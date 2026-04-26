@@ -1,6 +1,6 @@
 {
   "name": "backlink-pilot",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "type": "module",
   "description": "Automated backlink submission toolkit for indie hackers",
   "main": "src/cli.js",
@@ -36,6 +36,7 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
+    "proper-lockfile": "^4.1.2",
     "yaml": "^2.4.0"
   }
 }

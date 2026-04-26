@@ -4,10 +4,9 @@
 // Use --apply to write `status: dead` (creates targets.yaml.bak first).
 // Use --json for machine-readable output (Claude can parse).
 
-import { readFileSync, writeFileSync, renameSync, copyFileSync, existsSync } from 'fs';
-import { parseDocument } from 'yaml';
+import { existsSync } from 'fs';
+import { flatten, loadTargetsDoc, saveTargetsDoc, backupTargets, TARGETS_FILE } from './yaml-utils.js';
 
-const TARGETS_FILE = 'targets.yaml';
 const CONCURRENCY = 10;
 const TIMEOUT_MS = 15000;
 const RETRY_MAX = 3;
@@ -57,33 +56,11 @@ async function probeAll(entries, concurrency, onProgress) {
   return results;
 }
 
-function flatten(doc) {
-  // Walk YAMLMap → for each category, collect entries with submit_url.
-  // Return [{ categoryKey, entryNode, entry }] so we can both probe (entry)
-  // and mutate later (entryNode).
-  const out = [];
-  if (!doc.contents || !doc.contents.items) return out;
-  for (const pair of doc.contents.items) {
-    const categoryKey = pair.key?.value;
-    const list = pair.value;
-    if (!list || !list.items) continue;
-    for (const entryNode of list.items) {
-      if (!entryNode || typeof entryNode.get !== 'function') continue;
-      const submit_url = entryNode.get('submit_url');
-      if (!submit_url) continue;
-      const entry = entryNode.toJSON();
-      out.push({ categoryKey, entryNode, entry });
-    }
-  }
-  return out;
-}
-
 export async function pruneDead({ apply = false, json = false } = {}) {
   if (!existsSync(TARGETS_FILE)) {
     throw new Error(`${TARGETS_FILE} not found in cwd`);
   }
-  const raw = readFileSync(TARGETS_FILE, 'utf-8');
-  const doc = parseDocument(raw);
+  const doc = loadTargetsDoc();
 
   const all = flatten(doc);
   const toProbe = all.filter((f) => f.entry.status !== 'dead');
@@ -157,8 +134,7 @@ export async function pruneDead({ apply = false, json = false } = {}) {
   }
 
   // Apply: backup → mutate doc nodes (preserves comments) → atomic write
-  const bakPath = TARGETS_FILE + '.bak';
-  copyFileSync(TARGETS_FILE, bakPath);
+  const bakPath = backupTargets();
 
   for (const c of candidates) {
     c.entryNode.set('status', 'dead');
@@ -167,9 +143,7 @@ export async function pruneDead({ apply = false, json = false } = {}) {
     }
   }
 
-  const tmpPath = TARGETS_FILE + '.tmp';
-  writeFileSync(tmpPath, doc.toString(), 'utf-8');
-  renameSync(tmpPath, TARGETS_FILE);
+  saveTargetsDoc(doc);
 
   if (!json) {
     process.stdout.write(`\n✓ Marked ${candidates.length} sites as dead\n`);

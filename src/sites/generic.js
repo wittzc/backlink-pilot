@@ -125,11 +125,13 @@ export default {
         await delay(300);
       }
 
-      // 4. Screenshot before submit
+      // 4. Screenshot before submit — named {hostname}-{YYYY-MM-DD}.png so
+      //    same-site same-day screenshots overwrite instead of piling up.
       try {
         const screenshotDir = config.browser?.screenshot_dir || './screenshots';
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        await page.screenshot(`${screenshotDir}/generic-${timestamp}.png`);
+        const hostname = new URL(targetUrl).hostname.replace(/^www\./, '');
+        const date = new Date().toISOString().slice(0, 10);
+        await page.screenshot(`${screenshotDir}/${hostname}-${date}.png`);
       } catch {}
 
       // 5. Submit

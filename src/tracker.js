@@ -1,7 +1,8 @@
 // tracker.js — Submission status tracking (YAML file)
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, renameSync } from 'fs';
 import { parse, stringify } from 'yaml';
+import lockfile from 'proper-lockfile';
 
 const TRACKER_FILE = 'submissions.yaml';
 
@@ -12,30 +13,68 @@ export function loadTracker() {
   return parse(readFileSync(TRACKER_FILE, 'utf-8')) || { submissions: [] };
 }
 
-export function saveTracker(data) {
-  writeFileSync(TRACKER_FILE, stringify(data), 'utf-8');
+function saveTracker(data) {
+  const tmp = TRACKER_FILE + '.tmp';
+  writeFileSync(tmp, stringify(data), 'utf-8');
+  renameSync(tmp, TRACKER_FILE);
 }
 
-export function recordSubmission(site, status, details = {}) {
-  const tracker = loadTracker();
-  tracker.submissions.push({
-    site,
-    status,
-    timestamp: new Date().toISOString(),
-    ...details,
-  });
-  saveTracker(tracker);
+export async function recordSubmission(site, status, details = {}) {
+  // Ensure file exists before locking (lockfile requires the file to exist)
+  if (!existsSync(TRACKER_FILE)) {
+    writeFileSync(TRACKER_FILE, stringify({ submissions: [] }), 'utf-8');
+  }
+
+  let release;
+  try {
+    release = await lockfile.lock(TRACKER_FILE, {
+      stale: 60000,
+      retries: { retries: 3, minTimeout: 200 },
+    });
+    const tracker = loadTracker();
+    tracker.submissions.push({
+      site,
+      status,
+      timestamp: new Date().toISOString(),
+      ...details,
+    });
+    saveTracker(tracker);
+  } finally {
+    if (release) await release();
+  }
+}
+
+// Merge submissions.yaml + logs/global-history.json into one view.
+// Returns { submissions, commentedUrls, hasSubmitted(site), hasCommented(url) }
+export function loadAllHistory() {
+  const submissions = loadTracker().submissions || [];
+
+  let commentedUrls = new Set();
+  try {
+    const raw = readFileSync('logs/global-history.json', 'utf-8');
+    commentedUrls = new Set(JSON.parse(raw));
+  } catch {
+    // File absent or malformed — treat as empty
+  }
+
+  return {
+    submissions,
+    commentedUrls,
+    hasSubmitted: (site) => submissions.some((s) => s.site === site && s.status === 'submitted'),
+    hasCommented: (url) => commentedUrls.has(url),
+  };
 }
 
 export async function showStatus(opts = {}) {
-  const tracker = loadTracker();
+  const history = loadAllHistory();
+  const { submissions, commentedUrls } = history;
 
   if (opts.json) {
-    console.log(JSON.stringify(tracker, null, 2));
+    console.log(JSON.stringify({ submissions, commentedUrls: [...commentedUrls] }, null, 2));
     return;
   }
 
-  if (!tracker.submissions?.length) {
+  if (!submissions.length && !commentedUrls.size) {
     console.log('No submissions recorded yet.');
     return;
   }
@@ -43,7 +82,7 @@ export async function showStatus(opts = {}) {
   console.log('\n📊 Submission Status\n');
 
   const byStatus = {};
-  for (const s of tracker.submissions) {
+  for (const s of submissions) {
     const key = s.status || 'unknown';
     byStatus[key] = (byStatus[key] || 0) + 1;
   }
@@ -53,13 +92,18 @@ export async function showStatus(opts = {}) {
     console.log(`  ${icon} ${status}: ${count}`);
   }
 
-  console.log(`\n  Total: ${tracker.submissions.length} submissions\n`);
+  if (commentedUrls.size > 0) {
+    console.log(`  💬 blog comments: ${commentedUrls.size}`);
+  }
 
-  // Show recent 10
-  console.log('Recent:');
-  for (const s of tracker.submissions.slice(-10)) {
-    const date = new Date(s.timestamp).toLocaleDateString();
-    const icon = s.status === 'submitted' ? '✅' : s.status === 'failed' ? '❌' : '⏳';
-    console.log(`  ${icon} ${s.site} — ${s.status} (${date})`);
+  console.log(`\n  Total: ${submissions.length} directory submissions, ${commentedUrls.size} blog comments\n`);
+
+  if (submissions.length > 0) {
+    console.log('Recent directory submissions:');
+    for (const s of submissions.slice(-10)) {
+      const date = new Date(s.timestamp).toLocaleDateString();
+      const icon = s.status === 'submitted' ? '✅' : s.status === 'failed' ? '❌' : '⏳';
+      console.log(`  ${icon} ${s.site} — ${s.status} (${date})`);
+    }
   }
 }
