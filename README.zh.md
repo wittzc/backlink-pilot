@@ -10,7 +10,7 @@
 
 > 由 AI Agent ([OpenClaw](https://openclaw.ai)) 在真实外链建设中构建，30+ 站点实战验证。
 
-[`targets.yaml`](targets.yaml) 收录 **259 个目标站点**，其中 226 个可用 bb-browser 自动提交。
+[`targets.yaml`](targets.yaml) 收录 **<!-- stats:total -->258<!-- /stats --> 个目标站点**，其中 <!-- stats:auto-yes -->180<!-- /stats --> 个可用 bb-browser 自动提交。
 
 ---
 
@@ -81,7 +81,7 @@ node src/batch-submit.js --limit N       # 批量博客评论
 ### 最佳渠道（按 ROI 排序）
 
 1. **GitHub awesome-lists** — 最高 ROI，永久收录，$0，每个 5 分钟
-2. **免费目录站** — `targets.yaml` 收录 259 个，大部分可自动提交
+2. **免费目录站** — `targets.yaml` 收录 250+ 个，大部分可自动提交
 3. **博客评论** — Website 字段留链接，批量自动化
 
 ### 提交节奏
@@ -126,7 +126,7 @@ backlink-pilot/
 ├── LICENSE
 ├── package.json
 ├── config.example.yaml        ← 配置模板
-├── targets.yaml               ← 259 个目标站点
+├── targets.yaml               ← 250+ 个目标站点
 │
 ├── docs/                      ← 文档
 │   ├── index.md               ← 文档首页（VitePress）

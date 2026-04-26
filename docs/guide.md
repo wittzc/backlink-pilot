@@ -57,7 +57,7 @@ Claude will:
 | Say | Claude does |
 |-----|-------------|
 | "帮我提交外链" / "Submit backlinks" | Guide config → start submitting |
-| "提交到所有免费站" / "Submit to all free sites" | Filter 259 targets → batch submit |
+| "提交到所有免费站" / "Submit to all free sites" | Filter 250+ targets → batch submit |
 | "这个站能提交吗？[URL]" | Scout the site, analyze form |
 | "提交情况" / "Status" | Show submission history |
 | "帮我生成 awesome-list 提交" | Generate GitHub Issue body |
@@ -213,7 +213,7 @@ node src/cli.js submit https://any-site.com/submit --engine bb
 
 ### 8. Target Sites Database
 
-`targets.yaml` contains 259 directory sites. Filter by:
+`targets.yaml` contains 250+ directory sites. Filter by:
 
 | Field | Values | Meaning |
 |-------|--------|---------|
@@ -223,9 +223,9 @@ node src/cli.js submit https://any-site.com/submit --engine bb
 | `lang` | en / zh | Language |
 
 Quick counts:
-- **226** auto-submittable (`auto: yes`)
-- **44** confirmed dead (`status: dead`)
-- **~15** paid only (`status: paid`)
+- **<!-- stats:auto-yes -->180<!-- /stats -->** auto-submittable (`auto: yes`)
+- **<!-- stats:dead -->45<!-- /stats -->** confirmed dead (`status: dead`)
+- **<!-- stats:paid -->1<!-- /stats -->** paid only (`status: paid`)
 
 ---
 
@@ -297,7 +297,7 @@ ln -s ~/path/to/backlink-pilot ~/.openclaw/skills/backlink-pilot
 ```
 config.yaml              ← Your product config (gitignored, private)
 config.example.yaml      ← Template to copy from
-targets.yaml             ← 259 target sites with status metadata
+targets.yaml             ← 250+ target sites with status metadata
 submissions.yaml         ← Auto-generated submission history
 
 src/cli.js               ← CLI entry point (all commands)

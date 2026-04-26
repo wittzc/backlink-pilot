@@ -14,8 +14,8 @@ hero:
       link: https://github.com/s87343472/backlink-pilot
 
 features:
-  - title: 259 Target Sites
-    details: Pre-curated directory sites in targets.yaml — 226 auto-submittable with bb-browser.
+  - title: <!-- stats:total -->258<!-- /stats --> Target Sites
+    details: Pre-curated directory sites in targets.yaml — <!-- stats:auto-yes -->180<!-- /stats --> auto-submittable with bb-browser.
   - title: Claude Code Ready
     details: Clone, open Claude Code, say "帮我提交外链". That's it. CLAUDE.md guides the AI agent.
   - title: Real Chrome
