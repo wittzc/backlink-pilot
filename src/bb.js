@@ -11,10 +11,12 @@ function setBbTimeout(ms) {
 
 function bb(...args) {
   try {
-    return execFileSync('bb-browser', args, {
+    const output = execFileSync('bb-browser', args, {
       encoding: 'utf-8',
       timeout: _bbTimeout,
     }).trim();
+    if (/^错误[:：]/.test(output)) throw new Error(output);
+    return output;
   } catch (e) {
     const msg = e.stderr?.trim() || e.message;
     if (msg.includes('ECONNREFUSED') || msg.includes('No page target') || msg.includes('connect')) {
@@ -37,6 +39,12 @@ function bb(...args) {
 
 function escapeJs(str) {
   return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n');
+}
+
+function activeTabIndex() {
+  const list = bb('tab', 'list');
+  const match = list.match(/\* \[(\d+)\]/);
+  return match ? match[1] : null;
 }
 
 /**
@@ -84,42 +92,62 @@ export class BbPage {
     }
   }
 
+  // Call bb-browser with --tab <tabId> when we have an active tab
+  _bb(...args) {
+    if (this._tabId) return bb(...args, '--tab', this._tabId);
+    return bb(...args);
+  }
+
   async goto(url, _opts = {}) {
     const result = bb('open', url, '--tab');
     // Extract tabId from output like "Tab ID: XXXX"
     const tabMatch = result.match(/Tab ID:\s*(\S+)/);
     if (tabMatch) {
       this._tabId = tabMatch[1];
-      this._openedTabs.push(this._tabId);
+      this._openedTabs.push({ id: this._tabId, index: activeTabIndex() });
     }
-    // Wait for page to settle (no networkidle equivalent)
-    await new Promise(r => setTimeout(r, 2000));
+    // Poll snapshot until page has meaningful content (max 12s)
+    const deadline = Date.now() + 12000;
+    while (Date.now() < deadline) {
+      await new Promise(r => setTimeout(r, 1500));
+      let snap = '';
+      try {
+        snap = this._bb('snapshot', '-i');
+      } catch {
+        continue;
+      }
+      // Page is ready when snapshot has more than just header lines
+      if (snap.length > 200) break;
+    }
   }
 
   /**
    * Close all tabs opened during this session
    */
   async cleanup() {
-    for (const tabId of this._openedTabs) {
-      try { bb('tab', 'close', tabId); } catch {}
+    for (const tab of [...this._openedTabs].reverse()) {
+      if (tab.index !== null && tab.index !== undefined) {
+        try { bb('tab', 'close', String(tab.index)); continue; } catch {}
+      }
+      try { bb('tab', 'close', tab.id); } catch {}
     }
     this._openedTabs = [];
   }
 
   async fill(selectorOrRef, value) {
     if (selectorOrRef.startsWith('@')) {
-      bb('fill', selectorOrRef, value);
+      this._bb('fill', selectorOrRef, value);
     } else {
       // CSS selector — find element via eval, then use ref from snapshot
       const ref = await this._resolveRef(selectorOrRef);
-      if (ref) bb('fill', ref, value);
+      if (ref) this._bb('fill', ref, value);
       else throw new Error(`Element not found: ${selectorOrRef}`);
     }
   }
 
   async click(selectorOrRef) {
     if (selectorOrRef.startsWith('@')) {
-      bb('click', selectorOrRef);
+      this._bb('click', selectorOrRef);
     } else {
       // CSS selector — use evalClick with full user-event simulation
       // This dispatches mousedown/mouseup/click to work with React/Vue components
@@ -133,27 +161,31 @@ export class BbPage {
   }
 
   async textContent(selector) {
-    return bb('eval', `document.querySelector('${escapeJs(selector)}')?.textContent || ''`);
+    return this._bb('eval', `document.querySelector('${escapeJs(selector)}')?.textContent || ''`);
   }
 
   async content() {
-    return bb('eval', 'document.documentElement.outerHTML');
+    return this._bb('eval', 'document.documentElement.outerHTML');
   }
 
   url() {
-    return bb('eval', 'window.location.href');
+    return this._bb('eval', 'window.location.href');
   }
 
   async screenshot(path) {
-    if (path) bb('screenshot', path);
-    else bb('screenshot');
+    if (path) this._bb('screenshot', path);
+    else this._bb('screenshot');
+  }
+
+  async scroll(direction = 'down', px = 1000) {
+    this._bb('scroll', direction, String(px));
   }
 
   /**
    * Get interactive snapshot — returns parsed accessibility tree text
    */
   async snapshot() {
-    return bb('snapshot', '-i');
+    return this._bb('snapshot', '-i');
   }
 
   /**
@@ -164,7 +196,7 @@ export class BbPage {
     if (selector.includes(':has-text(')) {
       return this._queryHasText(selector);
     }
-    const exists = bb('eval',
+    const exists = this._bb('eval',
       `!!document.querySelector('${escapeJs(selector)}')`);
     if (exists === 'true') return new BbElementHandle(this, selector);
     return null;
@@ -183,7 +215,7 @@ export class BbPage {
     // Take snapshot and find matching element ref
     const snap = await this.snapshot();
     // Try direct eval to check existence first
-    const exists = bb('eval',
+    const exists = this._bb('eval',
       `!!document.querySelector('${escapeJs(selector)}')`);
     if (exists !== 'true') return null;
 
@@ -197,7 +229,7 @@ export class BbPage {
     const match = selector.match(/^(\w+):has-text\(["'](.+?)["']\)$/);
     if (!match) return null;
     const [, tag, text] = match;
-    const exists = bb('eval',
+    const exists = this._bb('eval',
       `!!Array.from(document.querySelectorAll('${tag}')).find(el => el.textContent.includes('${escapeJs(text)}'))`);
     if (exists === 'true') return new BbElementHandle(this, selector, { tag, text });
     return null;
@@ -207,18 +239,23 @@ export class BbPage {
    * Execute JS directly in page and fill/click by CSS selector
    */
   async evalFill(selector, value) {
-    bb('eval', `(() => {
+    this._bb('eval', `(() => {
       const el = document.querySelector('${escapeJs(selector)}');
       if (!el) return;
       el.focus();
-      el.value = '${escapeJs(value)}';
+      const proto = el instanceof HTMLTextAreaElement
+        ? HTMLTextAreaElement.prototype
+        : HTMLInputElement.prototype;
+      const setter = Object.getOwnPropertyDescriptor(proto, 'value')?.set;
+      if (setter) setter.call(el, '${escapeJs(value)}');
+      else el.value = '${escapeJs(value)}';
       el.dispatchEvent(new Event('input', {bubbles: true}));
       el.dispatchEvent(new Event('change', {bubbles: true}));
     })()`);
   }
 
   async evalClick(selector) {
-    bb('eval', `document.querySelector('${escapeJs(selector)}')?.click()`);
+    this._bb('eval', `document.querySelector('${escapeJs(selector)}')?.click()`);
   }
 
   /**
@@ -226,7 +263,7 @@ export class BbPage {
    * Required for React/Vue components that don't respond to .click()
    */
   async evalClickReal(selector) {
-    bb('eval', `(() => {
+    this._bb('eval', `(() => {
       const el = document.querySelector('${escapeJs(selector)}');
       if (!el) return;
       el.dispatchEvent(new MouseEvent('mousedown', {bubbles:true,cancelable:true}));
@@ -241,7 +278,7 @@ export class BbPage {
   }
 
   async evalClickByText(tag, text) {
-    bb('eval', `Array.from(document.querySelectorAll('${tag}')).find(el => el.textContent.includes('${escapeJs(text)}'))?.click()`);
+    this._bb('eval', `Array.from(document.querySelectorAll('${tag}')).find(el => el.textContent.includes('${escapeJs(text)}'))?.click()`);
   }
 }
 
@@ -258,8 +295,7 @@ export class BbElementHandle {
 
   async isVisible() {
     if (this._tag && this._text) {
-      const result = this._page._config;
-      return bb('eval',
+      return this._page._bb('eval',
         `(() => {
           const el = Array.from(document.querySelectorAll('${this._tag}')).find(e => e.textContent.includes('${escapeJs(this._text)}'));
           if (!el) return false;
@@ -268,7 +304,7 @@ export class BbElementHandle {
         })()`
       ) === 'true';
     }
-    return bb('eval',
+    return this._page._bb('eval',
       `(() => {
         const el = document.querySelector('${escapeJs(this._selector)}');
         if (!el) return false;
@@ -280,15 +316,15 @@ export class BbElementHandle {
 
   async textContent() {
     if (this._tag && this._text) {
-      return bb('eval',
+      return this._page._bb('eval',
         `Array.from(document.querySelectorAll('${this._tag}')).find(e => e.textContent.includes('${escapeJs(this._text)}'))?.textContent || ''`);
     }
-    return bb('eval',
+    return this._page._bb('eval',
       `document.querySelector('${escapeJs(this._selector)}')?.textContent || ''`);
   }
 
   async getAttribute(attr) {
-    return bb('eval',
+    return this._page._bb('eval',
       `document.querySelector('${escapeJs(this._selector)}')?.getAttribute('${escapeJs(attr)}') || null`);
   }
 
@@ -306,7 +342,7 @@ export class BbElementHandle {
 
   async evaluate(fn) {
     // Simple evaluate — runs fn as string with el as argument
-    return bb('eval',
+    return this._page._bb('eval',
       `(${fn.toString()})(document.querySelector('${escapeJs(this._selector)}'))`);
   }
 }
@@ -325,7 +361,7 @@ export class BbLocator {
   }
 
   async all() {
-    const countStr = bb('eval',
+    const countStr = this._page._bb('eval',
       `document.querySelectorAll('${escapeJs(this._selector)}').length`);
     const count = parseInt(countStr, 10) || 0;
     return Array.from({ length: count }, (_, i) =>
@@ -335,7 +371,7 @@ export class BbLocator {
   }
 
   async isVisible() {
-    return bb('eval',
+    return this._page._bb('eval',
       `(() => {
         const el = document.querySelector('${escapeJs(this._selector)}');
         if (!el) return false;
