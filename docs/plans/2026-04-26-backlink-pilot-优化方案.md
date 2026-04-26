@@ -323,6 +323,50 @@ Day 5: 发布 v2.2.0
 
 ---
 
+## 验收记录
+
+**执行日期**：2026-04-26
+**执行方式**：手动（Claude Code 会话逐步实现）
+
+### M1.1 完成（本次会话）
+
+| 验证项 | 结果 | 备注 |
+|--------|------|------|
+| `prune-dead` 默认干跑，输出候选清单 + reason | ✓ 通过 | 实现并通过 5 个单测 |
+| atomic write（`.tmp` + rename）+ `.bak` 备份 | ✓ 通过 | 测试用例验证写入路径 |
+| 临时 5xx 不误判（重试 3 次 + 指数退避） | ✓ 通过 | 测试 ECONNREFUSED 重试覆盖 |
+| HEAD→GET fallback on 405 | ✓ 通过 | 专项测试覆盖 |
+| README 数字与 targets.yaml 一致（stats 占位符） | ✓ 通过 | update-readme-stats.js + 10 个单测全过 |
+| YAML 1.2 string coercion 兼容（`auto: yes` 为字符串不是 bool） | ✓ 通过 | computeStatsFromYaml 中 `=== true \|\| === 'yes'` 双判断 |
+| 3 个 commit 入库 | ✓ 通过 | 1415781 / 2dd6666 / b381c92 |
+
+### M1.2 ~ M3.1 待执行
+
+| 里程碑 | 状态 |
+|--------|------|
+| M1.2 剥离 playwright | 待执行 |
+| M1.3 文件锁 + screenshots 轮转 | 待执行 |
+| M2.1 失败 nextSteps 数据契约 | 待执行 |
+| M2.2 `cli.js doctor` | 待执行 |
+| M3.0a CLAUDE.md 批量提交指引 | 待执行 |
+| M3.0b `cli.js stats --timing` | 待执行 |
+| M3.1 双轨历史合并 | 待执行 |
+
+**结论**：M1.1 通过；整体方案部分通过，M1.2 ~ M3 留待后续会话
+
+---
+
+## Conversation Excerpts and Prompt Log
+
+**user_problem**：项目「能用但不丝滑」——README 写 226 个 auto-submittable 但实际只有 180；45 个 dead 站每次让 Claude 重新判断浪费 token；失败时没有机器可读的下一步指引；playwright 已退役却还占 45MB 包体。用户想做一次系统性评估和优化。
+
+**key_pivots**：
+1. 从「项目研究」进入 → 产出分析文档后发现 README 数字错误是最具体的可操作 P0 问题，驱动了整个优化方案
+2. rev 1 优化方案经 `plan-ceo-review` + `plan-eng-review` 双评审后范围收窄：M4 持久 session 移出 v2.x（无性能基线数据时不动核心子进程模型），M3.1 原生 batch 命令降级为 CLAUDE.md 文档指引（agent-first 定位下 Claude 已是事实调度器，再造 CLI 是重复系统）
+3. 本次会话只完成 M1.1（prune-dead + stats 占位符 + 文档数字修正），M1.2 ~ M3.1 留待后续会话
+
+---
+
 ## Contract Readiness Check（plan-contract-governor）
 
 执行前确认：
