@@ -74,9 +74,9 @@ node src/cli.js submit https://some-directory.com/submit --engine bb
 
 ## Target Sites
 
-`targets.yaml` contains 259 directory sites with metadata. Filter by:
+`targets.yaml` contains 250+ directory sites with metadata. Filter by:
 - `auto: yes` — can be auto-submitted
-- `status: dead` — skip these (44 confirmed dead)
+- `status: dead` — skip these (45+ confirmed dead)
 - `status: paid` — costs money
 - `type: form` — has a submission form
 - `type: github` — awesome-list (submit via GitHub Issue)
@@ -137,7 +137,7 @@ utm:
 ```
 config.yaml              ← User's product config (gitignored)
 config.example.yaml      ← Template
-targets.yaml             ← 259 target sites with status
+targets.yaml             ← 250+ target sites with status
 submissions.yaml         ← Submission history (auto-generated)
 docs/                    ← Documentation (tutorial, troubleshooting, etc.)
 bak/deprecated-adapters/ ← Archived adapters (not tracked)

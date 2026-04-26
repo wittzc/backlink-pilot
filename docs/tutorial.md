@@ -41,7 +41,7 @@ Claude 会：
 | 你说 | Claude 做什么 |
 |------|---------------|
 | "帮我提交外链" | 引导配置 → 开始提交 |
-| "提交到所有免费站点" | 从 259 个目标里筛选可用的，逐个提交 |
+| "提交到所有免费站点" | 从 250+ 个目标里筛选可用的，逐个提交 |
 | "这个站能提交吗？https://xxx.com" | 侦察站点，分析表单 |
 | "提交情况怎么样了" | 显示历史提交记录 |
 | "帮我生成 awesome-list 提交内容" | 生成 GitHub Issue 模板 |
@@ -132,7 +132,7 @@ node src/cli.js bb-update             # 更新适配器
 - 自动去重，不会重复提交
 
 **Q: 支持多少个站点？**
-- `targets.yaml` 里有 259 个目标站，226 个可自动提交
+- `targets.yaml` 里有 250+ 个目标站，180+ 个可自动提交
 
 **Q: 需要付费吗？**
 - 工具本身免费开源（MIT）
@@ -150,7 +150,7 @@ node src/cli.js bb-update             # 更新适配器
 backlink-pilot/
 ├── CLAUDE.md              ← Claude Code 读这个来理解项目
 ├── config.example.yaml    ← 配置模板
-├── targets.yaml           ← 259 个目标站点
+├── targets.yaml           ← 250+ 个目标站点
 ├── src/
 │   ├── cli.js             ← 命令行入口
 │   ├── submit.js          ← 提交逻辑
