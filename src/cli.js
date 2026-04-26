@@ -9,6 +9,7 @@ import { generateAwesomeIssue } from './awesome/templates.js';
 import { pingIndexNow } from './indexnow.js';
 import { showStatus } from './tracker.js';
 import { forceUpdate } from './bb-update.js';
+import { pruneDead } from './prune-dead.js';
 
 const program = new Command();
 
@@ -72,6 +73,15 @@ program
   .description('Update bb-browser community site adapters')
   .action(() => {
     forceUpdate();
+  });
+
+program
+  .command('prune-dead')
+  .description('Probe targets.yaml URLs and mark unreachable ones as status: dead')
+  .option('--apply', 'Write changes to targets.yaml (default: dry-run)')
+  .option('--json', 'Output structured JSON (machine-readable)')
+  .action(async (opts) => {
+    await pruneDead({ apply: !!opts.apply, json: !!opts.json });
   });
 
 program.parse();
