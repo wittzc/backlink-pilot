@@ -5,6 +5,7 @@
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { createSession, delay, humanType } from './browser.js';
+import { loadAllHistory } from './tracker.js';
 
 const TIMEOUT_MS = 30000;
 const MIN_DELAY = 15000;  // 15-45s between submissions
@@ -121,7 +122,9 @@ function saveLog(log) {
   writeFileSync(getLogPath(), JSON.stringify(log, null, 2), 'utf-8');
 }
 
-// Also check global submission history (don't re-submit to same URL ever)
+// Global history: stored in logs/global-history.json (Set of commented blog URLs).
+// loadAllHistory() from tracker.js merges this with submissions.yaml, giving a unified
+// view across both submission types (directory sites + blog comments).
 function loadGlobalHistory() {
   const histPath = 'logs/global-history.json';
   if (existsSync(histPath)) return new Set(JSON.parse(readFileSync(histPath, 'utf-8')));

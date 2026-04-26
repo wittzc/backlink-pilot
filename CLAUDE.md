@@ -111,6 +111,24 @@ node src/cli.js submit https://some-directory.com/submit --engine bb
 | "提交情况" / "status" | Run `node src/cli.js status` |
 | "外链策略" / "backlink strategy" | Read Strategy section in README.md, give advice |
 
+## Batch Submission Playbook
+
+When the user asks to submit to multiple sites ("提交到所有免费站" / "批量提交" / "submit to all free sites"):
+
+1. Run `node src/cli.js status` — see what's already submitted, avoid duplicates
+2. Read `targets.yaml` — filter entries where `auto: yes` (or `'yes'`) AND `status` is not `dead` or `paid`
+3. Default limit: 10 sites per session (user can override: "帮我提交 5 个")
+4. For each site, run `node src/cli.js submit <name> --engine bb`
+5. Wait 60–180 seconds (random) between sites — use `sleep` or tell the user to wait
+6. After each submission, check the returned `nextSteps[]`:
+   - `PAGE_404` → run `node src/cli.js mark-dead <site> --yes`, then continue
+   - `LOGIN_REQUIRED` → run `node src/cli.js mark-manual <site> --yes`, then skip
+   - `CHROME_TIMEOUT` → run `pkill -f "bb-browser" || true && bb-browser open about:blank`, retry once
+   - `submitted` → continue to next site
+7. After all sites: print summary — submitted X / failed Y / skipped Z
+
+For `--json` mode (agent-readable): `node src/cli.js submit <site> --json`
+
 ## Config Reference
 
 ```yaml
