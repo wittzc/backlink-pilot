@@ -51,15 +51,6 @@ node src/cli.js submit https://any-site.com --engine bb
 
 ---
 
-## Engine Comparison
-
-| Engine | Setup | Pros | Cons |
-|--------|-------|------|------|
-| **bb-browser** (recommended) | `npm i -g bb-browser` | Real Chrome, invisible, OAuth works | Requires Chrome |
-| **playwright** (default) | `npm install` | No extra setup | Detected by anti-bot, blocked by Cloudflare |
-
----
-
 ## Commands
 
 ```bash

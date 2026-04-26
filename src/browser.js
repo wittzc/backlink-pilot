@@ -1,103 +1,79 @@
-// browser.js — Dual-engine browser wrapper
-// Supports rebrowser-playwright (default) and bb-browser
-
-import { chromium } from 'rebrowser-playwright';
+// browser.js — Browser wrapper (bb-browser engine)
+// rebrowser-playwright removed in v2.2; use --engine bb
 
 function resolveEngine(config) {
   if (config._engine) return config._engine;
   if (config.browser?.engine) return config.browser.engine;
-  return 'playwright';
+  return 'bb';
 }
 
-export async function launchBrowser(config = {}) {
-  const browserOpts = config.browser || {};
-
-  const browser = await chromium.launch({
-    headless: browserOpts.headless !== false,
-    args: [
-      '--disable-blink-features=AutomationControlled',
-      '--no-sandbox',
-      '--disable-dev-shm-usage',
-    ],
-  });
-
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-    viewport: { width: 1440, height: 900 },
-    locale: 'en-US',
-    timezoneId: 'America/New_York',
-  });
-
-  const page = await context.newPage();
-
-  return { browser, context, page };
+function exitPlaywrightDeprecated() {
+  console.error('');
+  console.error('✗ --engine playwright has been removed in v2.2.');
+  console.error('  rebrowser-playwright is no longer installed.');
+  console.error('');
+  console.error('  Fix:');
+  console.error('    npm install -g bb-browser');
+  console.error('    bb-browser open about:blank');
+  console.error('    node src/cli.js submit <site> --engine bb');
+  console.error('');
+  process.exit(1);
 }
 
 export async function withBrowser(config, fn) {
   const engine = resolveEngine(config);
 
-  if (engine === 'bb') {
-    const { BbPage, isBbAvailable } = await import('./bb.js');
-    if (!isBbAvailable()) {
-      console.warn('⚠️  bb-browser not found, falling back to playwright');
-      return withBrowser({ ...config, _engine: 'playwright' }, fn);
-    }
-    const { maybeUpdateBbSites } = await import('./bb-update.js');
-    await maybeUpdateBbSites(config);
-    const page = new BbPage(config);
-    try {
-      return await fn({ browser: null, context: null, page });
-    } finally {
-      await page.cleanup(); // close all tabs opened during this session
-    }
+  if (engine === 'playwright') {
+    exitPlaywrightDeprecated();
   }
 
-  // Default: rebrowser-playwright
-  const { browser, context, page } = await launchBrowser(config);
+  const { BbPage, isBbAvailable } = await import('./bb.js');
+  if (!isBbAvailable()) {
+    console.error('✗ bb-browser not found.');
+    console.error('  Install: npm install -g bb-browser');
+    console.error('  Then run: bb-browser open about:blank');
+    process.exit(1);
+  }
+  const { maybeUpdateBbSites } = await import('./bb-update.js');
+  await maybeUpdateBbSites(config);
+  const page = new BbPage(config);
   try {
-    return await fn({ browser, context, page });
+    return await fn({ browser: null, context: null, page });
   } finally {
-    await browser.close();
+    await page.cleanup();
   }
 }
 
-/**
- * Create a long-lived browser session (for batch-submit.js)
- * Returns { page, close } — close() cleans up resources
- */
 export async function createSession(config = {}) {
   const engine = resolveEngine(config);
 
-  if (engine === 'bb') {
-    const { BbPage, isBbAvailable } = await import('./bb.js');
-    if (!isBbAvailable()) {
-      console.warn('⚠️  bb-browser not found, falling back to playwright');
-      return createSession({ ...config, _engine: 'playwright' });
-    }
-    const { maybeUpdateBbSites } = await import('./bb-update.js');
-    await maybeUpdateBbSites(config);
-    const page = new BbPage(config);
-    return { page, close: async () => page.cleanup() };
+  if (engine === 'playwright') {
+    exitPlaywrightDeprecated();
   }
 
-  const { browser, context, page } = await launchBrowser(config);
-  return { page, close: async () => browser.close() };
+  const { BbPage, isBbAvailable } = await import('./bb.js');
+  if (!isBbAvailable()) {
+    console.error('✗ bb-browser not found.');
+    console.error('  Install: npm install -g bb-browser');
+    process.exit(1);
+  }
+  const { maybeUpdateBbSites } = await import('./bb-update.js');
+  await maybeUpdateBbSites(config);
+  const page = new BbPage(config);
+  return { page, close: async () => page.cleanup() };
 }
 
-// Human-like delays
 export function delay(ms) {
   const jitter = Math.random() * ms * 0.3;
   return new Promise(r => setTimeout(r, ms + jitter));
 }
 
-export async function humanType(page, selector, text, opts = {}) {
-  // bb-browser uses real Chrome — no need for character-by-character typing
+export async function humanType(page, selector, text) {
   if (page.constructor.name === 'BbPage') {
     await page.evalFill(selector, text);
     return;
   }
-
-  // Playwright path: type character by character
+  // Fallback for non-bb pages (should not occur in v2.2+)
   await page.click(selector);
   await delay(200);
   await page.fill(selector, '');

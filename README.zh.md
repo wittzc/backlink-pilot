@@ -51,15 +51,6 @@ node src/cli.js submit https://any-site.com --engine bb
 
 ---
 
-## 引擎对比
-
-| 引擎 | 安装 | 优点 | 缺点 |
-|------|------|------|------|
-| **bb-browser**（推荐） | `npm i -g bb-browser` | 真实 Chrome，100% 隐身，支持 OAuth | 需要 Chrome |
-| **playwright**（默认） | `npm install` | 零配置 | 被反爬检测，Cloudflare 拦截 |
-
----
-
 ## 命令速查
 
 ```bash

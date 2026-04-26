@@ -23,7 +23,7 @@ program
   .description('Discover submit pages and form fields on a site')
   .option('--deep', 'Follow links to find hidden submit pages')
   .option('--screenshot <path>', 'Save screenshot of submit page')
-  .option('--engine <engine>', 'Browser engine: bb or playwright')
+  .option('--engine <engine>', 'Browser engine (bb required; playwright removed in v2.2)')
   .action(async (url, opts) => {
     const config = await loadConfig();
     if (opts.engine) config._engine = opts.engine;
@@ -35,7 +35,7 @@ program
   .description('Submit to a directory site (name or URL for generic)')
   .option('--dry-run', 'Show what would be submitted without actually doing it')
   .option('--screenshot <path>', 'Save screenshot after submission')
-  .option('--engine <engine>', 'Browser engine: bb or playwright')
+  .option('--engine <engine>', 'Browser engine (bb required; playwright removed in v2.2)')
   .action(async (site, opts) => {
     const config = await loadConfig();
     if (opts.engine) config._engine = opts.engine;
