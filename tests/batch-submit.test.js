@@ -21,12 +21,15 @@ describe('batch-submit resource loading', () => {
     assert.equal(typeof entry.has_captcha, 'boolean');
   });
 
-  it('batchSubmit exits with error when resources missing', async () => {
-    // We test the guard logic directly rather than running the full function
-    // to avoid side effects
-    const resourcePath = 'resources/backlink-resources.json';
-    const sitesPath = 'resources/sites.json';
-    assert.ok(existsSync(resourcePath) || true, 'guard should check existence');
-    assert.ok(existsSync(sitesPath), 'sites.json should exist');
+  it('batchSubmit guards on missing resource files', async () => {
+    // resources/sites.json and resources/backlink-resources.json are
+    // user-specific (gitignored), so we cannot assert their existence.
+    // Instead, verify the guard logic exists in the batch-submit source.
+    const { readFileSync } = await import('fs');
+    const src = readFileSync('src/batch-submit.js', 'utf-8');
+    assert.ok(src.includes('resources/backlink-resources.json'),
+      'should guard backlink-resources.json');
+    assert.ok(src.includes('resources/sites.json'),
+      'should guard sites.json');
   });
 });

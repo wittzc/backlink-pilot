@@ -21,13 +21,24 @@ describe('generic adapter page validation', () => {
   });
 });
 
-describe('deprecated adapters are marked', () => {
-  const adapters = ['600tools', 'dangai', 'toolverto', 'submitaitools'];
+describe('current site adapters exist', () => {
+  // Canonical adapter list (Task 0 baseline). Old adapters
+  // (600tools / dangai / toolverto / submitaitools) have been moved to
+  // bak/deprecated-adapters/ and are no longer asserted here.
+  const adapters = [
+    'generic',
+    'aivalley',
+    'baitools',
+    'futuretools',
+    'saashub',
+    'startup88',
+    'uneed',
+  ];
 
   for (const name of adapters) {
-    it(`${name}.js is marked as DEPRECATED`, () => {
+    it(`src/sites/${name}.js exists`, () => {
       const src = readFileSync(`src/sites/${name}.js`, 'utf-8');
-      assert.ok(src.includes('DEPRECATED'), `${name} should be marked DEPRECATED`);
+      assert.ok(src.length > 0, `${name} adapter source should be non-empty`);
     });
   }
 });
