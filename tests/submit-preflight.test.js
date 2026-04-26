@@ -39,6 +39,7 @@ describe('current site adapters exist', () => {
     it(`src/sites/${name}.js exists`, () => {
       const src = readFileSync(`src/sites/${name}.js`, 'utf-8');
       assert.ok(src.length > 0, `${name} adapter source should be non-empty`);
+      assert.ok(src.includes('export'), `${name} should export something`);
     });
   }
 });

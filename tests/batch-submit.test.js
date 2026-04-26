@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, renameSync } from 'fs';
+import { existsSync } from 'fs';
 
 describe('batch-submit resource loading', () => {
   it('resources/backlink-resources.example.json exists', () => {
