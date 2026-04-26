@@ -14,6 +14,7 @@ import { markDead, markManual, markDone } from './targets.js';
 import { showStats } from './stats.js';
 import { runDoctor } from './doctor.js';
 import { cleanupScreenshots, cleanupLocks } from './utils/cleanup.js';
+import { triageTargets } from './triage.js';
 
 const program = new Command();
 
@@ -103,6 +104,28 @@ program
   .option('--json', 'Output structured JSON (machine-readable)')
   .action(async (opts) => {
     await pruneDead({ apply: !!opts.apply, json: !!opts.json });
+  });
+
+program
+  .command('triage')
+  .description('Classify targets.yaml sites before batch submission')
+  .option('--browser', 'Use bb-browser snapshots instead of HTTP-only heuristics')
+  .option('--limit <n>', 'Only scan the first N matching targets')
+  .option('--category <key>', 'Only scan one targets.yaml category key')
+  .option('--include-manual', 'Include non-auto targets too')
+  .option('--json', 'Output machine-readable JSON')
+  .option('--output <path>', 'Write JSON report to a file')
+  .action(async (opts) => {
+    const config = await loadConfig();
+    await triageTargets({
+      config,
+      browser: !!opts.browser,
+      limit: opts.limit ? parseInt(opts.limit, 10) : null,
+      category: opts.category || null,
+      includeManual: !!opts.includeManual,
+      json: !!opts.json,
+      outputPath: opts.output || null,
+    });
   });
 
 program

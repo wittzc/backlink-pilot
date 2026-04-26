@@ -1,0 +1,592 @@
+{
+  "mode": "browser",
+  "summary": {
+    "total": 30,
+    "buckets": {
+      "adapter-needed": 7,
+      "iframe-provider": 2,
+      "manual-review": 18,
+      "dead": 2,
+      "generic-ready": 1
+    }
+  },
+  "results": [
+    {
+      "name": "Future Tools",
+      "submit_url": "https://www.futuretools.io/submit-a-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "adapter-needed",
+      "code": "EXTRA_REQUIRED_FIELDS",
+      "automation": "adapter",
+      "reasons": [
+        "required non-text controls"
+      ],
+      "status": 200,
+      "final_url": "https://futuretools.io/submit-a-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 12,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Valley",
+      "submit_url": "https://aivalley.ai/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "adapter-needed",
+      "code": "EXTRA_REQUIRED_FIELDS",
+      "automation": "adapter",
+      "reasons": [
+        "required non-text controls"
+      ],
+      "status": 200,
+      "final_url": "https://aivalley.ai/submit-tool/",
+      "dom": {
+        "forms": 2,
+        "inputs": 16,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIToolsDirectory",
+      "submit_url": "https://aitoolsdirectory.com/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "iframe-provider",
+      "code": "PAPERFORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "paperform"
+      ],
+      "status": 200,
+      "final_url": "https://aitoolsdirectory.com/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://aitool.paperform.co/?embed=1&inline=1"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AI Directory",
+      "submit_url": "https://www.aidirectory.org/user-submit/",
+      "category": "overseas_ai_directories",
+      "bucket": "adapter-needed",
+      "code": "EXTRA_REQUIRED_FIELDS",
+      "automation": "adapter",
+      "reasons": [
+        "required non-text controls"
+      ],
+      "status": 200,
+      "final_url": "https://www.aidirectory.org/user-submit/",
+      "dom": {
+        "forms": 1,
+        "inputs": 14,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIToolMall",
+      "submit_url": "https://aitoolmall.com/submit/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://aitoolmall.com/submit/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Finder",
+      "submit_url": "https://ai-finder.net/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "about:blank",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIFINDY",
+      "submit_url": "https://aifindy.com/contacto/publica-tu-ia-en-aifindy",
+      "category": "overseas_ai_directories",
+      "bucket": "iframe-provider",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "status": 200,
+      "final_url": "https://aifindy.com/contacto/publica-tu-ia-en-aifindy",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://notionforms.io/forms/empresas-ia-nuevas",
+          "https://mix1994max.github.io/Notion-Prices/"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AllThingsAI",
+      "submit_url": "https://allthingsai.com",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "about:blank",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AiDude",
+      "submit_url": "https://aidude.pro/submit-your-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "dead",
+      "code": "PAGE_UNREACHABLE",
+      "automation": "none",
+      "reasons": [
+        "page unreachable"
+      ],
+      "status": 200,
+      "final_url": "chrome-error://chromewebdata/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Homes",
+      "submit_url": "https://aihomes.io/submit/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://reviewstores.com/links?idw=9561&subid=4WG1PlmRTGo7",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Library",
+      "submit_url": "https://library.phygital.plus/tool-submission",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://library.phygital.plus/tool-submission",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AiSuperSmart",
+      "submit_url": "https://www.aisupersmart.com/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "status": 200,
+      "final_url": "https://www.aisupersmart.com/submit-tool/",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Ai Business Tool",
+      "submit_url": "https://aibusinesstool.com/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://aibusinesstool.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Tool For Business",
+      "submit_url": "https://aitoolforbusiness.com/submit-ai-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "about:blank",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI-Hunter.io",
+      "submit_url": "https://ai-hunter.io/submit-ai-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://ai-hunter.io/submit-ai-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIToolGuru",
+      "submit_url": "https://aitoolguru.com/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "CLOSED_OR_PAID",
+      "automation": "manual",
+      "reasons": [
+        "closed or paid"
+      ],
+      "status": 200,
+      "final_url": "https://aitoolguru.com/",
+      "dom": {
+        "forms": 1,
+        "inputs": 3,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AILib",
+      "submit_url": "https://ailib.ru/en/add-ai/",
+      "category": "overseas_ai_directories",
+      "bucket": "adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "status": 200,
+      "final_url": "https://ailib.ru/en/add-ai/",
+      "dom": {
+        "forms": 1,
+        "inputs": 3,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIWikiTools",
+      "submit_url": "https://aiwikitools.com/submit-a-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://aiwikitools.com/submit-a-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Tools Up",
+      "submit_url": "https://aitoolsup.com/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "CLOSED_OR_PAID",
+      "automation": "manual",
+      "reasons": [
+        "closed or paid"
+      ],
+      "status": 200,
+      "final_url": "https://aitoolsup.com/submit-tool/",
+      "dom": {
+        "forms": 5,
+        "inputs": 12,
+        "iframes": [
+          "https://embeds.beehiiv.com/556ad394-e83d-4d3c-b578-15d59013b4a5"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Apps and Websites",
+      "submit_url": "https://landing.mycloudmedia.co.uk/apps-and-websites-submit-ai-or-saas-tool/new-submission.html",
+      "category": "overseas_ai_directories",
+      "bucket": "generic-ready",
+      "code": "GENERIC_READY",
+      "automation": "auto",
+      "reasons": [
+        "core fields detected"
+      ],
+      "status": 200,
+      "final_url": "https://landing.mycloudmedia.co.uk/apps-and-websites-submit-ai-or-saas-tool/new-submission.html",
+      "dom": {
+        "forms": 1,
+        "inputs": 10,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ChatGPTDemo.pro",
+      "submit_url": "https://chatgptdemo.pro/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "dead",
+      "code": "PAGE_UNREACHABLE",
+      "automation": "none",
+      "reasons": [
+        "page unreachable"
+      ],
+      "status": 200,
+      "final_url": "chrome-error://chromewebdata/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "DigiProToolz",
+      "submit_url": "https://digiprotoolz.com/contact-us/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "about:blank",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "DropYourAI",
+      "submit_url": "https://www.dropyourai.com/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "adapter-needed",
+      "code": "EXTRA_REQUIRED_FIELDS",
+      "automation": "adapter",
+      "reasons": [
+        "required non-text controls"
+      ],
+      "status": 200,
+      "final_url": "https://www.dropyourai.com/submit-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 23,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Draeno.io",
+      "submit_url": "https://draeno.io/submit-a-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://draeno.io/submit-a-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Future AGI Tools",
+      "submit_url": "https://www.futureagitools.com/submit-a-site",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "about:blank",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Free AI Tools Directory",
+      "submit_url": "https://free-ai-tools-directory.com/submit-request/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://free-ai-tools-directory.com/submit-request/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "findcool.tools",
+      "submit_url": "https://www.findcool.tools/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "about:blank",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Full Stack AI",
+      "submit_url": "https://fullstackai.co/submit-a-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "status": 200,
+      "final_url": "https://fullstackai.co/submit-a-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "PoweredbyAI",
+      "submit_url": "https://poweredbyai.app/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "LOGIN_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "login required"
+      ],
+      "status": 200,
+      "final_url": "https://poweredbyai.app/signin?redirect=%2Fsubmit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Paxi",
+      "submit_url": "https://paxi.ai/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "status": 200,
+      "final_url": "https://paxi.ai/submit",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    }
+  ]
+}
