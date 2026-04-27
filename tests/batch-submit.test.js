@@ -17,6 +17,7 @@ import {
   filterAndSort,
   loadTriageReport,
   runBatch,
+  runBatchCli,
 } from '../src/batch-submit.js';
 import {
   productHash,
@@ -439,6 +440,92 @@ describe('runBatch — 8 scenarios from Task 5 step 4', () => {
       assert.equal(sleeps.length, 2);
       // With rng=0, every sleep is exactly the minimum (60s).
       assert.ok(sleeps.every((ms) => ms === 60_000), `sleeps were ${sleeps}`);
+    } finally {
+      cleanup();
+    }
+  });
+});
+
+// --- runBatchCli safety gates ---------------------------------------------
+
+describe('runBatchCli safety gates (defense-in-depth)', () => {
+  // Build a triage report fixture file the CLI can consume without running
+  // a live triage. We inject loadConfig + runBatch via _deps so the tests
+  // never touch config.yaml on disk and never invoke real adapters.
+  function setupTriageFixture(resultCount = 10) {
+    const { dir, path } = tmpFile('triage.json');
+    const results = [];
+    for (let i = 0; i < resultCount; i++) {
+      results.push({
+        name: `Site ${i}`,
+        submit_url: `https://example${i}.com/submit`,
+        bucket: 'generic-ready',
+        code: 'GENERIC_READY',
+        category: 'overseas_ai_directories',
+        value_tier: 3,
+      });
+    }
+    writeFileSync(path, JSON.stringify({ results }), 'utf-8');
+    return { dir, triageSource: path, cleanup: () => rmSync(dir, { recursive: true, force: true }) };
+  }
+
+  function fakeDeps({ runBatchCalls } = {}) {
+    return {
+      loadConfigFn: async () => ({ product: PRODUCT }),
+      triageFn: async () => ({ results: [] }),
+      runBatchFn: async (targets, opts) => {
+        if (runBatchCalls) runBatchCalls.push({ count: targets.length, opts });
+        return { results: [], summary: { submitted: targets.length } };
+      },
+    };
+  }
+
+  it('non-dry-run without --yes throws with helpful message', async () => {
+    const { triageSource, cleanup } = setupTriageFixture(3);
+    try {
+      await assert.rejects(
+        () => runBatchCli({ triageSource, dryRun: false }, fakeDeps()),
+        (err) => {
+          assert.match(err.message, /Real submission requires --yes flag/);
+          assert.match(err.message, /--dry-run to preview/);
+          assert.match(err.message, /start with --limit 1/);
+          return true;
+        }
+      );
+    } finally {
+      cleanup();
+    }
+  });
+
+  it('non-dry-run with --yes and no explicit limit defaults to limit=5', async () => {
+    const { triageSource, cleanup } = setupTriageFixture(20);
+    try {
+      const runBatchCalls = [];
+      const { effectiveLimit, targetsCount } = await runBatchCli(
+        { triageSource, dryRun: false, yes: true },
+        fakeDeps({ runBatchCalls })
+      );
+      assert.equal(effectiveLimit, 5);
+      assert.equal(targetsCount, 5);
+      assert.equal(runBatchCalls.length, 1);
+      assert.equal(runBatchCalls[0].count, 5);
+    } finally {
+      cleanup();
+    }
+  });
+
+  it('dry-run without --yes and no limit runs without error and applies no cap', async () => {
+    const { triageSource, cleanup } = setupTriageFixture(20);
+    try {
+      const runBatchCalls = [];
+      const { effectiveLimit, targetsCount } = await runBatchCli(
+        { triageSource, dryRun: true },
+        fakeDeps({ runBatchCalls })
+      );
+      assert.equal(effectiveLimit, null, 'dry-run should impose no default cap');
+      assert.equal(targetsCount, 20, 'all triage results should pass through');
+      assert.equal(runBatchCalls.length, 1);
+      assert.equal(runBatchCalls[0].count, 20);
     } finally {
       cleanup();
     }

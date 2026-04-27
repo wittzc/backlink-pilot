@@ -177,7 +177,8 @@ program
   .command('batch-submit')
   .description('Run the directory batch executor (consumes triage report or runs live)')
   .option('--dry-run', 'Pass dryRun=true to every adapter; no real submissions')
-  .option('--limit <n>', 'Cap the number of targets executed this run')
+  .option('--yes', 'Confirm real (non-dry-run) submission; required without --dry-run')
+  .option('--limit <n>', 'Cap the number of targets executed this run (real runs default to 5)')
   .option('--category <key>', 'Only execute targets in this targets.yaml category')
   .option('--priority <level>', 'Filter by priority (high|medium|low → tier 1|2|3)')
   .option('--value-tier <n>', 'Filter by value tier (1|2|3); default order is tier-1 first')
@@ -188,6 +189,7 @@ program
     try {
       await runBatchCli({
         dryRun: !!opts.dryRun,
+        yes: !!opts.yes,
         limit: opts.limit ? parseInt(opts.limit, 10) : null,
         category: opts.category || null,
         priority: opts.priority || null,

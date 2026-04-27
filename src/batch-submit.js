@@ -509,9 +509,31 @@ export async function runBatch(targets, opts = {}, _deps = {}) {
 // `batch-submit` subcommand (which calls runBatchCli directly).
 // ---------------------------------------------------------------------------
 
-export async function runBatchCli(opts = {}) {
+export async function runBatchCli(opts = {}, _deps = {}) {
   const triageSource = opts.triageSource || null;
   const submissionsPath = opts.submissionsPath || DEFAULT_SUBMISSIONS_PATH;
+  const dryRun = !!opts.dryRun;
+  const {
+    loadConfigFn = loadConfig,
+    triageFn = triageTargets,
+    runBatchFn = runBatch,
+  } = _deps;
+
+  // Defense-in-depth: real (non-dry-run) submissions require an explicit
+  // --yes confirmation AND a default --limit cap of 5 (overridable). This
+  // gate lives at the CLI layer only; runBatch() itself stays pure so unit
+  // tests can drive it without ceremony.
+  if (!dryRun && !opts.yes) {
+    throw new Error(
+      'Real submission requires --yes flag.\n' +
+      '  Run with --dry-run to preview, or add --yes to confirm.\n' +
+      '  Recommended: start with --limit 1 and verify before scaling up.'
+    );
+  }
+  const limitWasProvided = opts.limit !== null && opts.limit !== undefined;
+  const effectiveLimit = limitWasProvided
+    ? opts.limit
+    : (dryRun ? null : 5);
 
   let triageReport;
   if (triageSource) {
@@ -519,8 +541,8 @@ export async function runBatchCli(opts = {}) {
   } else {
     // Live triage. We pass through category so a focused run doesn't probe
     // unrelated targets.
-    const config = await loadConfig();
-    triageReport = await triageTargets({
+    const config = await loadConfigFn();
+    triageReport = await triageFn({
       json: true,
       browser: false,
       limit: null,
@@ -530,14 +552,14 @@ export async function runBatchCli(opts = {}) {
     });
   }
 
-  const config = await loadConfig();
+  const config = await loadConfigFn();
   const product = config.product;
   if (!product || !product.name || !product.url) {
     throw new Error('config.yaml must define product { name, url, email }');
   }
 
   const targets = filterAndSort(prepareTargets(triageReport.results || []), {
-    limit: opts.limit,
+    limit: effectiveLimit,
     category: opts.category,
     priority: opts.priority,
     valueTier: opts.valueTier,
@@ -546,19 +568,24 @@ export async function runBatchCli(opts = {}) {
   const forceMap = parseForceFlag(opts.force || '');
 
   console.log(`Batch executor: ${targets.length} targets selected`);
-  console.log(`  productHash: ${productHash(product)}  dryRun=${!!opts.dryRun}`);
+  console.log(`  productHash: ${productHash(product)}  dryRun=${dryRun}`);
+  if (!dryRun && !limitWasProvided) {
+    console.log(`  safety: defaulting --limit to ${effectiveLimit} (override with --limit)`);
+  }
   if (forceMap.size) {
     console.log(`  force: ${[...forceMap.entries()].map(([k, v]) => `${k}:${v}`).join(', ')}`);
   }
   console.log('');
 
-  const { summary } = await runBatch(targets, {
+  const { summary } = await runBatchFn(targets, {
     product,
     config,
-    dryRun: !!opts.dryRun,
+    dryRun,
     forceMap,
     submissionsPath,
   });
+
+  return { summary, effectiveLimit, targetsCount: targets.length };
 
   console.log('\nSummary:');
   for (const [key, val] of Object.entries(summary)) {
@@ -574,6 +601,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   for (let i = 0; i < args.length; i++) {
     const a = args[i];
     if (a === '--dry-run') opts.dryRun = true;
+    else if (a === '--yes') opts.yes = true;
     else if (a === '--limit') opts.limit = parseInt(args[++i], 10);
     else if (a === '--category') opts.category = args[++i];
     else if (a === '--priority') opts.priority = args[++i];
