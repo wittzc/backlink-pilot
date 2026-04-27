@@ -11,6 +11,16 @@
 // load recipes from untrusted sources.
 
 /**
+ * @typedef {object} RecipePage
+ * @property {(selector: string, value: string) => Promise<void>} fillSelector
+ * @property {(selector: string, text: string) => Promise<void>} selectOptionByText
+ * @property {(name: string, value: string) => Promise<void>} checkRadio
+ * @property {(selector: string) => Promise<void>} checkCheckbox
+ * @property {(selector: string) => Promise<void>} clickSubmit
+ * @property {(selector: string) => Promise<string>} readSelector
+ */
+
+/**
  * Resolve a single recipe value reference against the user's product config.
  * Pure function. Returns string|array|null. No side effects.
  *
@@ -82,6 +92,10 @@ function _resolveMappedValue(product, def) {
 
 /**
  * Fill text-like fields. Skips fields whose value resolves to null/empty.
+ *
+ * @param {RecipePage} page
+ * @param {Array<object>} fields
+ * @param {object} product
  */
 export async function fillTextFields(page, fields, product) {
   if (!Array.isArray(fields)) return;
@@ -92,6 +106,11 @@ export async function fillTextFields(page, fields, product) {
   }
 }
 
+/**
+ * @param {RecipePage} page
+ * @param {Array<object>} selects
+ * @param {object} product
+ */
 export async function fillSelects(page, selects, product) {
   if (!Array.isArray(selects)) return;
   for (const sel of selects) {
@@ -101,6 +120,11 @@ export async function fillSelects(page, selects, product) {
   }
 }
 
+/**
+ * @param {RecipePage} page
+ * @param {Array<object>} radios
+ * @param {object} product
+ */
 export async function fillRadios(page, radios, product) {
   if (!Array.isArray(radios)) return;
   for (const r of radios) {
@@ -113,6 +137,9 @@ export async function fillRadios(page, radios, product) {
 /**
  * Tick legal-consent checkboxes. The loader has already rejected anything
  * outside the {tos, privacy} whitelist, so this function trusts the recipe.
+ *
+ * @param {RecipePage} page
+ * @param {Array<object>} checkboxes
  */
 export async function fillLegalCheckboxes(page, checkboxes) {
   if (!Array.isArray(checkboxes)) return;
@@ -135,6 +162,28 @@ export function assertRequiredFields(recipe, product) {
       missing.push(`${field.key} (needs product.${field.value})`);
     }
   }
+  // Selects/radios with a `map.default` are always satisfiable, so we only
+  // flag those WITHOUT a default that cannot resolve any source value.
+  for (const sel of recipe.selects ?? []) {
+    if (sel.optional) continue;
+    const hasDefault = sel.map && Object.prototype.hasOwnProperty.call(sel.map, 'default')
+      && sel.map.default != null;
+    if (hasDefault) continue;
+    const resolved = _resolveMappedValue(product, sel);
+    if (resolved == null) {
+      missing.push(`${sel.key} (needs product.${sel.valueFrom} or recipe map.default)`);
+    }
+  }
+  for (const r of recipe.radios ?? []) {
+    if (r.optional) continue;
+    const hasDefault = r.map && Object.prototype.hasOwnProperty.call(r.map, 'default')
+      && r.map.default != null;
+    if (hasDefault) continue;
+    const resolved = _resolveMappedValue(product, r);
+    if (resolved == null) {
+      missing.push(`${r.key} (needs product.${r.valueFrom} or recipe map.default)`);
+    }
+  }
   if (missing.length > 0) {
     const err = new Error(
       `Recipe missing required product config: ${missing.join(', ')}`,
@@ -147,6 +196,10 @@ export function assertRequiredFields(recipe, product) {
 
 /**
  * Click submit unless dryRun=true.
+ *
+ * @param {RecipePage} page
+ * @param {object} recipe
+ * @param {{ dryRun?: boolean }} [opts]
  */
 export async function submitRecipe(page, recipe, { dryRun = false } = {}) {
   if (dryRun) return;
@@ -157,6 +210,9 @@ export async function submitRecipe(page, recipe, { dryRun = false } = {}) {
 /**
  * Read DOM values for every field/select declared in the recipe — returns
  * `{ recipeKey: domValue }` map. Used by smoke tests to verify fills landed.
+ *
+ * @param {RecipePage} page
+ * @param {object} recipe
  */
 export async function readBackRecipeValues(page, recipe) {
   const out = {};
@@ -174,6 +230,11 @@ export async function readBackRecipeValues(page, recipe) {
  *
  * Order: assertRequiredFields → fillTextFields → fillSelects → fillRadios →
  * fillLegalCheckboxes → submitRecipe.
+ *
+ * @param {RecipePage} page
+ * @param {object} recipe
+ * @param {object} product
+ * @param {{ dryRun?: boolean }} [opts]
  */
 export async function runRecipe(page, recipe, product, opts = {}) {
   assertRequiredFields(recipe, product);

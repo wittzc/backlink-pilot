@@ -90,7 +90,10 @@ function validateRecipe(recipe, doc, filename) {
 
   if (recipe.checkboxes) {
     if (!Array.isArray(recipe.checkboxes)) {
-      throw new Error(`[${filename}] checkboxes must be a list`);
+      throw new Error(
+        `[${filename}] checkboxes must be a list (an array of mappings, ` +
+        `each starting with "-")`,
+      );
     }
     for (let i = 0; i < recipe.checkboxes.length; i++) {
       const cb = recipe.checkboxes[i];

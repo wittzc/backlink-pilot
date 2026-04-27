@@ -247,6 +247,78 @@ describe('assertRequiredFields', () => {
     };
     assert.doesNotThrow(() => assertRequiredFields(recipe, { name: 'X' }));
   });
+
+  it('throws when a required select has no map.default and product lacks the source', () => {
+    const recipe = {
+      url: 'https://x',
+      fields: [{ key: 'name', selector: 'input', value: 'name' }],
+      selects: [{
+        key: 'category',
+        selector: 'select[name="c"]',
+        valueFrom: 'categories',
+        map: { 'developer-tools': 'Code' }, // no default
+      }],
+    };
+    assert.throws(
+      () => assertRequiredFields(recipe, { name: 'X' /* no categories */ }),
+      (err) =>
+        err.code === 'RECIPE_MISSING_FIELDS' &&
+        /category/.test(err.message) &&
+        /categories|map\.default/.test(err.message),
+    );
+  });
+
+  it('does NOT throw when a select has a map.default, even if product lacks source', () => {
+    const recipe = {
+      url: 'https://x',
+      fields: [{ key: 'name', selector: 'input', value: 'name' }],
+      selects: [{
+        key: 'category',
+        selector: 'select[name="c"]',
+        valueFrom: 'categories',
+        map: { 'developer-tools': 'Code', default: 'Other' },
+      }],
+    };
+    assert.doesNotThrow(
+      () => assertRequiredFields(recipe, { name: 'X' /* no categories */ }),
+    );
+  });
+
+  it('throws when a required radio has no map.default and product lacks source', () => {
+    const recipe = {
+      url: 'https://x',
+      fields: [{ key: 'name', selector: 'input', value: 'name' }],
+      radios: [{
+        key: 'pricing_tier',
+        name: 'pricing_tier',
+        valueFrom: 'pricing',
+        map: { free: 'free' }, // no default
+      }],
+    };
+    assert.throws(
+      () => assertRequiredFields(recipe, { name: 'X' /* no pricing */ }),
+      (err) =>
+        err.code === 'RECIPE_MISSING_FIELDS' &&
+        /pricing_tier/.test(err.message) &&
+        /pricing|map\.default/.test(err.message),
+    );
+  });
+
+  it('does NOT throw when a radio has a map.default', () => {
+    const recipe = {
+      url: 'https://x',
+      fields: [{ key: 'name', selector: 'input', value: 'name' }],
+      radios: [{
+        key: 'pricing_tier',
+        name: 'pricing_tier',
+        valueFrom: 'pricing',
+        map: { free: 'free', default: 'free' },
+      }],
+    };
+    assert.doesNotThrow(
+      () => assertRequiredFields(recipe, { name: 'X' }),
+    );
+  });
 });
 
 // --- submitRecipe + dryRun ---------------------------------------------
@@ -509,6 +581,105 @@ describe('recipe-loader', () => {
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
+  });
+
+  // Whitelist coverage: arbitrary non-allowed strings must be rejected,
+  // not just the well-known "newsletter" / "marketing" cases.
+  for (const badType of ['agree', 'consent', '']) {
+    it(`rejects checkbox with type=${JSON.stringify(badType)} via whitelist`, () => {
+      const dir = tmpRecipesDir();
+      try {
+        const yamlTypeLine = badType === ''
+          ? '    type: ""'
+          : `    type: ${badType}`;
+        writeFileSync(join(dir, 'bad.yaml'), [
+          'url: https://x.com/submit',
+          'fields:',
+          '  - key: name',
+          '    selector: input',
+          '    value: name',
+          'checkboxes:',
+          '  - key: foo',
+          yamlTypeLine,
+          '    selector: input',
+          '',
+        ].join('\n'));
+        assert.throws(
+          () => loadRecipes(dir),
+          (err) =>
+            /bad\.yaml/.test(err.message) &&
+            /tos|privacy|whitelist|allowed|missing type/i.test(err.message),
+          `expected whitelist rejection for type=${JSON.stringify(badType)}, got: `
+            + 'no throw or wrong message',
+        );
+      } finally {
+        rmSync(dir, { recursive: true, force: true });
+      }
+    });
+  }
+
+  it('rejects checkboxes when value is a string (not an array)', () => {
+    const dir = tmpRecipesDir();
+    try {
+      writeFileSync(join(dir, 'flatcb.yaml'), [
+        'url: https://x.com/submit',
+        'fields:',
+        '  - key: name',
+        '    selector: input',
+        '    value: name',
+        'checkboxes: foo',
+        '',
+      ].join('\n'));
+      assert.throws(
+        () => loadRecipes(dir),
+        (err) =>
+          /flatcb\.yaml/.test(err.message) &&
+          /checkboxes/.test(err.message) &&
+          /list|array/i.test(err.message),
+      );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('rejects checkboxes when value is a single mapping (forgot the "-")', () => {
+    const dir = tmpRecipesDir();
+    try {
+      // YAML common error: indented map under `checkboxes:` without a `-` →
+      // parses as an object, not an array.
+      writeFileSync(join(dir, 'singlecb.yaml'), [
+        'url: https://x.com/submit',
+        'fields:',
+        '  - key: name',
+        '    selector: input',
+        '    value: name',
+        'checkboxes:',
+        '  key: tos',
+        '  type: tos',
+        '  selector: input',
+        '',
+      ].join('\n'));
+      assert.throws(
+        () => loadRecipes(dir),
+        (err) =>
+          /singlecb\.yaml/.test(err.message) &&
+          /checkboxes/.test(err.message) &&
+          /list|array/i.test(err.message),
+      );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('loadRecipeFromString surfaces malformed YAML syntax with filename in error', () => {
+    // Truly broken YAML (nested mapping in compact form) → parseDocument
+    // returns errors[]; loader must wrap with the filename.
+    assert.throws(
+      () => loadRecipeFromString('name: : invalid\n', 'broken.yaml'),
+      (err) =>
+        /broken\.yaml/.test(err.message) &&
+        /YAML parse error/i.test(err.message),
+    );
   });
 
   it('error message includes a line number when YAML node has location info', () => {
