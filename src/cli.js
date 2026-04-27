@@ -43,10 +43,13 @@ program
   .option('--screenshot <path>', 'Save screenshot after submission')
   .option('--engine <engine>', 'Browser engine (bb required; playwright removed in v2.2)')
   .option('--json', 'Output machine-readable JSON result (for Claude agent use)')
+  .option('--no-auto-verdict', 'Skip writing failure verdicts back to targets.yaml')
   .action(async (site, opts) => {
     const config = await loadConfig();
     if (opts.engine) config._engine = opts.engine;
-    await submit(site, { ...opts, config });
+    // commander maps --no-auto-verdict → opts.autoVerdict=false; normalize for submit.js
+    const submitOpts = { ...opts, noAutoVerdict: opts.autoVerdict === false, config };
+    await submit(site, submitOpts);
   });
 
 program

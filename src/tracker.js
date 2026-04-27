@@ -125,6 +125,33 @@ export async function recordSubmission(site, status, details = {}) {
   }
 }
 
+/**
+ * Count how many of the most-recent submissions for `site` failed with this
+ * exact `code`, walking backwards and stopping at the first record that
+ * doesn't match. Used by the verdict layer to gate ambiguous codes
+ * (NO_FIELDS / UNKNOWN_ERROR) behind a 2-strike rule so a single transient
+ * blip doesn't lock a site out of auto submission.
+ *
+ * Note: returns the streak BEFORE the current failure is recorded. The
+ * caller adds +1 for the in-flight failure if needed.
+ */
+export function getFailureStreak(site, code) {
+  if (!site || !code) return 0;
+  const tracker = loadTracker();
+  const submissions = tracker.submissions || [];
+  let streak = 0;
+  for (let i = submissions.length - 1; i >= 0; i--) {
+    const rec = submissions[i];
+    if (rec.site !== site) continue;
+    if (rec.status === 'failed' && rec.code === code) {
+      streak++;
+    } else {
+      break;
+    }
+  }
+  return streak;
+}
+
 // Merge submissions.yaml + logs/global-history.json into one view.
 // Returns { submissions, commentedUrls, hasSubmitted(site), hasCommented(url) }
 export function loadAllHistory() {

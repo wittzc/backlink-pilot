@@ -117,11 +117,14 @@ async function dismissCookieWall(page) {
 }
 
 async function scanFormFields(page) {
+  // Conservative SPA fallback: 5th attempt waits 8s for slow JS hydration
+  // before we give up and throw NO_FIELDS.
   const attempts = [
     { label: 'initial', wait: 0, scroll: 0 },
     { label: 'wait', wait: 3000, scroll: 0 },
     { label: 'scroll', wait: 1000, scroll: 900 },
     { label: 'deep-scroll', wait: 1000, scroll: 1400 },
+    { label: 'long-wait', wait: 8000, scroll: 0 },
   ];
   let last = { name: null, url: null, email: null, description: null, submit: null, _nameStrength: null };
 
@@ -190,21 +193,21 @@ export default {
       const bodySnippet = bodyText.substring(0, 500).toLowerCase();
 
       if (/404|not found|page not found/.test(bodySnippet) || /404/.test(pageTitle)) {
-        throw new Error(`Page returned 404 — submit URL may have changed. Check the site root.`);
+        throw Object.assign(new Error('Page returned 404 — submit URL may have changed. Check the site root.'), { code: 'PAGE_404' });
       }
       if (/500|server error|internal error/.test(bodySnippet)) {
-        throw new Error(`Page returned 500 Server Error — site may be down.`);
+        throw Object.assign(new Error('Page returned 500 Server Error — site may be down.'), { code: 'SERVER_ERROR' });
       }
       if (/login|sign.?in|log.?in|create.?account/.test(pageUrl.toLowerCase()) ||
           (/login|sign.?in/.test(bodySnippet) && !/submit|add.*tool|description/.test(bodySnippet))) {
-        throw new Error(`Page redirected to login — this site now requires an account.`);
+        throw Object.assign(new Error('Page redirected to login — this site now requires an account.'), { code: 'LOGIN_REQUIRED' });
       }
       if (/typeform is now closed|submissions?.*(closed|suspended)|free submissions?.*suspended|paid submission|paid .*submission|paid .*plan/.test(bodySnippet)) {
-        throw new Error(`Submissions appear closed or paid — this site may no longer accept free submissions.`);
+        throw Object.assign(new Error('Submissions appear closed or paid — this site may no longer accept free submissions.'), { code: 'PAID_WALL' });
       }
       if (/stripe\.com|checkout|payment|pricing|buy now|\$\d+/.test(bodySnippet) &&
           !/free/.test(bodySnippet)) {
-        throw new Error(`Page appears to be a payment page — this site may no longer be free.`);
+        throw Object.assign(new Error('Page appears to be a payment page — this site may no longer be free.'), { code: 'PAID_WALL' });
       }
 
       await dismissCookieWall(page);
@@ -218,9 +221,9 @@ export default {
       if (!fields.name && !fields.url && !fields.description) {
         const embedded = await detectEmbeddedForm(page);
         if (embedded) {
-          throw new Error(`${embedded} form detected in iframe — generic adapter cannot fill cross-frame forms. Use a form-specific adapter or direct form URL.`);
+          throw Object.assign(new Error(`${embedded} form detected in iframe — generic adapter cannot fill cross-frame forms. Use a form-specific adapter or direct form URL.`), { code: 'IFRAME_FORM' });
         }
-        throw new Error('No recognizable form fields found. Use scout first.');
+        throw Object.assign(new Error('No recognizable form fields found. Use scout first.'), { code: 'NO_FIELDS' });
       }
 
       // 3. Fill detected fields

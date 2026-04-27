@@ -5,49 +5,75 @@
 import { readdirSync } from 'fs';
 import { utmUrl } from './config.js';
 import { recordSubmission } from './tracker.js';
+import { applyFailureVerdict } from './targets.js';
 
-// Map error messages to structured codes + actionable next steps.
-function classifyError(site, message) {
-  const m = message.toLowerCase();
+// Run verdict layer + render the auto-applied line. Centralized so the
+// pre-flight 404/500 paths and the post-adapter catch share one render.
+function runVerdict(site, code, opts) {
+  if (opts?.noAutoVerdict) return null;
+  let verdict;
+  try {
+    verdict = applyFailureVerdict(site, code);
+  } catch (e) {
+    // Verdict layer must never break a submission. Surface and move on.
+    console.error(`  ⚠️  verdict layer error: ${e.message}`);
+    return null;
+  }
+  if (verdict?.applied && !opts?.json) {
+    const opStr = Object.entries(verdict.op).map(([k, v]) => `${k}=${v}`).join(', ');
+    console.log(`  🤖 Auto-applied to targets.yaml: ${opStr}${verdict.name ? ` → ${verdict.name}` : ''}`);
+  } else if (verdict?.skipped === 'streak' && !opts?.json) {
+    console.log(`  ⏸  Verdict held: ${verdict.streak}/${verdict.threshold} consecutive ${code} (will auto-block on next failure)`);
+  }
+  return verdict;
+}
+
+// Map an error to a structured code + actionable next steps. Prefers an
+// explicit e.code (set by adapters at the throw site, where the semantics are
+// known); falls back to message-string sniffing for legacy / library errors.
+function classifyError(site, err) {
   const today = new Date().toISOString().slice(0, 10);
+  const message = typeof err === 'string' ? err : (err?.message || '');
+  const explicitCode = typeof err === 'object' ? err?.code : null;
+  const m = message.toLowerCase();
 
-  if (m.includes('404') || m.includes('submit page no longer')) {
-    return {
-      code: 'PAGE_404',
-      nextSteps: [
-        { label: 'Mark site as dead', command: `node src/cli.js mark-dead ${site} --yes` },
-      ],
-    };
+  const code = explicitCode || sniffCode(m);
+
+  switch (code) {
+    case 'PAGE_404':
+      return { code, nextSteps: [{ label: 'Mark site as dead', command: `node src/cli.js mark-dead ${site} --yes` }] };
+    case 'LOGIN_REQUIRED':
+      return { code, nextSteps: [{ label: 'Mark site as manual', command: `node src/cli.js mark-manual ${site} --yes` }] };
+    case 'CAPTCHA_FAILED':
+      return {
+        code,
+        nextSteps: [
+          { label: 'Check screenshot', command: `open screenshots/${site}-${today}.png` },
+          { label: 'Mark as done if submitted', command: `node src/cli.js mark-done ${site}` },
+        ],
+      };
+    case 'CHROME_TIMEOUT':
+      return {
+        code,
+        nextSteps: [{ label: 'Restart Chrome', command: 'pkill -f "bb-browser" || true && bb-browser open about:blank' }],
+      };
+    case 'IFRAME_FORM':
+    case 'PAID_WALL':
+    case 'NO_FIELDS':
+    case 'SERVER_ERROR':
+      // Verdict layer handles targets.yaml updates; no per-error CLI hint needed.
+      return { code, nextSteps: [] };
+    default:
+      return { code: 'UNKNOWN_ERROR', nextSteps: [] };
   }
-  if (m.includes('login') || m.includes('sign-in') || m.includes('account')) {
-    return {
-      code: 'LOGIN_REQUIRED',
-      nextSteps: [
-        { label: 'Mark site as manual', command: `node src/cli.js mark-manual ${site} --yes` },
-      ],
-    };
-  }
-  if (m.includes('captcha')) {
-    return {
-      code: 'CAPTCHA_FAILED',
-      nextSteps: [
-        { label: 'Check screenshot', command: `open screenshots/${site}-${today}.png` },
-        { label: 'Mark as done if submitted', command: `node src/cli.js mark-done ${site}` },
-      ],
-    };
-  }
-  if (m.includes('chrome') || m.includes('timeout') || m.includes('connect')) {
-    return {
-      code: 'CHROME_TIMEOUT',
-      nextSteps: [
-        {
-          label: 'Restart Chrome',
-          command: 'pkill -f "bb-browser" || true && bb-browser open about:blank',
-        },
-      ],
-    };
-  }
-  return { code: 'UNKNOWN_ERROR', nextSteps: [] };
+}
+
+function sniffCode(m) {
+  if (m.includes('404') || m.includes('submit page no longer')) return 'PAGE_404';
+  if (m.includes('login') || m.includes('sign-in') || m.includes('account')) return 'LOGIN_REQUIRED';
+  if (m.includes('captcha')) return 'CAPTCHA_FAILED';
+  if (m.includes('chrome') || m.includes('timeout') || m.includes('connect')) return 'CHROME_TIMEOUT';
+  return 'UNKNOWN_ERROR';
 }
 
 async function loadAdapter(site) {
@@ -117,24 +143,26 @@ export async function submit(site, opts) {
       const { code, nextSteps } = classifyError(site, '404');
       const result = { status: 'failed', code, error: '404 — submit page gone', nextSteps };
       await recordSubmission(site, 'failed', { code, error: result.error });
+      const verdict = runVerdict(site, code, { json: jsonMode, noAutoVerdict: opts.noAutoVerdict });
       if (jsonMode) {
-        console.log(JSON.stringify(result, null, 2));
+        console.log(JSON.stringify({ ...result, verdict }, null, 2));
       } else {
         console.error(`❌ ${checkUrl} returned 404 — submit page no longer exists.`);
         console.log('   Try visiting the site root to find the new submit URL.');
         renderNextSteps(nextSteps);
       }
-      return result;
+      return { ...result, verdict };
     }
     if (res && res.status >= 500) {
       const result = { status: 'failed', code: 'SERVER_ERROR', error: `HTTP ${res.status}`, nextSteps: [] };
       await recordSubmission(site, 'failed', { code: 'SERVER_ERROR', error: result.error });
+      const verdict = runVerdict(site, 'SERVER_ERROR', { json: jsonMode, noAutoVerdict: opts.noAutoVerdict });
       if (jsonMode) {
-        console.log(JSON.stringify(result, null, 2));
+        console.log(JSON.stringify({ ...result, verdict }, null, 2));
       } else {
         console.error(`❌ ${checkUrl} returned ${res.status} — site appears down.`);
       }
-      return result;
+      return { ...result, verdict };
     }
   }
 
@@ -159,10 +187,11 @@ export async function submit(site, opts) {
     return result;
   } catch (e) {
     const duration_ms = Date.now() - startMs;
-    const { code, nextSteps } = classifyError(site, e.message);
+    const { code, nextSteps } = classifyError(site, e);
     await recordSubmission(site, 'failed', { code, error: e.message, duration_ms });
+    const verdict = runVerdict(site, code, { json: jsonMode, noAutoVerdict: opts.noAutoVerdict });
 
-    const result = { status: 'failed', code, error: e.message, nextSteps };
+    const result = { status: 'failed', code, error: e.message, nextSteps, verdict };
     if (jsonMode) {
       console.log(JSON.stringify(result, null, 2));
     } else {
