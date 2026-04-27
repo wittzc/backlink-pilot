@@ -202,7 +202,7 @@ function recipeFileExists(siteKey) {
 // ------------------------------------------------------------------
 
 function result(bucket, code, automation, notes = [], extra = {}) {
-  return { bucket, code, automation, notes, ...extra };
+  return { bucket, code, automation, notes, provider_url: null, ...extra };
 }
 
 function manual(reason, code, notes = []) {
@@ -298,8 +298,7 @@ export function classifyTriage({
   // Iframe-embedded provider (Paperform / Tally / Typeform / Airtable / CN forms).
   if (provider && !hasCoreFields(fields)) {
     const providerUrl = pickProviderIframeUrl(provider.provider, dom.iframes || []);
-    const extra = { provider: provider.provider };
-    if (providerUrl) extra.provider_url = providerUrl;
+    const extra = { provider: provider.provider, provider_url: providerUrl || null };
     return result('provider-ready', provider.code, 'provider-adapter', [provider.provider], extra);
   }
 

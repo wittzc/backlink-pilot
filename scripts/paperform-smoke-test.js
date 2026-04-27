@@ -38,13 +38,20 @@ async function resolveIframeUrl(input) {
 
   // Treat as host page; fetch and pull the first Paperform iframe src.
   let html = '';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
   try {
     const res = await fetch(input, {
-      headers: { 'user-agent': 'Mozilla/5.0 backlink-pilot paperform-smoke' },
+      signal: controller.signal,
+      headers: { 'User-Agent': 'backlink-pilot/1.0 paperform-smoke' },
     });
+    if (!res.ok) fail(`Host returned HTTP ${res.status} for ${input}`);
     html = await res.text();
   } catch (e) {
+    if (e.name === 'AbortError') fail(`Host page timed out after 15s: ${input}`);
     fail(`fetch failed for ${input}: ${e.message}`);
+  } finally {
+    clearTimeout(timeout);
   }
   const iframes = [...html.matchAll(/<iframe\b[^>]*\bsrc=["']([^"']+)["']/gi)].map((m) => m[1]);
   const url = pickProviderIframeUrl('paperform', iframes);

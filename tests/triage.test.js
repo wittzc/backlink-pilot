@@ -242,7 +242,7 @@ button [ref=7] "Submit"
       dom: { forms: 1, inputs: 3, iframes: [] },
     });
     assert.notEqual(result.bucket, 'provider-ready');
-    assert.equal(result.provider_url, undefined);
+    assert.equal(result.provider_url, null);
   });
 
   it('picks the Paperform iframe even when other unrelated iframes are present', () => {
