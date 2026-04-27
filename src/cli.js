@@ -10,7 +10,7 @@ import { pingIndexNow } from './indexnow.js';
 import { showStatus } from './tracker.js';
 import { forceUpdate } from './bb-update.js';
 import { pruneDead } from './prune-dead.js';
-import { markDead, markManual, markDone } from './targets.js';
+import { markDead, markManual, markDone, listLocked, unlock } from './targets.js';
 import { showStats } from './stats.js';
 import { runDoctor } from './doctor.js';
 import { cleanupScreenshots, cleanupLocks } from './utils/cleanup.js';
@@ -162,6 +162,62 @@ program
     try {
       const entry = markManual(site);
       console.log(`✓ Marked "${entry.name}" as manual in targets.yaml`);
+    } catch (e) {
+      console.error(`✗ ${e.message}`);
+      process.exit(1);
+    }
+  });
+
+program
+  .command('locked')
+  .description('List sites the verdict layer has auto-blocked, grouped by code')
+  .option('--code <code>', 'Filter to a single code (e.g. IFRAME_FORM, NO_FIELDS)')
+  .option('--json', 'Output as JSON')
+  .action((opts) => {
+    const rows = listLocked({ code: opts.code || null });
+    if (opts.json) {
+      console.log(JSON.stringify(rows, null, 2));
+      return;
+    }
+    if (!rows.length) {
+      console.log(opts.code ? `No locked sites with code=${opts.code}.` : 'No locked sites.');
+      return;
+    }
+    if (opts.code) {
+      console.log(`\n🔒 ${rows.length} site(s) locked with code=${opts.code}\n`);
+      for (const r of rows) {
+        console.log(`  ${r.name}`);
+        console.log(`    ${r.submit_url}`);
+        console.log(`    auto=${r.auto}${r.status ? `, status=${r.status}` : ''} — ${r.reason}`);
+      }
+      console.log('');
+      return;
+    }
+    const byCode = {};
+    for (const r of rows) (byCode[r.code] ||= []).push(r);
+    console.log(`\n🔒 ${rows.length} locked site(s), by code:\n`);
+    for (const [code, list] of Object.entries(byCode).sort((a, b) => b[1].length - a[1].length)) {
+      console.log(`  ${code.padEnd(18)} ${list.length}`);
+    }
+    console.log(`\n  See details: node src/cli.js locked --code <CODE>\n`);
+  });
+
+program
+  .command('unlock <site>')
+  .description('Unlock a verdict-blocked site (auto: yes, drop auto_blocked_reason)')
+  .option('--yes', 'Skip confirmation prompt')
+  .action((site, opts) => {
+    if (!opts.yes) {
+      console.log(`Unlock "${site}" in targets.yaml? Run with --yes to confirm.`);
+      return;
+    }
+    try {
+      const r = unlock(site);
+      if (!r.changed) {
+        console.log(`✓ "${r.name}" was already auto:yes with no block reason — nothing to do`);
+      } else {
+        console.log(`✓ Unlocked "${r.name}" (was auto:${r.previous.auto}) — next batch run will retry it`);
+      }
     } catch (e) {
       console.error(`✗ ${e.message}`);
       process.exit(1);

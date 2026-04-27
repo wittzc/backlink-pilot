@@ -59,6 +59,69 @@ export async function markDone(siteName) {
 }
 
 /**
+ * List all sites locked by the verdict layer (entries that carry an
+ * auto_blocked_reason). Returns a flat array of { name, submit_url, code,
+ * reason, category, auto, status }. Sites manually flagged auto:no without
+ * an auto_blocked_reason aren't included — those are operator decisions,
+ * not verdict output.
+ */
+export function listLocked({ code: filterCode } = {}) {
+  if (!existsSync(TARGETS_FILE)) return [];
+  const doc = loadTargetsDoc();
+  const all = flatten(doc);
+  const out = [];
+  for (const f of all) {
+    const reason = f.entry.auto_blocked_reason;
+    if (!reason) continue;
+    // auto_blocked_reason format: "CODE: free text (YYYY-MM-DD)" or "CODE (YYYY-MM-DD)"
+    const m = String(reason).match(/^([A-Z0-9_]+)/);
+    const code = m ? m[1] : 'UNKNOWN';
+    if (filterCode && code !== filterCode) continue;
+    out.push({
+      name: f.entry.name,
+      submit_url: f.entry.submit_url,
+      code,
+      reason: String(reason),
+      category: f.categoryKey,
+      auto: f.entry.auto,
+      status: f.entry.status || null,
+    });
+  }
+  return out;
+}
+
+/**
+ * Reverse of applyFailureVerdict — flip auto back to yes and drop the
+ * auto_blocked_reason field, so the next batch run will retry this site.
+ * Doesn't touch status (a status:dead entry stays dead even after unlock —
+ * that's a separate manual call). Idempotent: a site that's already
+ * auto:yes / no reason is a no-op.
+ */
+export function unlock(siteName) {
+  if (!existsSync(TARGETS_FILE)) throw new Error(`${TARGETS_FILE} not found`);
+  const doc = loadTargetsDoc();
+  const all = flatten(doc);
+  const target = findEntry(all, siteName);
+  if (!target) throw new Error(`"${siteName}" not found in targets.yaml`);
+
+  const wasAuto = target.entry.auto;
+  const hadReason = target.entryNode.has('auto_blocked_reason');
+  if (wasAuto === 'yes' && !hadReason) {
+    return { changed: false, name: target.entry.name };
+  }
+
+  backupTargets();
+  target.entryNode.set('auto', 'yes');
+  if (hadReason) target.entryNode.delete('auto_blocked_reason');
+  saveTargetsDoc(doc);
+  return {
+    changed: true,
+    name: target.entry.name,
+    previous: { auto: wasAuto, hadReason },
+  };
+}
+
+/**
  * Idempotent failure verdict — consult VERDICT_TABLE for the given error
  * code, gate ambiguous codes behind a streak threshold, and write the
  * verdict to targets.yaml if the entry needs updating.
