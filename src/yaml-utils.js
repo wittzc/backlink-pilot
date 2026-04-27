@@ -1,5 +1,8 @@
 // yaml-utils.js — Shared helpers for targets.yaml parsing and mutation.
 // Using parseDocument preserves header comments and field ordering on save.
+// Requires `yaml` >= 2.8 — earlier 2.4.x releases dropped standalone
+// commentBefore blocks on roundtrip, which silently wiped section banners
+// in targets.yaml.
 
 import { readFileSync, writeFileSync, renameSync, copyFileSync } from 'fs';
 import { parseDocument } from 'yaml';
