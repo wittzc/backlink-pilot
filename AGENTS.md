@@ -1,4 +1,4 @@
-# Backlink Pilot — Claude Code Instructions
+# Backlink Pilot — Agent Instructions (Codex / OpenHands / generic)
 
 This file is a redirect. The single source of truth for AI-agent instructions
 in this repo is **[docs/AGENT_GUIDE.md](docs/AGENT_GUIDE.md)**.

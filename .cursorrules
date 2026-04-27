@@ -1,0 +1,11 @@
+# Backlink Pilot — Cursor Rules
+
+This file is a redirect. The single source of truth for AI-agent instructions
+in this repo is **docs/AGENT_GUIDE.md**.
+
+Read that file before doing anything in this repo. It covers first-time user
+flow, available CLI commands and their exit-code contract, site adapters and
+targets.yaml schema, operating rules, error handling, and the batch
+submission playbook.
+
+For machine-readable command metadata see agent-manifest.json.

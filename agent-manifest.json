@@ -1,0 +1,76 @@
+{
+  "name": "backlink-pilot",
+  "version": "2.2.0",
+  "description": "Automated backlink submission toolkit for indie hackers",
+  "agent_guide": "docs/AGENT_GUIDE.md",
+  "cli_entry": "node src/cli.js",
+  "data_files": {
+    "config.yaml": "user product config (gitignored, copy from config.example.yaml)",
+    "targets.yaml": "directory of ~250 sites with auto/status flags and auto_blocked_reason",
+    "submissions.yaml": "submission history, indexed by (site, productHash) (gitignored)"
+  },
+  "exit_codes": {
+    "0": "success or graceful no-op",
+    "1": "user-actionable failure — surface nextSteps to user, do not auto-retry"
+  },
+  "json_output": "Pass --json to any command that supports it. JSON-mode failures still exit 1 but write a structured payload to stdout: { status, code, error, nextSteps[], verdict }",
+  "engine": "bb (bb-browser); playwright was removed in v2.2",
+  "commands": [
+    {
+      "name": "doctor",
+      "syntax": "node src/cli.js doctor",
+      "purpose": "Verify environment health (Node version, bb-browser, Chrome, config). Run this first if anything misbehaves."
+    },
+    {
+      "name": "submit",
+      "syntax": "node src/cli.js submit <site|url> [--engine bb] [--json] [--no-auto-verdict] [--dry-run]",
+      "purpose": "Submit current product to a single directory site. Accepts a known adapter name (e.g. 'futuretools') or a URL (uses generic adapter). Failures auto-write verdict to targets.yaml unless --no-auto-verdict.",
+      "json": true
+    },
+    {
+      "name": "batch-submit",
+      "syntax": "node src/cli.js batch-submit [--limit N] [--dry-run] [--yes] [--category KEY] [--priority high|medium|low] [--force site1,site2]",
+      "purpose": "Run submission across many targets with dedup. Already-submitted (site, productHash) pairs are skipped automatically. Failures populate the verdict layer so the auto:yes pool self-corrects.",
+      "json": false
+    },
+    {
+      "name": "status",
+      "syntax": "node src/cli.js status [--json]",
+      "purpose": "Show submission history aggregated by status. Cheap; safe to call anytime.",
+      "json": true
+    },
+    {
+      "name": "locked",
+      "syntax": "node src/cli.js locked [--code CODE] [--json]",
+      "purpose": "List sites the verdict layer has auto-blocked, grouped by code. Codes: PAGE_404 / IFRAME_FORM / NO_FIELDS / LOGIN_REQUIRED / PAID_WALL / UNKNOWN_ERROR. Use --code to drill into one bucket.",
+      "json": true
+    },
+    {
+      "name": "unlock",
+      "syntax": "node src/cli.js unlock <site> --yes",
+      "purpose": "Reverse a verdict lock — auto:yes restored, auto_blocked_reason dropped. Use after fixing the underlying issue (new adapter, updated submit_url) so the next batch run retries the site."
+    },
+    {
+      "name": "scout",
+      "syntax": "node src/cli.js scout <url> [--deep]",
+      "purpose": "Diagnose a single site's submit page — discover form fields and submit buttons. Use before writing a new adapter or to check if a NO_FIELDS site is fixable."
+    },
+    {
+      "name": "triage",
+      "syntax": "node src/cli.js triage [--browser] [--limit N] [--category KEY] [--json] [--output FILE]",
+      "purpose": "Classify all auto:yes targets into buckets (generic-ready / adapter-needed / iframe-provider / manual-review) before running batch-submit. HTTP-only by default; pass --browser for full snapshot triage.",
+      "json": true
+    }
+  ],
+  "verdict_codes": {
+    "PAGE_404": "Submit URL returns 404 → status:dead, auto:no",
+    "PAID_WALL": "Page is paywalled or submissions closed → status:paid, auto:no",
+    "LOGIN_REQUIRED": "Page redirects to login → auto:manual",
+    "IFRAME_FORM": "Form is in a Typeform/Tally/Airtable iframe → auto:no (immediate)",
+    "NO_FIELDS": "No recognizable form fields after long-wait scan → auto:no (after 2 consecutive failures)",
+    "UNKNOWN_ERROR": "Unclassified failure → auto:no (after 2 consecutive failures)",
+    "SERVER_ERROR": "HTTP 5xx — transient, no targets.yaml change",
+    "CHROME_TIMEOUT": "Chrome unresponsive — transient, no targets.yaml change",
+    "CAPTCHA_FAILED": "Captcha unsolved — may have submitted, no targets.yaml change"
+  }
+}
