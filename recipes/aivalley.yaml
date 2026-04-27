@@ -1,0 +1,30 @@
+# aivalley.ai — WordPress Contact Form 7 submit-tool form
+# Auth: none. Captcha: none observed.
+#
+# Two textareas share name="your-message" (long description, then short).
+# We address them with a positional suffix `|nth=N` understood by the
+# BbPage recipe adapter (selector strings are opaque to the runtime).
+
+url: https://aivalley.ai/submit-tool/
+
+fields:
+  - key: submitterName
+    selector: 'input[name="your-name"]'
+    value: submitterName
+  - key: email
+    selector: 'input[name="your-email"]'
+    value: email
+  - key: name
+    selector: 'input[name="ToolName"]'
+    value: name
+  - key: url
+    selector: 'input[name="ToolURL"]'
+    value: utmUrl
+  - key: longDescription
+    selector: 'textarea[name="your-message"]|nth=0'
+    value: longDescription
+  - key: shortDescription
+    selector: 'textarea[name="your-message"]|nth=1'
+    value: description
+
+submit: 'input[type="submit"].wpcf7-submit'

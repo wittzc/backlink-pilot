@@ -1,0 +1,65 @@
+# futuretools.io — Submit-a-tool form
+# Auth: none. Captcha: Cloudflare Turnstile observed since 2026-04 →
+# triage classifies this as manual-review (captcha-required). The recipe
+# is still useful as a fill helper for human-assisted submission: a human
+# solves the captcha, the recipe fills every other field deterministically.
+
+url: https://www.futuretools.io/submit-a-tool
+
+fields:
+  - key: submitterName
+    selector: 'input[name="submitter_name"]'
+    value: submitterName
+  - key: name
+    selector: 'input[name="tool_name"]'
+    value: name
+  - key: url
+    selector: 'input[name="tool_url"]'
+    value: utmUrl
+  - key: description
+    selector: 'textarea[name="description"]'
+    value: description
+  - key: email
+    selector: 'input[name="submitter_email"]'
+    value: email
+
+selects:
+  - key: category
+    selector: 'select[name="category"]'
+    valueFrom: categories
+    map:
+      developer-tools: Generative Code
+      programming: Generative Code
+      devtools: Generative Code
+      engineering: Generative Code
+      video: Generative Video
+      animation: Generative Video
+      image: Generative Art
+      image-generation: Generative Art
+      art: Generative Art
+      design: Generative Art
+      photo: Generative Art
+      graphic: Generative Art
+      audio: Text-To-Speech
+      speech: Text-To-Speech
+      voice: Text-To-Speech
+      tts: Text-To-Speech
+      chat: Chat
+      assistant: Chat
+      bot: Chat
+      default: Chat
+
+radios:
+  - key: pricing
+    name: pricing_tier
+    valueFrom: pricing
+    map:
+      free: free
+      freemium: freemium
+      paid: paid
+      open-source: open_source
+      open_source: open_source
+      opensource: open_source
+      default: free
+
+submit: 'button[type="submit"]'
