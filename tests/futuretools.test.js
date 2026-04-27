@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import {
+import futuretoolsAdapter, {
   futureToolsCategory,
   futureToolsPricing,
   chooseSubmitPath,
@@ -34,6 +34,14 @@ describe('futuretools chooseSubmitPath', () => {
     assert.equal(choice.recipe, null);
   });
 
+  it('takes the legacy branch for any truthy env-var value', () => {
+    assert.equal(chooseSubmitPath({ BACKLINK_RECIPE_DISABLE: 'true' }).path, 'legacy');
+    _resetRecipeCacheForTests();
+    assert.equal(chooseSubmitPath({ BACKLINK_RECIPE_DISABLE: 'YES' }).path, 'legacy');
+    _resetRecipeCacheForTests();
+    assert.equal(chooseSubmitPath({ BACKLINK_RECIPE_DISABLE: ' on ' }).path, 'legacy');
+  });
+
   it('takes the recipe branch when env unset and recipe loads', () => {
     const choice = chooseSubmitPath({});
     assert.equal(choice.path, 'recipe');
@@ -43,5 +51,29 @@ describe('futuretools chooseSubmitPath', () => {
     assert.ok(Array.isArray(choice.recipe.fields));
     assert.ok(choice.recipe.selects?.some((s) => s.key === 'category'));
     assert.ok(choice.recipe.radios?.some((r) => r.name === 'pricing_tier'));
+  });
+});
+
+describe('futuretools default.submit dispatch', () => {
+  beforeEach(() => _resetRecipeCacheForTests());
+
+  it('invokes the recipe path when env unset', async () => {
+    let called = '';
+    await futuretoolsAdapter.submit({}, {}, {
+      chooseSubmitPathFn: () => ({ path: 'recipe', recipe: { url: 'x' } }),
+      submitWithRecipeFn: async () => { called = 'recipe'; return { ok: true }; },
+      submitLegacyFn: async () => { called = 'legacy'; return { ok: true }; },
+    });
+    assert.equal(called, 'recipe');
+  });
+
+  it('invokes the legacy path when env disables recipe', async () => {
+    let called = '';
+    await futuretoolsAdapter.submit({}, {}, {
+      chooseSubmitPathFn: () => ({ path: 'legacy', recipe: null }),
+      submitWithRecipeFn: async () => { called = 'recipe'; return { ok: true }; },
+      submitLegacyFn: async () => { called = 'legacy'; return { ok: true }; },
+    });
+    assert.equal(called, 'legacy');
   });
 });

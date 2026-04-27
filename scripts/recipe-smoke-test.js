@@ -19,11 +19,17 @@
 // remove its `submit` selector before runtime sees it, so even a buggy
 // runtime cannot click submit.
 
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
 import { loadConfig, utmUrl } from '../src/config.js';
 import { loadRecipes } from '../src/sites/recipe-loader.js';
 import { runRecipe, readBackRecipeValues } from '../src/sites/form-recipe.js';
 import { createBbRecipePage } from '../src/sites/bb-recipe-page.js';
 import { withBrowser } from '../src/browser.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const RECIPES_DIR = resolve(__dirname, '..', 'recipes');
 
 const DRY_RUN = true; // immutable contract for this script
 
@@ -39,7 +45,7 @@ async function main() {
   if (DRY_RUN !== true) fail('DRY_RUN constant tampered with — refusing to run.');
 
   const config = await loadConfig();
-  const recipes = loadRecipes('recipes');
+  const recipes = loadRecipes(RECIPES_DIR);
   const recipe = recipes[siteKey];
   if (!recipe) fail(`No recipe found for siteKey=${siteKey} under recipes/`);
 

@@ -12,6 +12,10 @@
 
 /**
  * @typedef {object} RecipePage
+ * Selectors are CSS strings, optionally suffixed with `|nth=N` to address
+ * the Nth match (0-indexed). Implementations should split on `|nth=` and
+ * use querySelectorAll[N]. Required for forms with duplicate selectors
+ * (e.g., WPCF7 with two textareas named the same).
  * @property {(selector: string, value: string) => Promise<void>} fillSelector
  * @property {(selector: string, text: string) => Promise<void>} selectOptionByText
  * @property {(name: string, value: string) => Promise<void>} checkRadio

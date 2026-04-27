@@ -11,6 +11,7 @@ import { withBrowser, delay } from '../browser.js';
 import { loadRecipes } from './recipe-loader.js';
 import { runRecipe } from './form-recipe.js';
 import { createBbRecipePage } from './bb-recipe-page.js';
+import { isFlagOn } from '../lib/env-flag.js';
 
 const SITE_KEY = 'aivalley';
 const SUBMIT_URL = 'https://aivalley.ai/submit-tool/';
@@ -147,7 +148,7 @@ export async function submitWithRecipe(product, config, recipe) {
  * can verify the branch selection without launching a real browser.
  */
 export function chooseSubmitPath(env = process.env) {
-  if (env.BACKLINK_RECIPE_DISABLE === '1') return { path: 'legacy', recipe: null };
+  if (isFlagOn(env.BACKLINK_RECIPE_DISABLE)) return { path: 'legacy', recipe: null };
   const recipe = loadRecipeOnce();
   if (!recipe) return { path: 'legacy', recipe: null };
   return { path: 'recipe', recipe };
@@ -160,11 +161,16 @@ export default {
   captcha: 'none',
   engine: 'bb',
 
-  async submit(product, config) {
-    const choice = chooseSubmitPath();
+  async submit(product, config, _deps = {}) {
+    const {
+      submitWithRecipeFn = submitWithRecipe,
+      submitLegacyFn = submitLegacy,
+      chooseSubmitPathFn = chooseSubmitPath,
+    } = _deps;
+    const choice = chooseSubmitPathFn();
     if (choice.path === 'recipe') {
-      return submitWithRecipe(product, config, choice.recipe);
+      return submitWithRecipeFn(product, config, choice.recipe);
     }
-    return submitLegacy(product, config);
+    return submitLegacyFn(product, config);
   },
 };

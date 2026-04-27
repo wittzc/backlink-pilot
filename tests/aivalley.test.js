@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import {
+import aivalleyAdapter, {
   aiValleyDescriptions,
   aiValleySubmitterName,
   chooseSubmitPath,
@@ -42,6 +42,14 @@ describe('aivalley chooseSubmitPath', () => {
     assert.equal(choice.recipe, null);
   });
 
+  it('takes the legacy branch for any truthy env-var value', () => {
+    assert.equal(chooseSubmitPath({ BACKLINK_RECIPE_DISABLE: 'true' }).path, 'legacy');
+    _resetRecipeCacheForTests();
+    assert.equal(chooseSubmitPath({ BACKLINK_RECIPE_DISABLE: 'YES' }).path, 'legacy');
+    _resetRecipeCacheForTests();
+    assert.equal(chooseSubmitPath({ BACKLINK_RECIPE_DISABLE: ' on ' }).path, 'legacy');
+  });
+
   it('takes the recipe branch when env unset and recipe loads', () => {
     const choice = chooseSubmitPath({});
     assert.equal(choice.path, 'recipe');
@@ -52,5 +60,29 @@ describe('aivalley chooseSubmitPath', () => {
     const shortField = choice.recipe.fields.find((f) => f.key === 'shortDescription');
     assert.ok(longField?.selector.endsWith('|nth=0'));
     assert.ok(shortField?.selector.endsWith('|nth=1'));
+  });
+});
+
+describe('aivalley default.submit dispatch', () => {
+  beforeEach(() => _resetRecipeCacheForTests());
+
+  it('invokes the recipe path when env unset', async () => {
+    let called = '';
+    await aivalleyAdapter.submit({}, {}, {
+      chooseSubmitPathFn: () => ({ path: 'recipe', recipe: { url: 'x' } }),
+      submitWithRecipeFn: async () => { called = 'recipe'; return { ok: true }; },
+      submitLegacyFn: async () => { called = 'legacy'; return { ok: true }; },
+    });
+    assert.equal(called, 'recipe');
+  });
+
+  it('invokes the legacy path when env disables recipe', async () => {
+    let called = '';
+    await aivalleyAdapter.submit({}, {}, {
+      chooseSubmitPathFn: () => ({ path: 'legacy', recipe: null }),
+      submitWithRecipeFn: async () => { called = 'recipe'; return { ok: true }; },
+      submitLegacyFn: async () => { called = 'legacy'; return { ok: true }; },
+    });
+    assert.equal(called, 'legacy');
   });
 });

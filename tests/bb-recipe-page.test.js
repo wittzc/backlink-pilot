@@ -49,16 +49,18 @@ describe('parseSelector', () => {
 
 describe('queryExpr', () => {
   it('emits querySelector for plain selectors', () => {
+    // escapeJs (JSON.stringify-based) escapes embedded double quotes to \" —
+    // inside a single-quoted JS string literal that is harmless and parses fine.
     assert.equal(
       queryExpr('input[name="x"]'),
-      `document.querySelector('input[name="x"]')`,
+      `document.querySelector('input[name=\\"x\\"]')`,
     );
   });
 
   it('emits querySelectorAll[N] for |nth=N selectors', () => {
     assert.equal(
       queryExpr('textarea[name="msg"]|nth=1'),
-      `document.querySelectorAll('textarea[name="msg"]')[1]`,
+      `document.querySelectorAll('textarea[name=\\"msg\\"]')[1]`,
     );
   });
 
@@ -87,7 +89,8 @@ describe('createBbRecipePage', () => {
     const [verb, op, script] = bb.calls[0];
     assert.equal(verb, '_bb');
     assert.equal(op, 'eval');
-    assert.match(script, /document\.querySelector\('input\[name="email"\]'\)/);
+    // escapeJs escapes the inner double quotes to \" inside the eval literal.
+    assert.match(script, /document\.querySelector\('input\[name=\\"email\\"\]'\)/);
     assert.match(script, /a@b\.com/);
     // Must use the React-friendly setter path.
     assert.match(script, /Object\.getOwnPropertyDescriptor\(proto, 'value'\)/);
@@ -101,12 +104,53 @@ describe('createBbRecipePage', () => {
     assert.match(script, /L\\'Oreal/);
   });
 
+  it('fillSelector escapes newlines so the eval string literal stays valid', async () => {
+    const bb = makeMockBbPage();
+    const page = createBbRecipePage(bb);
+    await page.fillSelector('textarea[name="x"]', 'line1\nline2');
+    const script = bb.calls[0][2];
+    // The literal substring `\n` (backslash-n) must be present, NOT a raw
+    // newline inside the single-quoted JS string literal.
+    assert.match(script, /line1\\nline2/);
+    assert.ok(!/line1\nline2/.test(script.replace(/\\n/g, '_')),
+      'raw newline must not appear inside the value literal');
+  });
+
+  it('fillSelector escapes tabs', async () => {
+    const bb = makeMockBbPage();
+    const page = createBbRecipePage(bb);
+    await page.fillSelector('input[name="x"]', 'tab\there');
+    const script = bb.calls[0][2];
+    // JSON.stringify escapes \t to \\t.
+    assert.match(script, /tab\\there/);
+  });
+
+  it('fillSelector handles U+2028 line separator without breaking the eval', async () => {
+    const bb = makeMockBbPage();
+    const page = createBbRecipePage(bb);
+    await page.fillSelector('input[name="x"]', 'with\u2028sep');
+    const script = bb.calls[0][2];
+    // Since ES2019, JSON.stringify leaves U+2028/U+2029 unescaped (they are
+    // valid in JSON strings AND in JS string literals as of ES2019), so the
+    // raw character may pass through. What matters is that the resulting eval
+    // script remains parseable JS \u2014 verify by Function-constructing it.
+    assert.doesNotThrow(() => new Function(script));
+  });
+
+  it("fillSelector escapes single-quoted apostrophes (O'Brien)", async () => {
+    const bb = makeMockBbPage();
+    const page = createBbRecipePage(bb);
+    await page.fillSelector('input[name="x"]', "O'Brien");
+    const script = bb.calls[0][2];
+    assert.match(script, /O\\'Brien/);
+  });
+
   it('fillSelector resolves |nth=N selectors via querySelectorAll', async () => {
     const bb = makeMockBbPage();
     const page = createBbRecipePage(bb);
     await page.fillSelector('textarea[name="msg"]|nth=1', 'hi');
     const script = bb.calls[0][2];
-    assert.match(script, /querySelectorAll\('textarea\[name="msg"\]'\)\[1\]/);
+    assert.match(script, /querySelectorAll\('textarea\[name=\\"msg\\"\]'\)\[1\]/);
   });
 
   it('selectOptionByText emits a script that matches option by trimmed text', async () => {
@@ -154,7 +198,7 @@ describe('createBbRecipePage', () => {
     const [verb, op, script] = bb.calls[0];
     assert.equal(verb, '_bb');
     assert.equal(op, 'eval');
-    assert.match(script, /querySelectorAll\('button\[type="submit"\]'\)\[2\]/);
+    assert.match(script, /querySelectorAll\('button\[type=\\"submit\\"\]'\)\[2\]/);
     assert.match(script, /MouseEvent\('click'/);
   });
 

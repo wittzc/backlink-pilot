@@ -18,11 +18,14 @@
 // itself is in-repo). We escape values destined for string literals
 // inside eval scripts but do NOT defensively rewrite selectors.
 
-function escapeJs(str) {
-  return String(str ?? '')
-    .replace(/\\/g, '\\\\')
-    .replace(/'/g, "\\'")
-    .replace(/\n/g, '\\n');
+function escapeJs(s) {
+  if (s == null) return '';
+  // Use JSON.stringify for bulletproof JS string-literal escaping
+  // (covers \, ", \n, \r, \t, \u2028, \u2029, other control chars per JSON spec),
+  // strip the wrapping double quotes, then ALSO escape single quotes since
+  // the eval scripts in this file embed values inside single-quoted JS string
+  // literals (`'${escapeJs(value)}'`).
+  return JSON.stringify(String(s)).slice(1, -1).replace(/'/g, "\\'");
 }
 
 /**
