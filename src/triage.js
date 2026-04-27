@@ -46,27 +46,37 @@ function normalizeText(value) {
 // Provider detection
 // ------------------------------------------------------------------
 
-function detectProvider(dom = {}, text = '', html = '') {
+// Provider detection runs against the iframe URL list ONLY, never against body
+// text. Bare-word matches (e.g. "tally") on body content cause false positives
+// on words like "totally" / "mentally" / "metallic". Word boundaries (\b) are
+// applied defensively to all provider names for the same reason.
+function detectProvider(dom = {}) {
   const iframes = (dom.iframes || []).join(' ').toLowerCase();
-  const haystack = `${text} ${iframes} ${html}`.toLowerCase();
+  if (!iframes) return null;
 
-  if (/paperform/.test(haystack)) {
+  if (/\bpaperform\b/.test(iframes)) {
     return { provider: 'paperform', code: 'PAPERFORM_IFRAME' };
   }
-  if (/typeform/.test(haystack)) {
+  if (/\btypeform\b/.test(iframes)) {
     return { provider: 'typeform', code: 'TYPEFORM_IFRAME' };
   }
-  if (/tally\.so|tally/.test(haystack)) {
+  if (/\btally(\.so)?\b/.test(iframes)) {
     return { provider: 'tally', code: 'TALLY_IFRAME' };
   }
-  if (/airtable/.test(haystack)) {
+  if (/\bairtable\b/.test(iframes)) {
     return { provider: 'airtable', code: 'AIRTABLE_IFRAME' };
   }
-  if (/jinshuju|mikecrm|wjx|wenjuan/.test(haystack)) {
-    return { provider: 'embedded-form', code: 'EMBEDDED_FORM_IFRAME' };
+  if (/\bjinshuju\b/.test(iframes)) {
+    return { provider: 'jinshuju', code: 'JINSHUJU_IFRAME' };
   }
-  if (dom.iframes?.length) {
-    return { provider: 'iframe', code: 'IFRAME_FORM' };
+  if (/\bmikecrm\b/.test(iframes)) {
+    return { provider: 'mikecrm', code: 'MIKECRM_IFRAME' };
+  }
+  if (/\bwjx\b/.test(iframes)) {
+    return { provider: 'wjx', code: 'WJX_IFRAME' };
+  }
+  if (/\bwenjuan\b/.test(iframes)) {
+    return { provider: 'wenjuan', code: 'WENJUAN_IFRAME' };
   }
   return null;
 }
@@ -180,12 +190,12 @@ function recipeFileExists(siteKey) {
 // Result helpers
 // ------------------------------------------------------------------
 
-function result(bucket, code, automation, reasons = [], extra = {}) {
-  return { bucket, code, automation, reasons, ...extra };
+function result(bucket, code, automation, notes = [], extra = {}) {
+  return { bucket, code, automation, notes, ...extra };
 }
 
-function manual(reason, code, reasons = []) {
-  return result('manual-review', code, 'manual', reasons, { reason });
+function manual(reason, code, notes = []) {
+  return result('manual-review', code, 'manual', notes, { reason });
 }
 
 // ------------------------------------------------------------------
@@ -209,6 +219,15 @@ export function computeValueTier(entry = {}, categoryKey = null) {
 // Main classifier
 // ------------------------------------------------------------------
 
+/**
+ * Dispatch order: dead → captcha → login → closed-submission → paid → recipe →
+ * provider → field-detection → manual-review fallback.
+ *
+ * Hard walls (captcha / login / paid / closed) are checked BEFORE recipe and
+ * provider because they block automation regardless of adapter availability.
+ * Per ADR-007, CAPTCHA is fail-fast — a site with both a recipe and a captcha
+ * cannot be auto-submitted by the recipe runtime either.
+ */
 export function classifyTriage({
   status,
   finalUrl = '',
@@ -222,7 +241,7 @@ export function classifyTriage({
   const text = normalizeText(bodyText).toLowerCase();
   const url = String(finalUrl || '').toLowerCase();
 
-  // Network / HTTP errors first
+  // Network / HTTP errors first (dead bucket)
   if (status === null || status === undefined) {
     return manual('unknown', 'NETWORK_ERROR', ['network error or timeout']);
   }
@@ -236,40 +255,40 @@ export function classifyTriage({
     return manual('unknown', 'HTTP_ERROR', [`http ${status}`]);
   }
 
-  // Recipe-ready takes precedence over everything else (we already know how to do it)
+  // Captcha — hard wall, blocks even recipe-ready sites (ADR-007).
+  if (hasCaptcha(dom, text, snapshot, html)) {
+    return manual('captcha-required', 'CAPTCHA_REQUIRED', ['captcha detected']);
+  }
+
+  // Login wall — hard wall, recipes can't synthesize a session.
+  if (hasLoginWall(finalUrl, text)) {
+    return manual('login-required', 'LOGIN_REQUIRED', ['login required']);
+  }
+
+  // Closed submissions — hard wall.
+  if (hasClosedSignals(text)) {
+    return manual('closed-submission', 'SUBMISSIONS_CLOSED', ['submissions closed']);
+  }
+
+  // Paid submissions — hard wall.
+  if (hasPaidSignals(text, snapshot)) {
+    return manual('paid', 'PAID_SUBMISSION', ['paid submission']);
+  }
+
+  // Recipe-ready takes precedence over generic/provider auto-detection.
   const recipePresent = hasRecipe === undefined ? recipeFileExists(siteKey) : !!hasRecipe;
   if (recipePresent) {
     return result('recipe-ready', 'RECIPE_AVAILABLE', 'recipe', ['recipe configured']);
   }
 
-  // Login wall
-  if (hasLoginWall(finalUrl, text)) {
-    return manual('login-required', 'LOGIN_REQUIRED', ['login required']);
-  }
-
-  // Closed submissions
-  if (hasClosedSignals(text)) {
-    return manual('closed-submission', 'SUBMISSIONS_CLOSED', ['submissions closed']);
-  }
-
-  // Paid submissions
-  if (hasPaidSignals(text, snapshot)) {
-    return manual('paid', 'PAID_SUBMISSION', ['paid submission']);
-  }
-
   const fields = parseSnapshot(snapshot || '');
-  const provider = detectProvider(dom, text, html);
+  const provider = detectProvider(dom);
 
-  // iframe-embedded provider before captcha — captcha inside provider iframe is the provider's problem
+  // Iframe-embedded provider (Paperform / Tally / Typeform / Airtable / CN forms).
   if (provider && !hasCoreFields(fields)) {
     return result('provider-ready', provider.code, 'provider-adapter', [provider.provider], {
       provider: provider.provider,
     });
-  }
-
-  // Captcha (after provider check, before generic/adapter classification)
-  if (hasCaptcha(dom, text, snapshot, html)) {
-    return manual('captcha-required', 'CAPTCHA_REQUIRED', ['captcha detected']);
   }
 
   if (hasCoreFields(fields)) {
@@ -512,7 +531,7 @@ export async function triageTargets({
         bucket: classification.bucket,
         code: classification.code,
         automation: classification.automation,
-        reasons: classification.reasons,
+        notes: classification.notes,
         reason: classification.reason || null,
         provider: classification.provider || null,
         value_tier,

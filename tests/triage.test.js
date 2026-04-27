@@ -76,7 +76,7 @@ button [ref=11] "Submit Tool"
 });
 
 describe('triage classification — recipe-ready (Step 1)', () => {
-  it('marks targets with an existing recipe as recipe-ready (highest precedence)', () => {
+  it('marks targets with an existing recipe as recipe-ready when no hard wall blocks it', () => {
     const result = classifyTriage({
       status: 200,
       bodyText: 'Submit your tool',
@@ -92,6 +92,24 @@ button [ref=3] "Submit"
     assert.equal(result.bucket, 'recipe-ready');
     assert.equal(result.code, 'RECIPE_AVAILABLE');
     assert.equal(result.automation, 'recipe');
+  });
+
+  it('captcha takes precedence over recipe (ADR-007 fail-fast)', () => {
+    const result = classifyTriage({
+      status: 200,
+      bodyText: 'Submit your tool',
+      snapshot: `
+label [ref=1] "Tool Name"
+textbox [ref=2] "Name"
+button [ref=3] "Submit"
+`,
+      dom: { forms: 1, inputs: 1, iframes: ['https://challenges.cloudflare.com/turnstile/v0/api.js'] },
+      hasRecipe: true,
+    });
+
+    assert.equal(result.bucket, 'manual-review');
+    assert.equal(result.reason, 'captcha-required');
+    assert.equal(result.code, 'CAPTCHA_REQUIRED');
   });
 
   it('does not mark recipe-ready when hasRecipe is false', () => {
@@ -160,6 +178,27 @@ describe('triage classification — provider-ready (Step 2)', () => {
     });
     assert.equal(result.bucket, 'provider-ready');
     assert.equal(result.provider, 'airtable');
+  });
+
+  it('does NOT classify body word "totally" as Tally provider (no iframe)', () => {
+    const result = classifyTriage({
+      status: 200,
+      bodyText: 'This is totally a great tool. Mentally stimulating, fundamentally sound.',
+      snapshot: '',
+      dom: { forms: 0, inputs: 0, iframes: [] },
+    });
+    assert.notEqual(result.bucket, 'provider-ready');
+    assert.notEqual(result.provider, 'tally');
+  });
+
+  it('does NOT fall back to generic iframe provider for unrelated embeds (e.g. YouTube)', () => {
+    const result = classifyTriage({
+      status: 200,
+      bodyText: 'Watch our intro video below',
+      snapshot: '',
+      dom: { forms: 0, inputs: 0, iframes: ['https://www.youtube.com/embed/abc123'] },
+    });
+    assert.notEqual(result.bucket, 'provider-ready');
   });
 });
 
@@ -343,6 +382,43 @@ describe('triage classification — paid submission (Step 5)', () => {
     });
     assert.equal(result.bucket, 'manual-review');
     assert.equal(result.reason, 'paid');
+  });
+});
+
+describe('triage classification — negative cases (no false manual-review)', () => {
+  const cleanForm = {
+    status: 200,
+    finalUrl: 'https://clean.test/submit',
+    bodyText: 'Submit your tool to our directory',
+    snapshot: `
+label [ref=1] "Tool Name"
+textbox [ref=2] "Name"
+label [ref=3] "Website URL"
+textbox [ref=4] "https://example.com"
+label [ref=5] "Description"
+textbox [ref=6] "Brief description"
+button [ref=7] "Submit"
+`,
+    dom: { forms: 1, inputs: 3, iframes: [] },
+    html: '<form><input name="url"><textarea></textarea><button>Submit</button></form>',
+  };
+
+  it('clean form (no captcha selectors) MUST NOT classify as captcha-required', () => {
+    const result = classifyTriage(cleanForm);
+    assert.notEqual(result.reason, 'captcha-required');
+    assert.notEqual(result.code, 'CAPTCHA_REQUIRED');
+  });
+
+  it('clean form (no login URL or text) MUST NOT classify as login-required', () => {
+    const result = classifyTriage(cleanForm);
+    assert.notEqual(result.reason, 'login-required');
+    assert.notEqual(result.code, 'LOGIN_REQUIRED');
+  });
+
+  it('clean form (no $ price or payment language) MUST NOT classify as paid', () => {
+    const result = classifyTriage(cleanForm);
+    assert.notEqual(result.reason, 'paid');
+    assert.notEqual(result.code, 'PAID_SUBMISSION');
   });
 });
 
