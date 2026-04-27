@@ -50,33 +50,44 @@ function normalizeText(value) {
 // text. Bare-word matches (e.g. "tally") on body content cause false positives
 // on words like "totally" / "mentally" / "metallic". Word boundaries (\b) are
 // applied defensively to all provider names for the same reason.
+//
+// Per-provider regex used both for detection (against the joined iframe list)
+// and for picking which iframe URL is the provider URL (single-URL match).
+const PROVIDER_PATTERNS = [
+  { provider: 'paperform', code: 'PAPERFORM_IFRAME', re: /\bpaperform\b/i },
+  { provider: 'typeform', code: 'TYPEFORM_IFRAME', re: /\btypeform\b/i },
+  { provider: 'tally', code: 'TALLY_IFRAME', re: /\btally(\.so)?\b/i },
+  { provider: 'airtable', code: 'AIRTABLE_IFRAME', re: /\bairtable\b/i },
+  { provider: 'jinshuju', code: 'JINSHUJU_IFRAME', re: /\bjinshuju\b/i },
+  { provider: 'mikecrm', code: 'MIKECRM_IFRAME', re: /\bmikecrm\b/i },
+  { provider: 'wjx', code: 'WJX_IFRAME', re: /\bwjx\b/i },
+  { provider: 'wenjuan', code: 'WENJUAN_IFRAME', re: /\bwenjuan\b/i },
+];
+
 function detectProvider(dom = {}) {
   const iframes = (dom.iframes || []).join(' ').toLowerCase();
   if (!iframes) return null;
+  for (const p of PROVIDER_PATTERNS) {
+    if (p.re.test(iframes)) return { provider: p.provider, code: p.code };
+  }
+  return null;
+}
 
-  if (/\bpaperform\b/.test(iframes)) {
-    return { provider: 'paperform', code: 'PAPERFORM_IFRAME' };
-  }
-  if (/\btypeform\b/.test(iframes)) {
-    return { provider: 'typeform', code: 'TYPEFORM_IFRAME' };
-  }
-  if (/\btally(\.so)?\b/.test(iframes)) {
-    return { provider: 'tally', code: 'TALLY_IFRAME' };
-  }
-  if (/\bairtable\b/.test(iframes)) {
-    return { provider: 'airtable', code: 'AIRTABLE_IFRAME' };
-  }
-  if (/\bjinshuju\b/.test(iframes)) {
-    return { provider: 'jinshuju', code: 'JINSHUJU_IFRAME' };
-  }
-  if (/\bmikecrm\b/.test(iframes)) {
-    return { provider: 'mikecrm', code: 'MIKECRM_IFRAME' };
-  }
-  if (/\bwjx\b/.test(iframes)) {
-    return { provider: 'wjx', code: 'WJX_IFRAME' };
-  }
-  if (/\bwenjuan\b/.test(iframes)) {
-    return { provider: 'wenjuan', code: 'WENJUAN_IFRAME' };
+/**
+ * Given the detected provider name and the iframe URL list, pick the iframe
+ * URL whose host matches the provider regex. Returns the first match, or
+ * `null` if no iframe matches (defensive — detection ran against the joined
+ * string so at least one should match in practice).
+ *
+ * Exported so downstream consumers (provider adapters, smoke scripts) can
+ * recover the iframe src given a fresh dom snapshot without re-detecting.
+ */
+export function pickProviderIframeUrl(providerName, iframes = []) {
+  if (!providerName) return null;
+  const entry = PROVIDER_PATTERNS.find((p) => p.provider === providerName);
+  if (!entry) return null;
+  for (const url of iframes) {
+    if (typeof url === 'string' && entry.re.test(url)) return url;
   }
   return null;
 }
@@ -286,9 +297,10 @@ export function classifyTriage({
 
   // Iframe-embedded provider (Paperform / Tally / Typeform / Airtable / CN forms).
   if (provider && !hasCoreFields(fields)) {
-    return result('provider-ready', provider.code, 'provider-adapter', [provider.provider], {
-      provider: provider.provider,
-    });
+    const providerUrl = pickProviderIframeUrl(provider.provider, dom.iframes || []);
+    const extra = { provider: provider.provider };
+    if (providerUrl) extra.provider_url = providerUrl;
+    return result('provider-ready', provider.code, 'provider-adapter', [provider.provider], extra);
   }
 
   if (hasCoreFields(fields)) {
@@ -534,6 +546,7 @@ export async function triageTargets({
         notes: classification.notes,
         reason: classification.reason || null,
         provider: classification.provider || null,
+        provider_url: classification.provider_url || null,
         value_tier,
         status: page.status,
         final_url: page.finalUrl,

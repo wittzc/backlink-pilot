@@ -202,6 +202,68 @@ describe('triage classification — provider-ready (Step 2)', () => {
   });
 });
 
+describe('triage classification — provider_url surface (Task 4)', () => {
+  it('surfaces provider_url for Paperform with the actual iframe src', () => {
+    const result = classifyTriage({
+      status: 200,
+      bodyText: '',
+      snapshot: '',
+      dom: { forms: 0, inputs: 0, iframes: ['https://aitool.paperform.co/?embed=1'] },
+    });
+    assert.equal(result.bucket, 'provider-ready');
+    assert.equal(result.provider, 'paperform');
+    assert.equal(result.provider_url, 'https://aitool.paperform.co/?embed=1');
+  });
+
+  it('surfaces provider_url for Tally', () => {
+    const result = classifyTriage({
+      status: 200,
+      bodyText: '',
+      snapshot: '',
+      dom: { forms: 0, inputs: 0, iframes: ['https://tally.so/embed/abc'] },
+    });
+    assert.equal(result.provider, 'tally');
+    assert.equal(result.provider_url, 'https://tally.so/embed/abc');
+  });
+
+  it('does not include provider_url when there is no provider iframe', () => {
+    const result = classifyTriage({
+      status: 200,
+      bodyText: 'Submit your tool',
+      snapshot: `
+label [ref=1] "Tool Name"
+textbox [ref=2] "Name"
+label [ref=3] "Website URL"
+textbox [ref=4] "https://example.com"
+label [ref=5] "Description"
+textbox [ref=6] "Brief description"
+button [ref=7] "Submit"
+`,
+      dom: { forms: 1, inputs: 3, iframes: [] },
+    });
+    assert.notEqual(result.bucket, 'provider-ready');
+    assert.equal(result.provider_url, undefined);
+  });
+
+  it('picks the Paperform iframe even when other unrelated iframes are present', () => {
+    const result = classifyTriage({
+      status: 200,
+      bodyText: '',
+      snapshot: '',
+      dom: {
+        forms: 0,
+        inputs: 0,
+        iframes: [
+          'https://www.googletagmanager.com/ns.html?id=GTM-XYZ',
+          'https://forms.paperform.co/realform-id?embed=1',
+        ],
+      },
+    });
+    assert.equal(result.provider, 'paperform');
+    assert.equal(result.provider_url, 'https://forms.paperform.co/realform-id?embed=1');
+  });
+});
+
 describe('triage classification — captcha detection (Step 3)', () => {
   it('detects Cloudflare Turnstile iframe in DOM iframes', () => {
     const result = classifyTriage({
