@@ -1,5 +1,7 @@
 # Backlink Pilot v2.2 — Agent Guide
 
+**关联方案**: docs/plans/2026-04-28-跨agent通用化协议.md
+
 > **This is the single source of truth for AI-agent instructions in this repo.**
 > Tool-specific entry files (`CLAUDE.md` / `AGENTS.md` / `.cursorrules` /
 > `.github/copilot-instructions.md`) are stubs that redirect here. Edit only
