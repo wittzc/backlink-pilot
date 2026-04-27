@@ -1,10 +1,91 @@
 // tracker.js — Submission status tracking (YAML file)
 
 import { readFileSync, writeFileSync, existsSync, renameSync } from 'fs';
+import { createHash } from 'crypto';
 import { parse, stringify } from 'yaml';
 import lockfile from 'proper-lockfile';
 
 const TRACKER_FILE = 'submissions.yaml';
+
+// ---------------------------------------------------------------------------
+// Product-hash helpers (used by the directory batch executor for dedup keys).
+//
+// productHash(product) — sha256(name|url|email) → first 12 hex chars.
+// Stable per (name,url,email) tuple. Two different products from the same
+// installation get distinct hashes, so the dedup map naturally namespaces by
+// product even when submissions.yaml is shared across configs.
+// ---------------------------------------------------------------------------
+
+export function productHash(product = {}) {
+  const name = String(product.name || '').trim();
+  const url = String(product.url || '').trim();
+  const email = String(product.email || '').trim();
+  return createHash('sha256').update(`${name}|${url}|${email}`).digest('hex').slice(0, 12);
+}
+
+/**
+ * Build a Map<"<targetKey>::<productHash>", lastStatus> from submissions.yaml.
+ *
+ * Used by the directory batch executor as the dedup gate. Only the most
+ * recent status per (targetKey, productHash) tuple is kept — later entries
+ * overwrite earlier ones, so a `failed` followed by `submitted` reads as
+ * `submitted` (and conversely, a `submitted` followed by `failed` reads as
+ * `failed` — the executor only short-circuits on `submitted`).
+ *
+ * Accepts both new-style records (with `targetKey` + `productHash`) and old
+ * `recordSubmission()` records (with `site` only). Old records are keyed
+ * with `productHash = '*'` so a new productHash can never collide with them.
+ */
+export function loadSubmissionMap(submissionsPath = TRACKER_FILE) {
+  const map = new Map();
+  if (!existsSync(submissionsPath)) return map;
+  let data;
+  try {
+    data = parse(readFileSync(submissionsPath, 'utf-8')) || { submissions: [] };
+  } catch {
+    return map;
+  }
+  for (const rec of data.submissions || []) {
+    const targetKey = rec.targetKey || rec.site;
+    if (!targetKey) continue;
+    const hash = rec.productHash || '*';
+    map.set(`${targetKey}::${hash}`, rec.status || null);
+  }
+  return map;
+}
+
+/**
+ * Append a structured result record to submissions.yaml. Takes a file lock
+ * so concurrent executor runs don't clobber each other. Used by the
+ * directory batch executor; the legacy `recordSubmission()` API below is
+ * kept untouched for blog-comment + interactive flows.
+ */
+export async function recordResult(submissionsPath, result) {
+  const path = submissionsPath || TRACKER_FILE;
+  if (!existsSync(path)) {
+    writeFileSync(path, stringify({ submissions: [] }), 'utf-8');
+  }
+  let release;
+  try {
+    release = await lockfile.lock(path, {
+      stale: 60000,
+      retries: { retries: 3, minTimeout: 200 },
+    });
+    let data;
+    try {
+      data = parse(readFileSync(path, 'utf-8')) || { submissions: [] };
+    } catch {
+      data = { submissions: [] };
+    }
+    data.submissions = data.submissions || [];
+    data.submissions.push(result);
+    const tmp = path + '.tmp';
+    writeFileSync(tmp, stringify(data), 'utf-8');
+    renameSync(tmp, path);
+  } finally {
+    if (release) await release();
+  }
+}
 
 export function loadTracker() {
   if (!existsSync(TRACKER_FILE)) {

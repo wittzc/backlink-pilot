@@ -15,6 +15,7 @@ import { showStats } from './stats.js';
 import { runDoctor } from './doctor.js';
 import { cleanupScreenshots, cleanupLocks } from './utils/cleanup.js';
 import { triageTargets } from './triage.js';
+import { runBatchCli } from './batch-submit.js';
 
 const program = new Command();
 
@@ -170,6 +171,35 @@ program
   .action(async (site) => {
     await markDone(site);
     console.log(`✓ Recorded "${site}" as submitted in submissions.yaml`);
+  });
+
+program
+  .command('batch-submit')
+  .description('Run the directory batch executor (consumes triage report or runs live)')
+  .option('--dry-run', 'Pass dryRun=true to every adapter; no real submissions')
+  .option('--limit <n>', 'Cap the number of targets executed this run')
+  .option('--category <key>', 'Only execute targets in this targets.yaml category')
+  .option('--priority <level>', 'Filter by priority (high|medium|low → tier 1|2|3)')
+  .option('--value-tier <n>', 'Filter by value tier (1|2|3); default order is tier-1 first')
+  .option('--force <list>', 'Force re-submit comma-separated siteKey[:reason] pairs (no "all")')
+  .option('--triage-source <path>', 'Use a saved triage JSON instead of running triage live')
+  .option('--submissions-path <path>', 'Override submissions.yaml path')
+  .action(async (opts) => {
+    try {
+      await runBatchCli({
+        dryRun: !!opts.dryRun,
+        limit: opts.limit ? parseInt(opts.limit, 10) : null,
+        category: opts.category || null,
+        priority: opts.priority || null,
+        valueTier: opts.valueTier ? parseInt(opts.valueTier, 10) : null,
+        force: opts.force || '',
+        triageSource: opts.triageSource || null,
+        submissionsPath: opts.submissionsPath || null,
+      });
+    } catch (err) {
+      console.error('batch-submit failed:', err.message);
+      process.exit(1);
+    }
   });
 
 program
