@@ -86,20 +86,23 @@ export function applyFailureVerdict(siteName, code) {
   const target = findEntry(all, siteName);
   if (!target) return { applied: false, op: null, reason: null, skipped: 'no-entry' };
 
-  // Skip if entry is already in a "more terminal" state than what we'd write.
-  // Concretely: never overwrite status=dead with anything weaker, and don't
-  // re-stamp the same op repeatedly.
+  // Sanitize the op so we never weaken an already-terminal field, but we
+  // still patch sibling fields that are out of sync (e.g. status:dead with
+  // a stale auto:yes). Specifically: status:dead is sticky — never downgrade
+  // it to paid/etc. — but auto and other fields on the same entry are still
+  // fair game.
   const current = target.entry;
-  if (current.status === 'dead') {
-    return { applied: false, op: null, reason: null, skipped: 'already-applied' };
+  const safeOp = { ...rule.op };
+  if (current.status === 'dead' && safeOp.status && safeOp.status !== 'dead') {
+    delete safeOp.status;
   }
-  const wouldChange = Object.entries(rule.op).some(([k, v]) => current[k] !== v);
+  const wouldChange = Object.entries(safeOp).some(([k, v]) => current[k] !== v);
   if (!wouldChange) {
     return { applied: false, op: null, reason: null, skipped: 'already-applied' };
   }
 
   backupTargets();
-  for (const [k, v] of Object.entries(rule.op)) {
+  for (const [k, v] of Object.entries(safeOp)) {
     target.entryNode.set(k, v);
   }
   if (rule.reason) {
@@ -112,5 +115,5 @@ export function applyFailureVerdict(siteName, code) {
     target.entryNode.set('auto_blocked_reason', `${code} (${today})`);
   }
   saveTargetsDoc(doc);
-  return { applied: true, op: rule.op, reason: rule.reason || null, name: target.entry.name, skipped: null };
+  return { applied: true, op: safeOp, reason: rule.reason || null, name: target.entry.name, skipped: null };
 }
