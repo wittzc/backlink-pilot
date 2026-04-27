@@ -1,15 +1,30 @@
 // triage.js — Batch-classify targets before attempting submissions.
-// The goal is to separate generic-ready forms from iframe providers,
-// captcha/manual sites, closed/paid pages, and adapter-needed forms.
+//
+// New bucket model (v2.1):
+//   recipe-ready          → targets with a recipes/<siteKey>.yaml config
+//   provider-ready        → embedded iframe form (Paperform/Tally/Typeform/Airtable)
+//   generic-ready         → simple visible HTML form, generic adapter handles it
+//   custom-adapter-needed → has form fields but needs site-specific JS adapter
+//   manual-review         → not automated; carries .reason sub-classification
+//   dead                  → 404/500/unreachable
+//
+// manual-review.reason ∈ { captcha-required | login-required | paid | closed-submission | unknown }
+//
+// Backward-compat aliases for downstream report parsers (see summarizeTriage):
+//   adapter-needed   ← recipe-ready + custom-adapter-needed
+//   iframe-provider  ← provider-ready
 
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { dirname } from 'path';
+import { dirname, join } from 'path';
 import { createSession } from './browser.js';
 import { parseSnapshot } from './sites/generic.js';
 import { flatten, loadTargetsDoc, TARGETS_FILE } from './yaml-utils.js';
 
 const DEFAULT_CONCURRENCY = 6;
 const DEFAULT_TIMEOUT_MS = 15000;
+
+// Categories we consider tier-2 by default when no explicit priority is set.
+const TIER_2_CATEGORIES = new Set(['overseas_ai_directories', 'awesome_lists']);
 
 function autoYes(value) {
   return value === true || String(value).toLowerCase() === 'yes';
@@ -27,23 +42,111 @@ function normalizeText(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
 }
 
-function detectProvider(dom = {}, text = '') {
-  const haystack = `${text} ${(dom.iframes || []).join(' ')}`.toLowerCase();
-  if (/typeform/.test(haystack)) return { provider: 'typeform', code: 'TYPEFORM_IFRAME' };
-  if (/paperform/.test(haystack)) return { provider: 'paperform', code: 'PAPERFORM_IFRAME' };
-  if (/airtable/.test(haystack)) return { provider: 'airtable', code: 'AIRTABLE_IFRAME' };
-  if (/tally\.so|tally/.test(haystack)) return { provider: 'tally', code: 'TALLY_IFRAME' };
+// ------------------------------------------------------------------
+// Provider detection
+// ------------------------------------------------------------------
+
+function detectProvider(dom = {}, text = '', html = '') {
+  const iframes = (dom.iframes || []).join(' ').toLowerCase();
+  const haystack = `${text} ${iframes} ${html}`.toLowerCase();
+
+  if (/paperform/.test(haystack)) {
+    return { provider: 'paperform', code: 'PAPERFORM_IFRAME' };
+  }
+  if (/typeform/.test(haystack)) {
+    return { provider: 'typeform', code: 'TYPEFORM_IFRAME' };
+  }
+  if (/tally\.so|tally/.test(haystack)) {
+    return { provider: 'tally', code: 'TALLY_IFRAME' };
+  }
+  if (/airtable/.test(haystack)) {
+    return { provider: 'airtable', code: 'AIRTABLE_IFRAME' };
+  }
   if (/jinshuju|mikecrm|wjx|wenjuan/.test(haystack)) {
     return { provider: 'embedded-form', code: 'EMBEDDED_FORM_IFRAME' };
   }
-  if (dom.iframes?.length) return { provider: 'iframe', code: 'IFRAME_FORM' };
+  if (dom.iframes?.length) {
+    return { provider: 'iframe', code: 'IFRAME_FORM' };
+  }
   return null;
 }
 
-function hasCaptcha(dom = {}, text = '', snapshot = '') {
-  const haystack = `${text} ${snapshot} ${(dom.iframes || []).join(' ')}`.toLowerCase();
-  return /captcha|recaptcha|hcaptcha|turnstile|cloudflare/.test(haystack);
+// ------------------------------------------------------------------
+// Captcha detection
+// Selectors covered:
+//   iframe[src*="challenges.cloudflare.com"]  (Turnstile)
+//   .h-captcha                                 (hCaptcha widget)
+//   .g-recaptcha                               (Google reCAPTCHA widget)
+//   script[src*="recaptcha"] / script[src*="hcaptcha"]
+// ------------------------------------------------------------------
+
+function hasCaptcha(dom = {}, text = '', snapshot = '', html = '') {
+  const iframes = (dom.iframes || []).join(' ').toLowerCase();
+  // Turnstile / Cloudflare challenge iframes
+  if (/challenges\.cloudflare\.com|turnstile/i.test(iframes)) return true;
+  // reCAPTCHA / hCaptcha iframes
+  if (/recaptcha|hcaptcha/i.test(iframes)) return true;
+
+  const rawHtml = String(html || '').toLowerCase();
+  if (/class=["'][^"']*\bh-captcha\b/.test(rawHtml)) return true;
+  if (/class=["'][^"']*\bg-recaptcha\b/.test(rawHtml)) return true;
+  if (/<script[^>]+src=["'][^"']*recaptcha/.test(rawHtml)) return true;
+  if (/<script[^>]+src=["'][^"']*hcaptcha/.test(rawHtml)) return true;
+  if (/challenges\.cloudflare\.com/.test(rawHtml)) return true;
+
+  // Fallback to text-based heuristics (matches older browser-mode triage)
+  const haystack = `${text} ${snapshot}`.toLowerCase();
+  if (/recaptcha|hcaptcha|turnstile/.test(haystack)) return true;
+  // Plain "captcha" word — only flag when explicit, avoid matching unrelated copy.
+  if (/\bcaptcha\b/.test(haystack) && !/no captcha|without captcha/.test(haystack)) return true;
+  return false;
 }
+
+// ------------------------------------------------------------------
+// Login wall detection
+// ------------------------------------------------------------------
+
+function hasLoginWall(finalUrl = '', text = '') {
+  const url = String(finalUrl || '').toLowerCase();
+  // Path-based: redirected to /login, /signin, /sign-in, /signup, /sign-up, /register
+  if (/\/(log[-_]?in|sign[-_]?in|sign[-_]?up|register|create[-_]?account)(\b|\/|\?)/.test(url)) {
+    return true;
+  }
+  const t = String(text || '').toLowerCase();
+  if (/login required|please (sign|log)\s?in|sign in to (submit|continue)|you must (be )?(logged|signed) in/.test(t)) {
+    return true;
+  }
+  return false;
+}
+
+// ------------------------------------------------------------------
+// Paid submission detection
+// Looks for $ pricing + payment language. Browser mode could refine this with
+// proximity-to-button DOM measurement; HTTP mode uses bodyText globally.
+// ------------------------------------------------------------------
+
+function hasPaidSignals(text = '', snapshot = '') {
+  const haystack = `${text} ${snapshot}`.toLowerCase();
+  // Strong signals: explicit price + payment / featured language
+  const hasPrice = /\$\s?\d{1,4}/.test(haystack);
+  const paywall = /(featured submission|premium submission|pay\s+(now|to|\$)|sponsored listing|paid plan|paid submission|submissions?\s+suspended)/i
+    .test(haystack);
+  if (hasPrice && paywall) return true;
+  if (/featured submission/.test(haystack)) return true;
+  if (/(paid|premium)\s+submission/.test(haystack)) return true;
+  if (/checkout|buy now/.test(haystack) && hasPrice) return true;
+  return false;
+}
+
+function hasClosedSignals(text = '') {
+  return /typeform is now closed|submissions?\s+(closed|suspended)|free submissions?\s+suspended|no longer accepting/.test(
+    String(text || '').toLowerCase()
+  );
+}
+
+// ------------------------------------------------------------------
+// Adapter-needed heuristics (control types that generic adapter can't handle)
+// ------------------------------------------------------------------
 
 function hasExtraRequiredControls(snapshot = '') {
   const s = snapshot.toLowerCase();
@@ -56,16 +159,72 @@ function hasExtraRequiredControls(snapshot = '') {
   return false;
 }
 
-function result(bucket, code, automation, reasons = []) {
-  return { bucket, code, automation, reasons };
+// ------------------------------------------------------------------
+// Recipe-ready detection
+// Convention: Task 2 will create recipes/<siteKey>.yaml. We only check
+// existence so this module stays decoupled from the future recipe runtime.
+// ------------------------------------------------------------------
+
+const RECIPES_DIR = 'recipes';
+
+function recipeFileExists(siteKey) {
+  if (!siteKey) return false;
+  try {
+    return existsSync(join(RECIPES_DIR, `${siteKey}.yaml`));
+  } catch {
+    return false;
+  }
 }
 
-export function classifyTriage({ status, finalUrl = '', bodyText = '', snapshot = '', dom = {} } = {}) {
+// ------------------------------------------------------------------
+// Result helpers
+// ------------------------------------------------------------------
+
+function result(bucket, code, automation, reasons = [], extra = {}) {
+  return { bucket, code, automation, reasons, ...extra };
+}
+
+function manual(reason, code, reasons = []) {
+  return result('manual-review', code, 'manual', reasons, { reason });
+}
+
+// ------------------------------------------------------------------
+// value_tier heuristic
+// tier-1: explicit priority: high OR value_tier: 1
+// tier-2: explicit priority: medium OR category in TIER_2_CATEGORIES
+// tier-3: everything else
+// ------------------------------------------------------------------
+
+export function computeValueTier(entry = {}, categoryKey = null) {
+  if (entry?.value_tier === 1 || entry?.value_tier === '1') return 1;
+  const priority = String(entry?.priority || '').toLowerCase();
+  if (priority === 'high') return 1;
+  if (entry?.value_tier === 2 || entry?.value_tier === '2') return 2;
+  if (priority === 'medium') return 2;
+  if (categoryKey && TIER_2_CATEGORIES.has(categoryKey)) return 2;
+  return 3;
+}
+
+// ------------------------------------------------------------------
+// Main classifier
+// ------------------------------------------------------------------
+
+export function classifyTriage({
+  status,
+  finalUrl = '',
+  bodyText = '',
+  snapshot = '',
+  dom = {},
+  html = '',
+  siteKey = null,
+  hasRecipe = undefined,
+} = {}) {
   const text = normalizeText(bodyText).toLowerCase();
   const url = String(finalUrl || '').toLowerCase();
 
+  // Network / HTTP errors first
   if (status === null || status === undefined) {
-    return result('manual-review', 'NETWORK_ERROR', 'manual', ['network error or timeout']);
+    return manual('unknown', 'NETWORK_ERROR', ['network error or timeout']);
   }
   if (url.startsWith('chrome-error://') || status === 404) {
     return result('dead', 'PAGE_UNREACHABLE', 'none', ['page unreachable']);
@@ -74,36 +233,64 @@ export function classifyTriage({ status, finalUrl = '', bodyText = '', snapshot 
     return result('dead', 'SERVER_ERROR', 'none', [`http ${status}`]);
   }
   if (status >= 400) {
-    return result('manual-review', 'HTTP_ERROR', 'manual', [`http ${status}`]);
+    return manual('unknown', 'HTTP_ERROR', [`http ${status}`]);
   }
-  if (/login|sign.?in|log.?in|create.?account|register/.test(url) ||
-      (/login|sign.?in|create account|register/.test(text) && !/submit|add.*tool|description/.test(text))) {
-    return result('manual-review', 'LOGIN_REQUIRED', 'manual', ['login required']);
+
+  // Recipe-ready takes precedence over everything else (we already know how to do it)
+  const recipePresent = hasRecipe === undefined ? recipeFileExists(siteKey) : !!hasRecipe;
+  if (recipePresent) {
+    return result('recipe-ready', 'RECIPE_AVAILABLE', 'recipe', ['recipe configured']);
   }
-  if (/typeform is now closed|submissions?.*(closed|suspended)|free submissions?.*suspended|paid submission|paid .*submission|paid .*plan|checkout|buy now|\$\d+/.test(text)) {
-    return result('manual-review', 'CLOSED_OR_PAID', 'manual', ['closed or paid']);
+
+  // Login wall
+  if (hasLoginWall(finalUrl, text)) {
+    return manual('login-required', 'LOGIN_REQUIRED', ['login required']);
+  }
+
+  // Closed submissions
+  if (hasClosedSignals(text)) {
+    return manual('closed-submission', 'SUBMISSIONS_CLOSED', ['submissions closed']);
+  }
+
+  // Paid submissions
+  if (hasPaidSignals(text, snapshot)) {
+    return manual('paid', 'PAID_SUBMISSION', ['paid submission']);
   }
 
   const fields = parseSnapshot(snapshot || '');
-  const provider = detectProvider(dom, text);
+  const provider = detectProvider(dom, text, html);
+
+  // iframe-embedded provider before captcha — captcha inside provider iframe is the provider's problem
   if (provider && !hasCoreFields(fields)) {
-    return result('iframe-provider', provider.code, 'provider-adapter', [provider.provider]);
+    return result('provider-ready', provider.code, 'provider-adapter', [provider.provider], {
+      provider: provider.provider,
+    });
   }
-  if (hasCaptcha(dom, text, snapshot)) {
-    return result('manual-review', 'CAPTCHA', 'manual', ['captcha detected']);
+
+  // Captcha (after provider check, before generic/adapter classification)
+  if (hasCaptcha(dom, text, snapshot, html)) {
+    return manual('captcha-required', 'CAPTCHA_REQUIRED', ['captcha detected']);
   }
+
   if (hasCoreFields(fields)) {
     if (hasExtraRequiredControls(snapshot)) {
-      return result('adapter-needed', 'EXTRA_REQUIRED_FIELDS', 'adapter', ['required non-text controls']);
+      return result('custom-adapter-needed', 'EXTRA_REQUIRED_FIELDS', 'adapter', [
+        'required non-text controls',
+      ]);
     }
     return result('generic-ready', 'GENERIC_READY', 'auto', ['core fields detected']);
   }
+
   if (coreFieldCount(fields) > 0 || dom.forms > 0 || dom.inputs > 0) {
-    return result('adapter-needed', 'PARTIAL_FORM', 'adapter', ['partial form detected']);
+    return result('custom-adapter-needed', 'PARTIAL_FORM', 'adapter', ['partial form detected']);
   }
 
-  return result('manual-review', 'NO_FORM_DETECTED', 'manual', ['no recognizable form']);
+  return manual('unknown', 'NO_FORM_DETECTED', ['no recognizable form']);
 }
+
+// ------------------------------------------------------------------
+// Target collection
+// ------------------------------------------------------------------
 
 export function collectTriageTargets(doc, { includeManual = false, category = null } = {}) {
   return flatten(doc).filter((f) => {
@@ -114,18 +301,49 @@ export function collectTriageTargets(doc, { includeManual = false, category = nu
   });
 }
 
+// ------------------------------------------------------------------
+// Summary with backward-compat aliases + tier breakdown
+// ------------------------------------------------------------------
+
 export function summarizeTriage(items) {
   const buckets = {};
+  const manual_reasons = {};
+  const tiers = { 1: 0, 2: 0, 3: 0 };
+  const bucket_by_tier = {};
+
   for (const item of items) {
-    buckets[item.bucket] = (buckets[item.bucket] || 0) + 1;
+    const b = item.bucket;
+    buckets[b] = (buckets[b] || 0) + 1;
+
+    if (b === 'manual-review' && item.reason) {
+      manual_reasons[item.reason] = (manual_reasons[item.reason] || 0) + 1;
+    }
+
+    const tier = item.value_tier || 3;
+    if (tiers[tier] !== undefined) tiers[tier] += 1;
+
+    bucket_by_tier[b] = bucket_by_tier[b] || { 1: 0, 2: 0, 3: 0 };
+    if (bucket_by_tier[b][tier] !== undefined) bucket_by_tier[b][tier] += 1;
   }
-  return { total: items.length, buckets };
+
+  // Backward-compat aliases for downstream reports.
+  // adapter-needed  = recipe-ready + custom-adapter-needed (any "needs adapter or recipe" work)
+  // iframe-provider = provider-ready
+  const aliasAdapter = (buckets['recipe-ready'] || 0) + (buckets['custom-adapter-needed'] || 0);
+  if (aliasAdapter > 0) buckets['adapter-needed'] = aliasAdapter;
+  if (buckets['provider-ready']) buckets['iframe-provider'] = buckets['provider-ready'];
+
+  return { total: items.length, buckets, manual_reasons, tiers, bucket_by_tier };
 }
 
 export function writeTriageOutput(outputPath, output) {
   mkdirSync(dirname(outputPath), { recursive: true });
   writeFileSync(outputPath, JSON.stringify(output, null, 2) + '\n', 'utf-8');
 }
+
+// ------------------------------------------------------------------
+// Page fetch (HTTP mode)
+// ------------------------------------------------------------------
 
 function extractDomFromHtml(html) {
   const bodyText = normalizeText(html
@@ -168,6 +386,7 @@ async function fetchPage(url, timeoutMs = DEFAULT_TIMEOUT_MS) {
       bodyText,
       snapshot: '',
       dom,
+      html,
     };
   } catch (err) {
     return {
@@ -176,6 +395,7 @@ async function fetchPage(url, timeoutMs = DEFAULT_TIMEOUT_MS) {
       bodyText: err.message || String(err),
       snapshot: '',
       dom: { forms: 0, inputs: 0, iframes: [] },
+      html: '',
       error: err.message || String(err),
     };
   } finally {
@@ -196,7 +416,8 @@ async function browserPage(url, config) {
         forms: document.forms.length,
         inputs: document.querySelectorAll('input,textarea,select').length,
         iframes: Array.from(document.querySelectorAll('iframe')).map(f => f.src || '').filter(Boolean).slice(0, 10),
-        body: (document.body && document.body.innerText || '').slice(0, 4000)
+        body: (document.body && document.body.innerText || '').slice(0, 4000),
+        outerHtml: document.documentElement.outerHTML.slice(0, 50000)
       })`);
     } catch {}
     const domInfo = raw ? JSON.parse(raw) : {};
@@ -210,6 +431,7 @@ async function browserPage(url, config) {
         inputs: domInfo.inputs || 0,
         iframes: domInfo.iframes || [],
       },
+      html: domInfo.outerHtml || '',
     };
   } catch (err) {
     return {
@@ -218,6 +440,7 @@ async function browserPage(url, config) {
       bodyText: err.message || String(err),
       snapshot: '',
       dom: { forms: 0, inputs: 0, iframes: [] },
+      html: '',
       error: err.message || String(err),
     };
   } finally {
@@ -238,6 +461,14 @@ async function mapConcurrent(items, concurrency, fn, onProgress) {
   }
   await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker));
   return results;
+}
+
+// Derive a stable site key from name (used for recipe lookup).
+function siteKeyFromName(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 export async function triageTargets({
@@ -271,7 +502,9 @@ export async function triageTargets({
     browser ? 1 : concurrency,
     async (target) => {
       const page = await probe(target);
-      const classification = classifyTriage(page);
+      const siteKey = siteKeyFromName(target.entry.name);
+      const classification = classifyTriage({ ...page, siteKey });
+      const value_tier = computeValueTier(target.entry, target.categoryKey);
       return {
         name: target.entry.name,
         submit_url: target.entry.submit_url,
@@ -280,6 +513,9 @@ export async function triageTargets({
         code: classification.code,
         automation: classification.automation,
         reasons: classification.reasons,
+        reason: classification.reason || null,
+        provider: classification.provider || null,
+        value_tier,
         status: page.status,
         final_url: page.finalUrl,
         dom: page.dom,
@@ -312,12 +548,36 @@ export async function triageTargets({
 function renderTriage(output) {
   process.stdout.write('\nTriage summary:\n');
   for (const [bucket, count] of Object.entries(output.summary.buckets)) {
-    process.stdout.write(`  ${bucket}: ${count}\n`);
+    process.stdout.write(`  ${bucket.padEnd(22)} ${count}\n`);
+  }
+
+  if (output.summary.manual_reasons && Object.keys(output.summary.manual_reasons).length) {
+    process.stdout.write('\nManual-review reasons:\n');
+    for (const [reason, count] of Object.entries(output.summary.manual_reasons)) {
+      process.stdout.write(`  ${reason.padEnd(22)} ${count}\n`);
+    }
+  }
+
+  if (output.summary.tiers) {
+    process.stdout.write('\nValue tiers:\n');
+    for (const tier of [1, 2, 3]) {
+      process.stdout.write(`  tier-${tier}                 ${output.summary.tiers[tier] || 0}\n`);
+    }
+  }
+
+  if (output.summary.bucket_by_tier) {
+    process.stdout.write('\nBucket × tier:\n');
+    for (const [bucket, byTier] of Object.entries(output.summary.bucket_by_tier)) {
+      process.stdout.write(
+        `  ${bucket.padEnd(22)} t1=${byTier[1] || 0} t2=${byTier[2] || 0} t3=${byTier[3] || 0}\n`
+      );
+    }
   }
 
   process.stdout.write('\nTop actionable targets:\n');
   for (const item of output.results.slice(0, 50)) {
-    process.stdout.write(`  ${item.bucket.padEnd(16)} ${item.name}\n`);
-    process.stdout.write(`    ${item.code} — ${item.submit_url}\n`);
+    const tierTag = item.value_tier ? `t${item.value_tier}` : 't?';
+    process.stdout.write(`  [${tierTag}] ${item.bucket.padEnd(22)} ${item.name}\n`);
+    process.stdout.write(`       ${item.code} — ${item.submit_url}\n`);
   }
 }

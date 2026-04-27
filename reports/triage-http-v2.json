@@ -1,0 +1,4077 @@
+{
+  "mode": "http",
+  "summary": {
+    "total": 180,
+    "buckets": {
+      "manual-review": 83,
+      "custom-adapter-needed": 55,
+      "provider-ready": 38,
+      "dead": 4,
+      "adapter-needed": 55,
+      "iframe-provider": 38
+    },
+    "manual_reasons": {
+      "captcha-required": 15,
+      "unknown": 58,
+      "login-required": 5,
+      "paid": 5
+    },
+    "tiers": {
+      "1": 0,
+      "2": 63,
+      "3": 117
+    },
+    "bucket_by_tier": {
+      "manual-review": {
+        "1": 0,
+        "2": 32,
+        "3": 51
+      },
+      "custom-adapter-needed": {
+        "1": 0,
+        "2": 9,
+        "3": 46
+      },
+      "provider-ready": {
+        "1": 0,
+        "2": 20,
+        "3": 18
+      },
+      "dead": {
+        "1": 0,
+        "2": 2,
+        "3": 2
+      }
+    }
+  },
+  "results": [
+    {
+      "name": "Future Tools",
+      "submit_url": "https://www.futuretools.io/submit-a-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://futuretools.io/submit-a-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 11,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Valley",
+      "submit_url": "https://aivalley.ai/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aivalley.ai/submit-tool/",
+      "dom": {
+        "forms": 2,
+        "inputs": 16,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIToolsDirectory",
+      "submit_url": "https://aitoolsdirectory.com/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aitoolsdirectory.com/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Directory",
+      "submit_url": "https://www.aidirectory.org/user-submit/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.aidirectory.org/user-submit/",
+      "dom": {
+        "forms": 1,
+        "inputs": 22,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIToolMall",
+      "submit_url": "https://aitoolmall.com/submit/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aitoolmall.com/submit/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-NDFCF2ZK"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AI Finder",
+      "submit_url": "https://ai-finder.net/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://ai-finder.net/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "AIFINDY",
+      "submit_url": "https://aifindy.com/contacto/publica-tu-ia-en-aifindy",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aifindy.com/contacto/publica-tu-ia-en-aifindy",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://notionforms.io/forms/empresas-ia-nuevas",
+          "https://mix1994max.github.io/Notion-Prices/"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AllThingsAI",
+      "submit_url": "https://allthingsai.com",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://allthingsai.com",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "AiDude",
+      "submit_url": "https://aidude.pro/submit-your-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://aidude.pro/submit-your-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "AI Homes",
+      "submit_url": "https://aihomes.io/submit/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aihomes.io/submit/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://obs.sd559908.js.brandsmat.com/ns/c59f6651af12b5efb3ef9693abae15af.html?ch=aihomes.io"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AI Library",
+      "submit_url": "https://library.phygital.plus/tool-submission",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "AIRTABLE_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "airtable"
+      ],
+      "reason": null,
+      "provider": "airtable",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://library.phygital.plus/tool-submission",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AiSuperSmart",
+      "submit_url": "https://www.aisupersmart.com/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.aisupersmart.com/submit-tool/",
+      "dom": {
+        "forms": 3,
+        "inputs": 14,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-PFGKJ5F2"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Ai Business Tool",
+      "submit_url": "https://aibusinesstool.com/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "AIRTABLE_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "airtable"
+      ],
+      "reason": null,
+      "provider": "airtable",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aibusinesstool.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI Tool For Business",
+      "submit_url": "https://aitoolforbusiness.com/submit-ai-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aitoolforbusiness.com/submit-ai-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI-Hunter.io",
+      "submit_url": "https://ai-hunter.io/submit-ai-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://ai-hunter.io/submit-ai-tool/",
+      "dom": {
+        "forms": 2,
+        "inputs": 22,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-MVD9X2C"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AIToolGuru",
+      "submit_url": "https://aitoolguru.com/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aitoolguru.com/",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-5G629ZG"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AILib",
+      "submit_url": "https://ailib.ru/en/add-ai/",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://ailib.ru/en/add-ai/",
+      "dom": {
+        "forms": 1,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AIWikiTools",
+      "submit_url": "https://aiwikitools.com/submit-a-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aiwikitools.com/submit-a-tool/",
+      "dom": {
+        "forms": 5,
+        "inputs": 16,
+        "iframes": [
+          "https://pharm-alaa.formaloo.net/5p12j"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AI Tools Up",
+      "submit_url": "https://aitoolsup.com/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "TALLY_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "tally"
+      ],
+      "reason": null,
+      "provider": "tally",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aitoolsup.com/submit-tool/",
+      "dom": {
+        "forms": 5,
+        "inputs": 12,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Apps and Websites",
+      "submit_url": "https://landing.mycloudmedia.co.uk/apps-and-websites-submit-ai-or-saas-tool/new-submission.html",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://landing.mycloudmedia.co.uk/apps-and-websites-submit-ai-or-saas-tool/new-submission.html",
+      "dom": {
+        "forms": 1,
+        "inputs": 10,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ChatGPTDemo.pro",
+      "submit_url": "https://chatgptdemo.pro/submit-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://chatgptdemo.pro/submit-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "DigiProToolz",
+      "submit_url": "https://digiprotoolz.com/contact-us/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "LOGIN_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "login required"
+      ],
+      "reason": "login-required",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://expireddomains.com/domain/digiprotoolz.com",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "DropYourAI",
+      "submit_url": "https://www.dropyourai.com/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "PAID_SUBMISSION",
+      "automation": "manual",
+      "reasons": [
+        "paid submission"
+      ],
+      "reason": "paid",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.dropyourai.com/submit-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 23,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Draeno.io",
+      "submit_url": "https://draeno.io/submit-a-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "dead",
+      "code": "PAGE_UNREACHABLE",
+      "automation": "none",
+      "reasons": [
+        "page unreachable"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 404,
+      "final_url": "https://draeno.io/submit-a-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Future AGI Tools",
+      "submit_url": "https://www.futureagitools.com/submit-a-site",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://futureagitools.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Free AI Tools Directory",
+      "submit_url": "https://free-ai-tools-directory.com/submit-request/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://free-ai-tools-directory.com/submit-request/",
+      "dom": {
+        "forms": 1,
+        "inputs": 14,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "findcool.tools",
+      "submit_url": "https://www.findcool.tools/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://findcool.tools/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Full Stack AI",
+      "submit_url": "https://fullstackai.co/submit-a-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "TALLY_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "tally"
+      ],
+      "reason": null,
+      "provider": "tally",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://fullstackai.co/submit-a-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==",
+          "https://tally.so/embed/3E5gy2?alignLeft=1&#038;hideTitle=1&#038;transparentBackground=1&#038;dynamicHeight=1"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "PoweredbyAI",
+      "submit_url": "https://poweredbyai.app/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "LOGIN_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "login required"
+      ],
+      "reason": "login-required",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://poweredbyai.app/signin?redirect=%2Fsubmit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-M9R7TN6N"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Paxi",
+      "submit_url": "https://paxi.ai/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://paxi.ai/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Human Alternative",
+      "submit_url": "https://www.humanalternative.com/submit-resource/submit-a-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://www.humanalternative.com/submit-resource/submit-a-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Human or Not",
+      "submit_url": "https://www.humanornot.co/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.humanornot.co/submit-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 3,
+        "iframes": [
+          "https://embeds.beehiiv.com/83cac558-a7d6-49a6-a46c-2a74d7b74a60?slim=true"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Insidr.ai",
+      "submit_url": "https://www.insidr.ai/submit-tools/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.insidr.ai/submit-tools/",
+      "dom": {
+        "forms": 1,
+        "inputs": 7,
+        "iframes": [
+          "https://embeds.beehiiv.com/ff8d26ab-5dec-4c43-a8a7-dc07afe49ceb?slim=true",
+          "https://embeds.beehiiv.com/ff8d26ab-5dec-4c43-a8a7-dc07afe49ceb?slim=true",
+          "https://embeds.beehiiv.com/ff8d26ab-5dec-4c43-a8a7-dc07afe49ceb?slim=true",
+          "https://embeds.beehiiv.com/3100f4c7-3734-449d-9f14-81fa79bb9450?slim=true",
+          "https://embeds.beehiiv.com/3100f4c7-3734-449d-9f14-81fa79bb9450?slim=true",
+          "https://embeds.beehiiv.com/3100f4c7-3734-449d-9f14-81fa79bb9450?slim=true",
+          "https://embeds.beehiiv.com/ff8d26ab-5dec-4c43-a8a7-dc07afe49ceb?slim=true",
+          "https://embeds.beehiiv.com/ff8d26ab-5dec-4c43-a8a7-dc07afe49ceb?slim=true",
+          "https://embeds.beehiiv.com/ff8d26ab-5dec-4c43-a8a7-dc07afe49ceb?slim=true",
+          "https://embeds.beehiiv.com/3100f4c7-3734-449d-9f14-81fa79bb9450?slim=true"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Gate2AI",
+      "submit_url": "https://www.gate2ai.com/zh-cn/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.gate2ai.com/zh-cn/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Supertools",
+      "submit_url": "https://supertools.therundown.ai/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "TYPEFORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "typeform"
+      ],
+      "reason": null,
+      "provider": "typeform",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.rundown.ai/submit",
+      "dom": {
+        "forms": 2,
+        "inputs": 6,
+        "iframes": [
+          "https://tally.so/embed/mOa7j7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Startup AI tools",
+      "submit_url": "https://www.startupaitools.com/submit-ai-tools/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "PAID_SUBMISSION",
+      "automation": "manual",
+      "reasons": [
+        "paid submission"
+      ],
+      "reason": "paid",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.startupaitools.com/submit-ai-tools/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-MJL8S72Z"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "SaaSBaba",
+      "submit_url": "https://saasbaba.com/add-ai-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://saasbaba.com/add-ai-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "SpotTheAI",
+      "submit_url": "https://www.spottheai.com/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://www.spottheai.com/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Nextool AI",
+      "submit_url": "https://www.nextool.ai/submit-a-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://nextool.ai/submit-a-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "OpenFuture AI",
+      "submit_url": "https://openfuture.ai/zh/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://openfuture.ai/zh/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "TopApps.Ai",
+      "submit_url": "https://topapps.ai/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "dead",
+      "code": "SERVER_ERROR",
+      "automation": "none",
+      "reasons": [
+        "http 503"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 503,
+      "final_url": "https://topapps.ai/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ToolHunter.ai",
+      "submit_url": "https://www.toolhunter.ai/submit-a-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.toolhunter.ai/submit-a-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 11,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ToolPilot",
+      "submit_url": "https://www.toolpilot.ai/pages/submit-your-ai-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.toolpilot.ai/pages/submit-your-ai-tool",
+      "dom": {
+        "forms": 4,
+        "inputs": 15,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ToolScout",
+      "submit_url": "https://toolscout.ai/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://toolscout.ai/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ToolsAI.net",
+      "submit_url": "https://toolsai.net/add-listing/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://toolsai.net/add-listing/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "TrackBes",
+      "submit_url": "https://trackbes.com/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://trackbes.com/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ToolStory.net",
+      "submit_url": "https://toolsstory.net/add-listing/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://toolsstory.net/add-listing/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://obs.sd559908.js.htttrack.com/ns/7eb20cacab39d145d8e198dc0781364a.html?ch=toolsstory.net"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "tools-ai.online",
+      "submit_url": "https://www.tools-ai.online/tool-submit",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.tools-ai.online/submit-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 6,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "The AI Warehouse",
+      "submit_url": "https://www.thewarehouse.ai/product-submission",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://www.thewarehouse.ai/product-submission",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Interested In AI",
+      "submit_url": "https://www.interestedinai.com/submit-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://www.interestedinai.com/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "NextGenTools",
+      "submit_url": "https://nextgentools.me/submit-your-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "AIRTABLE_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "airtable"
+      ],
+      "reason": null,
+      "provider": "airtable",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://nextgentools.me/submit-your-tool",
+      "dom": {
+        "forms": 2,
+        "inputs": 4,
+        "iframes": [
+          "https://airtable.com/embed/appcBtIrBPDXk1Xvv/pagn3lWWO0YPfnkB1/form"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Super AI Tools",
+      "submit_url": "https://www.superaitools.io/submit-a-tool",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "AIRTABLE_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "airtable"
+      ],
+      "reason": null,
+      "provider": "airtable",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.superaitools.io/submit-a-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Free AI Tool",
+      "submit_url": "https://freeaitool.ai/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "PAID_SUBMISSION",
+      "automation": "manual",
+      "reasons": [
+        "paid submission"
+      ],
+      "reason": "paid",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://freeaitool.ai/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "aitoolslist.io",
+      "submit_url": "https://aitoolslist.io/submit-ai-tool/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "TALLY_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "tally"
+      ],
+      "reason": null,
+      "provider": "tally",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aitoolslist.io/submit-ai-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://tally.so/embed/n9BqRX?alignLeft=1&#038;hideTitle=1&#038;transparentBackground=1&#038;dynamicHeight=1",
+          "https://tally.so/embed/n9BqRX?alignLeft=1&#038;hideTitle=1&#038;transparentBackground=1&#038;dynamicHeight=1"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "AI Tools Masters",
+      "submit_url": "https://aitoolsmasters.com/add-ai-tools/",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aitoolsmasters.com/add-ai-tools/",
+      "dom": {
+        "forms": 1,
+        "inputs": 15,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AILibri",
+      "submit_url": "https://ailibri.com/addAi",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://ailibri.com/addAi",
+      "dom": {
+        "forms": 3,
+        "inputs": 7,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "aitoolhunt",
+      "submit_url": "https://www.aitoolhunt.com/",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": null,
+      "final_url": "https://www.aitoolhunt.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "This operation was aborted"
+    },
+    {
+      "name": "Cipinet",
+      "submit_url": "https://www.cipinet.com/submit.php",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://www.cipinet.com/submit.php",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-KG2T8XV"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "A List Directory",
+      "submit_url": "http://www.alistdirectory.com/submit.php",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "HTTP_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "http 403"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 2,
+      "status": 403,
+      "final_url": "http://www.alistdirectory.com/cgi-sys/suspendedpage.cgi",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Foundr.ai",
+      "submit_url": "https://foundr.ai/",
+      "category": "overseas_ai_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://foundr.ai/",
+      "dom": {
+        "forms": 2,
+        "inputs": 23,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-PH8QCSG"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Tap4 AI",
+      "submit_url": "https://tap4.ai/cn/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://tap4.ai/cn/submit/",
+      "dom": {
+        "forms": 2,
+        "inputs": 7,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "aiwith.me",
+      "submit_url": "https://aiwith.me/zh/submit",
+      "category": "overseas_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://aiwith.me/zh/submit",
+      "dom": {
+        "forms": 1,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ToolsFine",
+      "submit_url": "https://tally.so/r/wvB7Xg",
+      "category": "overseas_ai_directories",
+      "bucket": "manual-review",
+      "code": "PAID_SUBMISSION",
+      "automation": "manual",
+      "reasons": [
+        "paid submission"
+      ],
+      "reason": "paid",
+      "provider": null,
+      "value_tier": 2,
+      "status": 200,
+      "final_url": "https://tally.so/r/wvB7Xg",
+      "dom": {
+        "forms": 1,
+        "inputs": 26,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Alternative.me",
+      "submit_url": "https://alternative.me/how-to/submit-software/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://alternative.me/how-to/submit-software/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "App Rater",
+      "submit_url": "https://apprater.net/add/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://apprater.net/add/",
+      "dom": {
+        "forms": 3,
+        "inputs": 16,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Appoid",
+      "submit_url": "http://appiod.com/submit-app-for-review/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://appiod.com/submit-app-for-review/",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": [
+          "https://amp2.wufoo.com/embed/w1jhochl1h88713?entsource=wordpress"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "All Startups",
+      "submit_url": "http://www.allstartups.info/Startups/Submit",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "http://www.allstartups.info/Startups/Submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "BufferApps",
+      "submit_url": "https://bufferapps.com/beta-listing/new",
+      "category": "overseas_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://bufferapps.com/beta-listing/new",
+      "dom": {
+        "forms": 3,
+        "inputs": 10,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Changelog",
+      "submit_url": "https://changelog.com/news/submit",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "LOGIN_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "login required"
+      ],
+      "reason": "login-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://changelog.com/news/submit",
+      "dom": {
+        "forms": 4,
+        "inputs": 11,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Digital Stuff We Love",
+      "submit_url": "https://digitalstuffwelove.org.nz/submit-tool",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://digitalstuffwelove.org.nz/submit-tool",
+      "dom": {
+        "forms": 3,
+        "inputs": 17,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "DataTau",
+      "submit_url": "https://datatau.net/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://datatau.net/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "10words",
+      "submit_url": "https://10words.io/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://10words.io/",
+      "dom": {
+        "forms": 1,
+        "inputs": 3,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "MicroLaunch",
+      "submit_url": "https://microlaunch.net/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "TYPEFORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "typeform"
+      ],
+      "reason": null,
+      "provider": "typeform",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://microlaunch.net/",
+      "dom": {
+        "forms": 2,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Fiddy",
+      "submit_url": "https://fiddy.co/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://fiddy.co/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Fund a Maker",
+      "submit_url": "https://fundamaker.com/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://fundamaker.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Joinly",
+      "submit_url": "https://www.joinly.xyz/",
+      "category": "overseas_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.joinly.xyz/",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "KillerStartups",
+      "submit_url": "https://www.killerstartups.com/submit-startup/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://killerstartups.com/submit-startup/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": [
+          "https://embeds.beehiiv.com/7d0e1786-fd83-4ead-98e4-ae44aeee8d21?slim=true",
+          "https://embeds.beehiiv.com/7d0e1786-fd83-4ead-98e4-ae44aeee8d21?slim=true"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "PitchWall",
+      "submit_url": "https://pitchwall.co/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://pitchwall.co/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Prime Indies",
+      "submit_url": "https://primeindies.com/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "http://ww1.primeindies.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Toools.design",
+      "submit_url": "https://toools.design/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.toools.design/",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-TDTR26G"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "TechPluto",
+      "submit_url": "https://www.techpluto.com/submit-a-startup/",
+      "category": "overseas_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.techpluto.com/submit-a-startup/",
+      "dom": {
+        "forms": 3,
+        "inputs": 6,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "The Startup Pitch",
+      "submit_url": "https://thestartuppitch.com/post-a-pitch/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://thestartuppitch.com/post-a-pitch/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Top Best Alternatives",
+      "submit_url": "https://www.topbestalternatives.com/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.topbestalternatives.com/",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Launched!",
+      "submit_url": "https://launched.io/",
+      "category": "overseas_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://launched.io/",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Startup Collections",
+      "submit_url": "https://startupcollections.com/submit-product/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://startupcollections.com/submit-product/",
+      "dom": {
+        "forms": 3,
+        "inputs": 10,
+        "iframes": [
+          "https://docs.google.com/forms/d/e/1FAIpQLSfxtP1hx6kN9nkAYXquRq2eTG24_YPEx5-pHov2POonNLeuOw/viewform?embedded=true",
+          "https://www.googletagmanager.com/ns.html?id=GTM-P75HM2"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "StartupRanking",
+      "submit_url": "https://www.startupranking.com/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.startupranking.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 4,
+        "iframes": [
+          "https://www.googletagmanager.com/ns.html?id=GTM-5Q72BHH"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "StartupBase",
+      "submit_url": "https://startupbase.io/",
+      "category": "overseas_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://startupbase.io/",
+      "dom": {
+        "forms": 0,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "SourceForge",
+      "submit_url": "https://sourceforge.net/software/vendors/new",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "HTTP_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "http 403"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 403,
+      "final_url": "https://sourceforge.net/software/vendors/new",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "techdirectory.io",
+      "submit_url": "https://www.techdirectory.io/get-listed",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.techdirectory.io/get-listed",
+      "dom": {
+        "forms": 3,
+        "inputs": 26,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Toolbase.io",
+      "submit_url": "https://form.typeform.com/to/LQcTJr",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "TYPEFORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "typeform"
+      ],
+      "reason": null,
+      "provider": "typeform",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://form.typeform.com/to/LQcTJr",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "TechFaster",
+      "submit_url": "http://techfaster.com/submit-your-company/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "HTTP_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "http 403"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 403,
+      "final_url": "http://techfaster.com/cgi-sys/suspendedpage.cgi",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Unloc",
+      "submit_url": "https://www.unloc.tools/submit-tool",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.unloc.tools/submit-tool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Wewaat",
+      "submit_url": "https://www.wewaat.com/submitnewtool",
+      "category": "overseas_general",
+      "bucket": "dead",
+      "code": "PAGE_UNREACHABLE",
+      "automation": "none",
+      "reasons": [
+        "page unreachable"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 404,
+      "final_url": "https://www.wewaat.com/submitnewtool",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Indie Tools",
+      "submit_url": "https://indietools.co/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://indietools.co/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Simple Lister",
+      "submit_url": "https://simplelister.com/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://simplelister.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Launching Today",
+      "submit_url": "https://www.launching.today/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.launching.today/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "WebsiteHunt",
+      "submit_url": "https://www.websitehunt.co/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.websitehunt.co/",
+      "dom": {
+        "forms": 2,
+        "inputs": 4,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Twelve.tools",
+      "submit_url": "https://twelve.tools/submit-your-tool",
+      "category": "overseas_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://twelve.tools/submit-your-tool",
+      "dom": {
+        "forms": 1,
+        "inputs": 21,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "WhatLaunched.Today",
+      "submit_url": "https://www.whatlaunched.today",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "LOGIN_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "login required"
+      ],
+      "reason": "login-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.whatlaunched.today/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "bigstartups.co",
+      "submit_url": "https://bigstartups.co/overview/list-product",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://bigstartups.co/overview/list-product",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "business-software.com",
+      "submit_url": "https://www.business-software.com/add-your-product/",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.business-software.com/add-your-product/",
+      "dom": {
+        "forms": 4,
+        "inputs": 28,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "osalt.com",
+      "submit_url": "https://osalt.com/suggest",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://osalt.com/suggest",
+      "dom": {
+        "forms": 2,
+        "inputs": 10,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ASR",
+      "submit_url": "https://www.activesearchresults.com/addwebsite.php",
+      "category": "overseas_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.activesearchresults.com/addwebsite.php",
+      "dom": {
+        "forms": 1,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AppsThunder",
+      "submit_url": "https://appsthunder.com/submit-your-app/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://appsthunder.com/submit-your-app/",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": [
+          "https://amp2.wufoo.com/embed/q1p25j118pjfs4?entsource=wordpress"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "insanelycooltools",
+      "submit_url": "https://www.insanelycooltools.com/submit",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.insanelycooltools.com/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "700.tools",
+      "submit_url": "https://700.tools/add",
+      "category": "overseas_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://700.tools/add",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "once.tools",
+      "submit_url": "https://once.tools/",
+      "category": "overseas_general",
+      "bucket": "provider-ready",
+      "code": "TYPEFORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "typeform"
+      ],
+      "reason": null,
+      "provider": "typeform",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://once.tools/",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Dizila",
+      "submit_url": "https://www.dizila.com/submit",
+      "category": "overseas_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.dizila.com/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Viesearch",
+      "submit_url": "https://viesearch.com/submit",
+      "category": "overseas_directories",
+      "bucket": "provider-ready",
+      "code": "EMBEDDED_FORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "embedded-form"
+      ],
+      "reason": null,
+      "provider": "embedded-form",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://viesearch.com/submit",
+      "dom": {
+        "forms": 2,
+        "inputs": 14,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "OnToplist.com",
+      "submit_url": "https://www.ontoplist.com/join/",
+      "category": "overseas_directories",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.ontoplist.com/join/",
+      "dom": {
+        "forms": 5,
+        "inputs": 25,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Offpagesavvy",
+      "submit_url": "https://www.offpagesavvy.com/submit-your-site/",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.offpagesavvy.com/submit-your-site/",
+      "dom": {
+        "forms": 2,
+        "inputs": 16,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Unmatched Style",
+      "submit_url": "https://unmatchedstyle.com/submit",
+      "category": "overseas_directories",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://unmatchedstyle.com/submit",
+      "dom": {
+        "forms": 2,
+        "inputs": 20,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "01webdirectory",
+      "submit_url": "https://www.01webdirectory.com/frmPreSubmit.aspx",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.01webdirectory.com/frmPreSubmit.aspx",
+      "dom": {
+        "forms": 1,
+        "inputs": 12,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "247WebDirectory",
+      "submit_url": "https://www.247webdirectory.com/",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.247webdirectory.com/",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "9Sites.net",
+      "submit_url": "https://www.9sites.net/addurl.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.9sites.net/addurl.php",
+      "dom": {
+        "forms": 2,
+        "inputs": 12,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ABC Directory",
+      "submit_url": "https://www.abc-directory.com/submiturl",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.abc-directory.com/submiturl",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "All Business Directory",
+      "submit_url": "https://www.allbusinessdirectory.biz/directory.php?page=submission-guidelines",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.allbusinessdirectory.biz/directory.php?page=submission-guidelines",
+      "dom": {
+        "forms": 1,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "All States USA Directory",
+      "submit_url": "https://www.allstatesusadirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.allstatesusadirectory.com/submit.php",
+      "dom": {
+        "forms": 2,
+        "inputs": 17,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "BusinessSeek.biz",
+      "submit_url": "https://www.businessseek.biz/page.php?page=submission-policy",
+      "category": "overseas_directories",
+      "bucket": "manual-review",
+      "code": "PAID_SUBMISSION",
+      "automation": "manual",
+      "reasons": [
+        "paid submission"
+      ],
+      "reason": "paid",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.businessseek.biz/page.php?page=submission-policy",
+      "dom": {
+        "forms": 2,
+        "inputs": 10,
+        "iframes": [
+          "https://www.businessseek.biz/admanager/show.php?z=38"
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Submission Web Directory",
+      "submit_url": "https://www.submissionwebdirectory.com/",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.submissionwebdirectory.com/",
+      "dom": {
+        "forms": 2,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Highrankdirectory",
+      "submit_url": "https://www.highrankdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.highrankdirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 21,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Sonic Run",
+      "submit_url": "https://www.sonicrun.com/freelisting.html",
+      "category": "overseas_directories",
+      "bucket": "manual-review",
+      "code": "CAPTCHA_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "captcha detected"
+      ],
+      "reason": "captcha-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.sonicrun.com/freelisting.html",
+      "dom": {
+        "forms": 1,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Site Promotion Directory",
+      "submit_url": "https://www.sitepromotiondirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.sitepromotiondirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 20,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "SitesWebdirectory",
+      "submit_url": "https://www.siteswebdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.siteswebdirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 4,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Marketing Internet Directory",
+      "submit_url": "https://www.marketinginternetdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.marketinginternetdirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 21,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Promote Business Directory",
+      "submit_url": "https://www.promotebusinessdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.promotebusinessdirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 9,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ProLinkDirectory",
+      "submit_url": "https://www.prolinkdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.prolinkdirectory.com/submit.php",
+      "dom": {
+        "forms": 2,
+        "inputs": 28,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "GainWeb.org",
+      "submit_url": "https://gainweb.org/",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://gainweb.org/",
+      "dom": {
+        "forms": 2,
+        "inputs": 6,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Jayde",
+      "submit_url": "https://www.jayde.com/submit.html",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.jayde.com/submit.html",
+      "dom": {
+        "forms": 2,
+        "inputs": 44,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Free Directory",
+      "submit_url": "https://www.directory-free.com/submit/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.directory-free.com/submit/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 6,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Free PR Web Directory",
+      "submit_url": "https://www.freeprwebdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.freeprwebdirectory.com/submit.php",
+      "dom": {
+        "forms": 2,
+        "inputs": 17,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Free Internet Web Directory",
+      "submit_url": "https://www.freeinternetwebdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.freeinternetwebdirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 24,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "TXTLinks",
+      "submit_url": "https://www.txtlinks.com/sug_url.php?cat_id=0",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.txtlinks.com/sug_url.php?cat_id=0",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Tsection",
+      "submit_url": "https://www.tsection.com/",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.tsection.com/",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Thales Directory",
+      "submit_url": "https://thalesdirectory.com/submit/",
+      "category": "overseas_directories",
+      "bucket": "dead",
+      "code": "PAGE_UNREACHABLE",
+      "automation": "none",
+      "reasons": [
+        "page unreachable"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 404,
+      "final_url": "https://thalesdirectory.com/submit/",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Quality Internet Directory",
+      "submit_url": "https://www.qualityinternetdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.qualityinternetdirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 22,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "UK Internet Directory",
+      "submit_url": "https://www.ukinternetdirectory.net/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.ukinternetdirectory.net/submit.php",
+      "dom": {
+        "forms": 2,
+        "inputs": 20,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "USA Websites Directory",
+      "submit_url": "https://www.usawebsitesdirectory.com/submit.php",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.usawebsitesdirectory.com/submit.php",
+      "dom": {
+        "forms": 3,
+        "inputs": 24,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "World Web Directory",
+      "submit_url": "https://www.worldweb-directory.com/add.php",
+      "category": "overseas_directories",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.worldweb-directory.com/add.php",
+      "dom": {
+        "forms": 1,
+        "inputs": 11,
+        "iframes": [
+          "//adgebra.co.in/afpf/afpf?p1=869&p2=0&p3=1&p4=&p5="
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "Submit.biz",
+      "submit_url": "https://www.submit.biz/",
+      "category": "overseas_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.submit.biz/",
+      "dom": {
+        "forms": 1,
+        "inputs": 3,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "5118.link",
+      "submit_url": "http://www.5118.link/article/22.html",
+      "category": "overseas_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "http://www.5118.link/article/22.html",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "2AGI",
+      "submit_url": "https://2agi.net/zh/submit",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://2agi.net/zh/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "ai-bot.cn",
+      "submit_url": "https://tally.so/r/wkeKz1",
+      "category": "chinese_ai_directories",
+      "bucket": "provider-ready",
+      "code": "TALLY_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "tally"
+      ],
+      "reason": null,
+      "provider": "tally",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://tally.so/r/wkeKz1",
+      "dom": {
+        "forms": 1,
+        "inputs": 9,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI NAV",
+      "submit_url": "https://www.ainavpro.com/contribute",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.ainavpro.com/contribute",
+      "dom": {
+        "forms": 2,
+        "inputs": 34,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI大师",
+      "submit_url": "https://www.aidashi.cn/sl",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.aidashi.cn/sl",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "AI智式",
+      "submit_url": "https://aiwaytools.com/%e7%bd%91%e5%9d%80%e6%8f%90%e4%ba%a4/",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://aiwaytools.com/%e7%bd%91%e5%9d%80%e6%8f%90%e4%ba%a4/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "AI工具箱 (aitool123)",
+      "submit_url": "https://www.aitool123.cc/%E6%8F%90%E4%BA%A4%E6%94%B6%E5%BD%95/",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.aitool123.cc/%E6%8F%90%E4%BA%A4%E6%94%B6%E5%BD%95/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "工具达人AI导航",
+      "submit_url": "http://toolsdar.mikecrm.com/nix44in",
+      "category": "chinese_ai_directories",
+      "bucket": "provider-ready",
+      "code": "EMBEDDED_FORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "embedded-form"
+      ],
+      "reason": null,
+      "provider": "embedded-form",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "http://toolsdar.mikecrm.com/nix44in",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "映技派",
+      "submit_url": "https://www.yjpoo.com/submit-ai-tool/",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.yjpoo.com/submit-ai-tool/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "深度AI导航",
+      "submit_url": "https://www.deepdhai.com/submit",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.deepdhai.com/submit",
+      "dom": {
+        "forms": 2,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "懂AI",
+      "submit_url": "https://www.dongaiapp.com/sub",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.dongaiapp.com/sub",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "南城FE AI导航",
+      "submit_url": "https://nancheng.fun/contribute",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://nancheng.fun/contribute",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "zhexieai",
+      "submit_url": "https://zhexieai.com/%e6%8f%90%e4%ba%a4%e7%bd%91%e5%9d%80",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://zhexieai.com/%e6%8f%90%e4%ba%a4%e7%bd%91%e5%9d%80",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Cooltools",
+      "submit_url": "https://backdata.net/submit-site.html",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://backdata.net/submit-site.html",
+      "dom": {
+        "forms": 1,
+        "inputs": 7,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "iforai",
+      "submit_url": "https://iforai.com/submit_website/",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://iforai.com/submit_website/",
+      "dom": {
+        "forms": 2,
+        "inputs": 49,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "未来百科",
+      "submit_url": "https://nav.6aiq.com/contribute",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://nav.6aiq.com/contribute",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "123AI导航",
+      "submit_url": "https://www.fsl123.com/contribute",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.fsl123.com/contribute",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "AIGC工具导航",
+      "submit_url": "https://www.aigc.cn/submit",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.aigc.cn/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI导航网 (94kan)",
+      "submit_url": "https://ai.94kan.cn/submit",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://ai.94kan.cn/submit",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "AIGC便利店",
+      "submit_url": "https://aigclist.com/submit-ai-tools-free/",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "LOGIN_REQUIRED",
+      "automation": "manual",
+      "reasons": [
+        "login required"
+      ],
+      "reason": "login-required",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://aigclist.com/auth/login?callbackUrl=%2Fsubmit-ai-tools-free",
+      "dom": {
+        "forms": 1,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "知否Box AI导航",
+      "submit_url": "https://www.zhifoubox.com/submission",
+      "category": "chinese_ai_directories",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.zhifoubox.com/submission",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "海外导航网",
+      "submit_url": "https://www.hhlink.com/%E6%8F%90%E4%BA%A4%E6%96%B0%E7%BD%91%E7%AB%99",
+      "category": "chinese_ai_directories",
+      "bucket": "provider-ready",
+      "code": "EMBEDDED_FORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "embedded-form"
+      ],
+      "reason": null,
+      "provider": "embedded-form",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.hhlink.com/%E6%8F%90%E4%BA%A4%E6%96%B0%E7%BD%91%E7%AB%99",
+      "dom": {
+        "forms": 1,
+        "inputs": 23,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "智鹭AI",
+      "submit_url": "https://www.aiheron.com/promote",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.aiheron.com/promote",
+      "dom": {
+        "forms": 2,
+        "inputs": 19,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "老北鼻AI导航",
+      "submit_url": "https://lbbai.com/contribute",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://lbbai.com/contribute",
+      "dom": {
+        "forms": 2,
+        "inputs": 15,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI工具箱 (ailookme)",
+      "submit_url": "https://www.ailookme.com/%e7%bd%91%e5%9d%80%e6%8f%90%e4%ba%a4",
+      "category": "chinese_ai_directories",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.ailookme.com/%e7%bd%91%e5%9d%80%e6%8f%90%e4%ba%a4",
+      "dom": {
+        "forms": 1,
+        "inputs": 32,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "AI导航网 (aiopenminds)",
+      "submit_url": "https://jinshuju.net/f/BhEFyJ",
+      "category": "chinese_ai_directories",
+      "bucket": "provider-ready",
+      "code": "EMBEDDED_FORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "embedded-form"
+      ],
+      "reason": null,
+      "provider": "embedded-form",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://jsj.top/f/BhEFyJ",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "ABABTOOLS",
+      "submit_url": "https://ababtools.com/?post=1292",
+      "category": "chinese_general",
+      "bucket": "provider-ready",
+      "code": "EMBEDDED_FORM_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "embedded-form"
+      ],
+      "reason": null,
+      "provider": "embedded-form",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://ababtools.com/?post=1292",
+      "dom": {
+        "forms": 2,
+        "inputs": 8,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "新趣集",
+      "submit_url": "https://xinquji.com/",
+      "category": "chinese_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://xinquji.com/",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Mergeek",
+      "submit_url": "https://mergeek.com/publish_project",
+      "category": "chinese_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://mergeek.com/publish_project",
+      "dom": {
+        "forms": 1,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "挖互联网",
+      "submit_url": "https://tigg.cc/share",
+      "category": "chinese_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://tigg.cc/share",
+      "dom": {
+        "forms": 1,
+        "inputs": 10,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "线圈",
+      "submit_url": "https://xquan.net/help?tab=submit-guide",
+      "category": "chinese_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://xquan.net/help?tab=submit-guide",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "一网一匠",
+      "submit_url": "https://ywyj.cn/",
+      "category": "chinese_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://ywyj.cn/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "Solo 社区",
+      "submit_url": "https://solo.xin/product",
+      "category": "chinese_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://solo.xin/product",
+      "dom": {
+        "forms": 0,
+        "inputs": 2,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "电商导航网",
+      "submit_url": "https://www.dianshangdaohang.cn/shoulu/",
+      "category": "chinese_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://www.dianshangdaohang.cn/shoulu/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "fetch failed"
+    },
+    {
+      "name": "名站在线",
+      "submit_url": "http://www.fwol.cn/infos_add.php",
+      "category": "chinese_general",
+      "bucket": "provider-ready",
+      "code": "IFRAME_FORM",
+      "automation": "provider-adapter",
+      "reasons": [
+        "iframe"
+      ],
+      "reason": null,
+      "provider": "iframe",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "http://www.fwol.cn/infos_add.php",
+      "dom": {
+        "forms": 1,
+        "inputs": 10,
+        "iframes": [
+          "http://www.fwol.cn/iframe-wz.php?type=&tid=&tid=&aid=&ssid=&keyword=&name=&title=&ctid=&bid="
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "63243网址导航",
+      "submit_url": "https://www.63243.com/about/add.html",
+      "category": "chinese_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.63243.com/about/add.html",
+      "dom": {
+        "forms": 1,
+        "inputs": 17,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "小木屋",
+      "submit_url": "https://wechalet.cn/appstore/add",
+      "category": "chinese_general",
+      "bucket": "custom-adapter-needed",
+      "code": "PARTIAL_FORM",
+      "automation": "adapter",
+      "reasons": [
+        "partial form detected"
+      ],
+      "reason": null,
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://wechalet.cn/appstore/add",
+      "dom": {
+        "forms": 0,
+        "inputs": 5,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "笛卡",
+      "submit_url": "https://dizkaz.com/",
+      "category": "chinese_general",
+      "bucket": "manual-review",
+      "code": "NETWORK_ERROR",
+      "automation": "manual",
+      "reasons": [
+        "network error or timeout"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": null,
+      "final_url": "https://dizkaz.com/",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": "This operation was aborted"
+    },
+    {
+      "name": "FUUN.FUN",
+      "submit_url": "https://fuun.fun/talk.html",
+      "category": "chinese_general",
+      "bucket": "manual-review",
+      "code": "NO_FORM_DETECTED",
+      "automation": "manual",
+      "reasons": [
+        "no recognizable form"
+      ],
+      "reason": "unknown",
+      "provider": null,
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://fuun.fun/talk.html",
+      "dom": {
+        "forms": 0,
+        "inputs": 0,
+        "iframes": []
+      },
+      "error": null
+    },
+    {
+      "name": "Uneed",
+      "submit_url": "https://www.uneed.best/promote-your-tool",
+      "category": "communities_manual",
+      "bucket": "provider-ready",
+      "code": "TALLY_IFRAME",
+      "automation": "provider-adapter",
+      "reasons": [
+        "tally"
+      ],
+      "reason": null,
+      "provider": "tally",
+      "value_tier": 3,
+      "status": 200,
+      "final_url": "https://www.uneed.best/pricing",
+      "dom": {
+        "forms": 1,
+        "inputs": 1,
+        "iframes": []
+      },
+      "error": null
+    }
+  ]
+}
