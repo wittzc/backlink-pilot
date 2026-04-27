@@ -51,8 +51,10 @@ overseas_ai_directories:
   - name: AIToolsDirectory
     submit_url: https://aitoolsdirectory.com/submit-tool
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-27)"
   - name: AI Directory
     submit_url: https://www.aidirectory.org/user-submit/
     type: form
@@ -94,8 +96,10 @@ overseas_ai_directories:
   - name: AI Homes
     submit_url: https://aihomes.io/submit/submit-tool
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-27)"
   - name: AI Library
     submit_url: https://library.phygital.plus/tool-submission
     type: form
@@ -104,8 +108,10 @@ overseas_ai_directories:
   - name: AiSuperSmart
     submit_url: https://www.aisupersmart.com/submit-tool/
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-27)"
   - name: Ai Business Tool
     submit_url: https://aibusinesstool.com/
     type: form
@@ -218,8 +224,9 @@ overseas_ai_directories:
   - name: DigiProToolz
     submit_url: https://digiprotoolz.com/contact-us/
     type: form
-    auto: yes
+    auto: manual
     lang: en
+    auto_blocked_reason: LOGIN_REQUIRED (2026-04-27)
   - name: DropYourAI
     submit_url: https://www.dropyourai.com/submit-tool
     type: form
