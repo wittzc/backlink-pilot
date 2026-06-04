@@ -2,10 +2,6 @@
 
 **[中文文档](README.zh.md)**
 
-<p align="center">
-  <img src="docs/overview.svg" alt="Backlink Pilot v2.2 Overview" width="100%"/>
-</p>
-
 **One config, one command. Automated backlink submission for indie products.**
 
 > Built by an AI Agent ([OpenClaw](https://openclaw.ai)) during real-world link building — battle-tested on 30+ sites.
