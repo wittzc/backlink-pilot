@@ -1,16 +1,16 @@
-# Backlink Pilot v2.1
+# Backlink Pilot v2.2
 
 **[中文文档](README.zh.md)**
 
 <p align="center">
-  <img src="docs/overview.svg" alt="Backlink Pilot v2.1 Overview" width="100%"/>
+  <img src="docs/overview.svg" alt="Backlink Pilot v2.2 Overview" width="100%"/>
 </p>
 
 **One config, one command. Automated backlink submission for indie products.**
 
 > Built by an AI Agent ([OpenClaw](https://openclaw.ai)) during real-world link building — battle-tested on 30+ sites.
 
-**<!-- stats:total -->258<!-- /stats --> target sites** in [`targets.yaml`](targets.yaml) — <!-- stats:auto-yes -->180<!-- /stats --> auto-submittable with bb-browser.
+**<!-- stats:total -->258<!-- /stats --> target sites** in [`targets.yaml`](targets.yaml) — <!-- stats:auto-yes -->143<!-- /stats --> auto-submittable with bb-browser.
 
 ---
 
@@ -54,13 +54,15 @@ node src/cli.js submit https://any-site.com --engine bb
 ## Commands
 
 ```bash
-node src/cli.js submit <site-or-url>     # Submit to directory
-node src/cli.js scout <url> --deep       # Discover form fields
-node src/cli.js awesome <repo>           # Generate awesome-list Issue
-node src/cli.js indexnow <url>           # Ping search engines
-node src/cli.js status                   # Check submission history
-node src/cli.js bb-update                # Update bb-browser adapters
-node src/batch-submit.js --limit N       # Batch blog comments
+node src/cli.js submit <site-or-url>          # Submit to one directory
+node src/cli.js batch-submit --yes --limit 5  # Directory batch (dedup + verdict)
+node src/cli.js scout <url> --deep            # Discover form fields
+node src/cli.js doctor                        # Check environment health
+node src/cli.js awesome <repo>                # Generate awesome-list Issue
+node src/cli.js indexnow <url>                # Ping search engines
+node src/cli.js status                        # Check submission history
+node src/cli.js bb-update                     # Update bb-browser adapters
+node src/batch-blog-comments.js --limit N     # Batch blog comments
 ```
 
 ---
@@ -72,7 +74,7 @@ node src/batch-submit.js --limit N       # Batch blog comments
 ### Best channels by ROI
 
 1. **GitHub awesome-lists** — highest ROI, permanent, $0, 5 min each
-2. **Free directory sites** — 250+ targets in `targets.yaml`, most auto-submittable
+2. **Free directory sites** — 258 targets in `targets.yaml`, ~143 auto-submittable
 3. **Blog comments** — Website field backlinks, batch-automated
 
 ### Submission pace
@@ -95,7 +97,7 @@ node src/batch-submit.js --limit N       # Batch blog comments
 
 ### Claude Code
 
-Clone the repo, run `claude`, and talk. `CLAUDE.md` is the instruction manual — Claude reads it automatically.
+Clone the repo, run `claude`, and talk. `CLAUDE.md` redirects to `docs/AGENT_GUIDE.md`, the single source of truth for agent instructions — Claude reads it automatically.
 
 ### OpenClaw
 
@@ -113,11 +115,11 @@ Then just say: "Submit to free directories"
 backlink-pilot/
 ├── README.md                  ← You are here
 ├── README.zh.md               ← Chinese docs
-├── CLAUDE.md                  ← Claude Code agent instructions
+├── CLAUDE.md                  ← Redirect stub → docs/AGENT_GUIDE.md
 ├── LICENSE
 ├── package.json
 ├── config.example.yaml        ← Config template
-├── targets.yaml               ← 250+ target sites
+├── targets.yaml               ← 258 target sites (143 auto-submittable)
 │
 ├── docs/                      ← Documentation
 │   ├── index.md               ← Docs home (VitePress)
@@ -131,16 +133,22 @@ backlink-pilot/
 ├── src/                       ← Source code
 │   ├── cli.js                 ← CLI entry point
 │   ├── submit.js              ← Submission dispatcher
-│   ├── bb.js                  ← bb-browser wrapper
-│   ├── browser.js             ← Dual-engine manager
+│   ├── bb.js                  ← bb-browser wrapper (BbPage API)
+│   ├── browser.js             ← bb-browser engine guard
 │   ├── config.js              ← Config loader + UTM
 │   ├── tracker.js             ← Submission tracking
-│   ├── captcha.js             ← CAPTCHA solvers
+│   ├── captcha.js             ← Color CAPTCHA solver
 │   ├── indexnow.js            ← Search engine ping
-│   ├── batch-submit.js        ← Batch blog comments
+│   ├── batch-submit.js        ← Directory batch executor (dedup + verdict)
+│   ├── batch-blog-comments.js ← Batch blog comments
+│   ├── triage.js              ← Pre-batch target classification
 │   ├── bb-update.js           ← bb-browser adapter updater
 │   ├── sites/                 ← Site adapters
 │   │   ├── generic.js         ← Universal adapter
+│   │   ├── form-recipe.js     ← YAML recipe-driven adapter (recipes/*.yaml)
+│   │   ├── providers/         ← Iframe form providers (Paperform, …)
+│   │   ├── futuretools.js
+│   │   ├── aivalley.js
 │   │   ├── saashub.js
 │   │   ├── uneed.js
 │   │   ├── baitools.js
@@ -148,8 +156,7 @@ backlink-pilot/
 │   ├── scout/discover.js      ← Form field discovery
 │   └── awesome/templates.js   ← Awesome-list Issue generator
 │
-├── tests/                     ← Test suite
-└── bak/                       ← Deprecated code (not tracked)
+└── tests/                     ← Test suite
 ```
 
 ---
@@ -187,4 +194,4 @@ MIT
 
 ## Credits
 
-Built with [OpenClaw](https://openclaw.ai). Browser automation by [bb-browser](https://github.com/niciral/bb-browser) and [rebrowser-playwright](https://github.com/nickthecoder/rebrowser-playwright).
+Built with [OpenClaw](https://openclaw.ai). Browser automation by [bb-browser](https://github.com/niciral/bb-browser).

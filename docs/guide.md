@@ -1,6 +1,6 @@
 # 使用指南
 
-Backlink Pilot v2.1 完整使用指南。按你的情况选一条路径：
+Backlink Pilot v2.2 完整使用指南。按你的情况选一条路径：
 
 | 路径 | 适合谁 | 耗时 |
 |------|--------|------|
@@ -51,7 +51,7 @@ Claude 会：
 | 你说 | Claude 做 |
 |------|-----------|
 | 帮我提交外链 | 引导配置，开始提交 |
-| 提交到所有免费站 | 筛选 250+ 目标站，批量提交 |
+| 提交到所有免费站 | 筛选可自动提交的站（约 143 个），批量提交 |
 | 这个站能提交吗？[URL] | 侦察该站，分析表单 |
 | 提交情况 | 显示提交记录 |
 | 帮我生成 awesome-list 提交 | 生成 GitHub Issue 内容 |
@@ -160,10 +160,10 @@ node src/cli.js submit startup88 --engine bb
 
 ```bash
 # 先空跑
-node src/batch-submit.js --dry-run --limit 5
+node src/batch-blog-comments.js --dry-run --limit 5
 
 # 实际运行
-node src/batch-submit.js --limit 10 --engine bb
+node src/batch-blog-comments.js --limit 10
 ```
 
 ### 6. 其他命令
@@ -205,7 +205,7 @@ node src/cli.js submit https://any-site.com/submit --engine bb
 
 ### 8. 目标站点库
 
-`targets.yaml` 收录 250+ 个目录站。可按以下字段筛选：
+`targets.yaml` 收录 258 个目录站。可按以下字段筛选：
 
 | 字段 | 取值 | 含义 |
 |------|------|------|
@@ -256,10 +256,10 @@ ln -s ~/path/to/backlink-pilot ~/.openclaw/skills/backlink-pilot
 
 3. **始终用 bb-browser**
    - 加 `--engine bb`，或在 config 里设 `browser.engine: bb`
-   - Playwright 会被多数现代反爬系统拦截
+   - playwright 已在 v2.2 移除，bb-browser 是唯一引擎
 
 4. **提交前先检查**
-   - v2.1 有预检 HTTP 请求（自动跳过 404/500）
+   - v2.2 有预检 HTTP 请求（自动跳过 404/500）
    - 有些站点需要先手动登录 Google：`bb-browser open https://accounts.google.com`
 
 5. **截图就是你的凭证**
@@ -289,20 +289,22 @@ ln -s ~/path/to/backlink-pilot ~/.openclaw/skills/backlink-pilot
 ```
 config.yaml              ← 你的产品配置（gitignored，私有）
 config.example.yaml      ← 复制用的模板
-targets.yaml             ← 250+ 目标站点及状态元数据
+targets.yaml             ← 258 目标站点及状态元数据
 submissions.yaml         ← 自动生成的提交记录
 
 src/cli.js               ← CLI 入口（所有命令）
 src/submit.js            ← 提交调度器 + 预检
 src/bb.js                ← bb-browser 封装（BbPage API）
-src/browser.js           ← 双引擎管理器（bb + playwright）
+src/browser.js           ← bb-browser 引擎守卫
 src/sites/generic.js     ← 任意目录站的通用适配器
+src/sites/form-recipe.js ← YAML 配方驱动适配器（recipes/*.yaml）
 src/sites/*.js           ← 站点专用适配器
 src/scout/discover.js    ← 表单字段发现
-src/captcha.js           ← 验证码求解器
+src/captcha.js           ← 颜色验证码求解器
 src/tracker.js           ← 提交去重追踪
 src/indexnow.js          ← 搜索引擎推送
-src/batch-submit.js      ← 批量博客评论提交器
+src/batch-submit.js      ← 目录批量执行器（去重 + verdict）
+src/batch-blog-comments.js ← 批量博客评论
 
 CLAUDE.md                ← 给 Claude Code AI agent 的指令
 docs/                    ← 文档站（VitePress）

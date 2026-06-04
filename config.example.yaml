@@ -49,10 +49,8 @@ indexnow:
 
 # Browser settings
 browser:
-  engine: bb           # bb (recommended) | playwright — bb uses real Chrome, invisible to anti-bot
-  headless: true       # playwright only (bb always uses visible Chrome)
-  slow_mo: 100         # ms between actions (playwright only)
-  timeout: 30000       # page load timeout (ms) — applies to both engines
+  engine: bb           # only engine (playwright removed in v2.2); uses real Chrome, invisible to anti-bot
+  timeout: 30000       # page load timeout (ms)
   screenshot_dir: "./screenshots"
 
 # bb-browser settings (only used when engine: bb)

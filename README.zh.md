@@ -1,16 +1,16 @@
-# Backlink Pilot v2.1
+# Backlink Pilot v2.2
 
 **[English](README.md)**
 
 <p align="center">
-  <img src="docs/overview.zh.svg" alt="Backlink Pilot v2.1 概览" width="100%"/>
+  <img src="docs/overview.zh.svg" alt="Backlink Pilot v2.2 概览" width="100%"/>
 </p>
 
 **一条命令提交外链的自动化工具。** 配置一次产品信息，自动提交到目录站、awesome-list、搜索引擎。
 
 > 由 AI Agent ([OpenClaw](https://openclaw.ai)) 在真实外链建设中构建，30+ 站点实战验证。
 
-[`targets.yaml`](targets.yaml) 收录 **<!-- stats:total -->258<!-- /stats --> 个目标站点**，其中 <!-- stats:auto-yes -->180<!-- /stats --> 个可用 bb-browser 自动提交。
+[`targets.yaml`](targets.yaml) 收录 **<!-- stats:total -->258<!-- /stats --> 个目标站点**，其中 <!-- stats:auto-yes -->143<!-- /stats --> 个可用 bb-browser 自动提交。
 
 ---
 
@@ -54,13 +54,15 @@ node src/cli.js submit https://any-site.com --engine bb
 ## 命令速查
 
 ```bash
-node src/cli.js submit <站点名或URL>     # 提交到目录站
-node src/cli.js scout <URL> --deep       # 侦察站点表单
-node src/cli.js awesome <仓库名>          # 生成 awesome-list Issue
-node src/cli.js indexnow <URL>           # 通知搜索引擎
-node src/cli.js status                   # 查看提交记录
-node src/cli.js bb-update                # 更新 bb-browser 适配器
-node src/batch-submit.js --limit N       # 批量博客评论
+node src/cli.js submit <站点名或URL>          # 提交到单个目录站
+node src/cli.js batch-submit --yes --limit 5  # 目录批量提交（去重 + verdict）
+node src/cli.js scout <URL> --deep            # 侦察站点表单
+node src/cli.js doctor                        # 检查环境健康
+node src/cli.js awesome <仓库名>              # 生成 awesome-list Issue
+node src/cli.js indexnow <URL>                # 通知搜索引擎
+node src/cli.js status                        # 查看提交记录
+node src/cli.js bb-update                     # 更新 bb-browser 适配器
+node src/batch-blog-comments.js --limit N     # 批量博客评论
 ```
 
 ---
@@ -72,7 +74,7 @@ node src/batch-submit.js --limit N       # 批量博客评论
 ### 最佳渠道（按 ROI 排序）
 
 1. **GitHub awesome-lists** — 最高 ROI，永久收录，$0，每个 5 分钟
-2. **免费目录站** — `targets.yaml` 收录 250+ 个，大部分可自动提交
+2. **免费目录站** — `targets.yaml` 收录 258 个，约 143 个可自动提交
 3. **博客评论** — Website 字段留链接，批量自动化
 
 ### 提交节奏
@@ -95,7 +97,7 @@ node src/batch-submit.js --limit N       # 批量博客评论
 
 ### Claude Code
 
-克隆仓库 → 运行 `claude` → 直接对话。`CLAUDE.md` 是 AI 的操作手册，Claude 自动读取。
+克隆仓库 → 运行 `claude` → 直接对话。`CLAUDE.md` 是 redirect stub，指向 `docs/AGENT_GUIDE.md`（agent 指令的单一权威源），Claude 自动读取。
 
 ### OpenClaw
 
@@ -113,11 +115,11 @@ ln -s ~/path/to/backlink-pilot ~/.openclaw/skills/backlink-pilot
 backlink-pilot/
 ├── README.md                  ← 英文文档
 ├── README.zh.md               ← 你在这里
-├── CLAUDE.md                  ← Claude Code 指令
+├── CLAUDE.md                  ← redirect stub → docs/AGENT_GUIDE.md
 ├── LICENSE
 ├── package.json
 ├── config.example.yaml        ← 配置模板
-├── targets.yaml               ← 250+ 个目标站点
+├── targets.yaml               ← 258 个目标站点（143 个可自动提交）
 │
 ├── docs/                      ← 文档
 │   ├── index.md               ← 文档首页（VitePress）
@@ -131,16 +133,22 @@ backlink-pilot/
 ├── src/                       ← 源码
 │   ├── cli.js                 ← 命令行入口
 │   ├── submit.js              ← 提交调度器
-│   ├── bb.js                  ← bb-browser 封装
-│   ├── browser.js             ← 双引擎管理
+│   ├── bb.js                  ← bb-browser 封装（BbPage API）
+│   ├── browser.js             ← bb-browser 引擎守卫
 │   ├── config.js              ← 配置加载 + UTM
 │   ├── tracker.js             ← 提交去重追踪
-│   ├── captcha.js             ← 验证码解决器
+│   ├── captcha.js             ← 颜色验证码解决器
 │   ├── indexnow.js            ← 搜索引擎通知
-│   ├── batch-submit.js        ← 批量博客评论
+│   ├── batch-submit.js        ← 目录批量执行器（去重 + verdict）
+│   ├── batch-blog-comments.js ← 批量博客评论
+│   ├── triage.js              ← 批量前目标分类
 │   ├── bb-update.js           ← bb-browser 适配器更新
 │   ├── sites/                 ← 站点适配器
 │   │   ├── generic.js         ← 通用适配器
+│   │   ├── form-recipe.js     ← YAML 配方驱动适配器（recipes/*.yaml）
+│   │   ├── providers/         ← iframe 表单 provider（Paperform 等）
+│   │   ├── futuretools.js
+│   │   ├── aivalley.js
 │   │   ├── saashub.js
 │   │   ├── uneed.js
 │   │   ├── baitools.js
@@ -148,8 +156,7 @@ backlink-pilot/
 │   ├── scout/discover.js      ← 表单字段发现
 │   └── awesome/templates.js   ← Awesome-list Issue 生成器
 │
-├── tests/                     ← 测试
-└── bak/                       ← 废弃代码（不上传）
+└── tests/                     ← 测试
 ```
 
 ---
@@ -187,4 +194,4 @@ MIT
 
 ## 致谢
 
-使用 [OpenClaw](https://openclaw.ai) 构建。浏览器自动化：[bb-browser](https://github.com/niciral/bb-browser)、[rebrowser-playwright](https://github.com/nickthecoder/rebrowser-playwright)。
+使用 [OpenClaw](https://openclaw.ai) 构建。浏览器自动化：[bb-browser](https://github.com/niciral/bb-browser)。

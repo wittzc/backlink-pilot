@@ -2,10 +2,24 @@
 
 ## Directory Site Adapters
 
-| Site | Command | Auth | CAPTCHA | Notes |
-|------|---------|------|---------|-------|
-| submitaitools.org | `submit submitaitools` | None | Color (auto) | DA 73, free listing |
-| toolverto.com | `submit toolverto` | None | None | Clean URL only (no UTM) |
+Site-specific adapters in `src/sites/` (hand-written, highest fidelity):
+
+| Adapter | Command | Notes |
+|---------|---------|-------|
+| `futuretools` | `submit futuretools` | Future Tools directory |
+| `aivalley` | `submit aivalley` | AI Valley (Contact Form 7) |
+| `saashub` | `submit saashub` | SaaS directory |
+| `uneed` | `submit uneed` | Tools (DR 72) |
+| `baitools` | `submit baitools` | AI tools, color CAPTCHA |
+| `startup88` | `submit startup88` | Startup directory |
+
+For stable mid-complexity forms, prefer a **YAML recipe** (`recipes/*.yaml`,
+loaded by `src/sites/form-recipe.js`) over a JS adapter — no code needed.
+Iframe-embedded forms (Paperform/Tally/Typeform/Airtable) go through
+`src/sites/providers/`.
+
+Deprecated adapters (`submitaitools`, `toolverto`, `600tools`, `dangai`) were
+removed in v2.2; those sites now use the generic or recipe path.
 
 ## Generic Adapter (bb-browser)
 
@@ -34,11 +48,16 @@ Uses bb-browser's `snapshot` to auto-detect form fields (name, URL, email, descr
 
 ## Engine Selection
 
-Per-adapter engine override: adapters can declare `engine: 'bb'` to force bb-browser. The generic adapter does this automatically.
-
-Priority: CLI `--engine` flag > adapter `engine` property > `config.yaml` `browser.engine` > default (`playwright`).
+bb-browser is the only engine — `rebrowser-playwright` was removed in v2.2.
+Adapters may still declare `engine: 'bb'` explicitly, but it is the default.
+The CLI `--engine bb` flag and `config.yaml` `browser.engine: bb` are accepted
+for compatibility; `--engine playwright` now exits with an error.
 
 ## Adding New Site Adapters
+
+> The skeleton below is illustrative. For the current adapter interface, copy a
+> live adapter such as `src/sites/futuretools.js`, or prefer a `recipes/*.yaml`
+> recipe (no JS needed).
 
 Create `src/sites/<sitename>.js`:
 

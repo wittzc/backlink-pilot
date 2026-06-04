@@ -2,6 +2,11 @@
 
 Real-world lessons from 20+ directory site submissions, 13 bot detection tests, and hundreds of browser automation attempts.
 
+> **Historical note.** Much of this was learned before v2.2 migrated to
+> bb-browser as the only engine. Some automation snippets below use the old
+> `rebrowser-playwright` API (now removed) — kept for the site-level findings
+> and anti-detection reasoning, which still apply. Today, just use `--engine bb`.
+
 ## Browser Automation
 
 ### OpenClaw Browser vs rebrowser-playwright
@@ -232,17 +237,6 @@ All submitted URLs should include UTM parameters for GA4 tracking:
 ```
 
 **Exception:** Sites that validate/reject URLs with query parameters (toolverto). Submit clean URL for those.
-
-## Playwright Installation in China
-
-`cdn.playwright.dev` downloads at ~0% from mainland China.
-
-**Workaround:**
-1. Use Google Storage CDN: `storage.googleapis.com/chrome-for-testing-public/`
-2. Download the Chromium zip manually
-3. Extract to `~/Library/Caches/ms-playwright/chromium-{version}/`
-
-**Do NOT** use npmmirror — they 404 on newer Playwright versions.
 
 ## Email for Agent Registration
 

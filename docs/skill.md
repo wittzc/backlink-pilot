@@ -15,23 +15,26 @@ cd ~/Downloads/backlink-pilot
 cp config.example.yaml config.yaml   # edit with product details
 ```
 
-### Engine Options
+### Engine
 
-| Engine | Setup | Pros |
-|--------|-------|------|
-| **playwright** (default) | `npm install` | No extension needed |
-| **bb** (recommended) | `npm install -g bb-browser` + Chrome extension | Real browser, no anti-bot, no Cloudflare/OAuth issues |
+bb-browser is the only engine (playwright was removed in v2.2):
 
-Set in `config.yaml` → `browser.engine: bb` or use `--engine bb` flag.
+| Engine | Setup | Why |
+|--------|-------|-----|
+| **bb** | `npm install -g bb-browser` + Chrome extension | Real Chrome — no anti-bot, no Cloudflare/OAuth issues |
+
+Already the default; `--engine bb` or `config.yaml` → `browser.engine: bb` are optional.
 
 ## Commands
 
 ```bash
 node src/cli.js scout <url> --deep              # discover form fields
-node src/cli.js submit <site>                   # submit to directory
-node src/cli.js submit <site> --engine bb       # use real Chrome
+node src/cli.js submit <site>                   # submit to one directory
 node src/cli.js submit https://any-site.com     # generic submission (bb-browser)
 node src/cli.js submit <site> --dry-run         # preview only
+node src/cli.js batch-submit --yes --limit 5    # directory batch (dedup + verdict)
+node src/cli.js triage --json                   # classify pool before batch
+node src/cli.js doctor                          # check environment health
 node src/cli.js awesome <list-key>              # generate awesome-list issue
 node src/cli.js indexnow <url>                  # ping search engines
 node src/cli.js status                          # check submissions
@@ -53,6 +56,6 @@ Site adapters and awesome-list targets: see `adapters.md`
 
 - **Never submit same product twice to same site**
 - Some sites reject UTM params → submit clean URL
-- Google OAuth sites need manual first login (playwright only; bb-browser handles this)
-- Cloudflare Turnstile = hard wall for playwright → use `--engine bb` or skip
-- Troubleshooting: see `TROUBLESHOOTING.md`
+- Google OAuth sites need manual first login — bb-browser persists the session
+- Cloudflare Turnstile = hard wall → fill the form fast (token expires ~2 min) or skip
+- Troubleshooting: see `troubleshooting.md`
