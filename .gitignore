@@ -14,6 +14,7 @@ test_*
 resources/sites.json
 resources/backlink-resources.json
 bak/
+*.bak
 .claude-local.md
 docs/.vitepress/dist/
 docs/.vitepress/cache/
