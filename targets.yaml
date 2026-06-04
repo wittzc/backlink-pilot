@@ -68,8 +68,9 @@ overseas_ai_directories:
   - name: AI Finder
     submit_url: https://ai-finder.net/
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "NO_FIELDS: no recognizable form fields after long-wait scan (2026-04-28)"
   - name: AIFINDY
     submit_url: https://aifindy.com/contacto/publica-tu-ia-en-aifindy
     type: form
@@ -91,8 +92,9 @@ overseas_ai_directories:
   - name: AiDude
     submit_url: https://aidude.pro/submit-your-tool
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "NO_FIELDS: no recognizable form fields after long-wait scan (2026-04-28)"
   - name: AI Homes
     submit_url: https://aihomes.io/submit/submit-tool
     type: form
@@ -440,8 +442,10 @@ overseas_ai_directories:
   - name: NextGenTools
     submit_url: https://nextgentools.me/submit-your-tool
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-28)"
   - name: YourAITool
     submit_url: https://youraitool.com/submit-tool
     type: form
@@ -519,8 +523,10 @@ overseas_ai_directories:
   - name: aiwith.me
     submit_url: https://aiwith.me/zh/submit
     type: form
-    auto: yes
+    auto: no
     lang: multi
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-28)"
   - name: ToolsFine
     submit_url: https://tally.so/r/wvB7Xg
     type: form
@@ -551,8 +557,10 @@ overseas_general:
   - name: Appoid
     submit_url: http://appiod.com/submit-app-for-review/
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-28)"
   - name: All Startups
     submit_url: http://www.allstartups.info/Startups/Submit
     type: form
@@ -717,9 +725,11 @@ overseas_general:
   - name: Toolbase.io
     submit_url: https://form.typeform.com/to/LQcTJr
     type: form
-    auto: yes
+    auto: no
     lang: en
     notes: Typeform
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-28)"
   - name: Tool Finder
     submit_url: https://toolfinder.co/submit-your-tool
     type: form
@@ -746,8 +756,10 @@ overseas_general:
   - name: Indie Tools
     submit_url: https://indietools.co/
     type: form
-    auto: yes
+    auto: no
     lang: en
+    status: paid
+    auto_blocked_reason: PAID_WALL (2026-04-30)
   - name: No Code Family
     submit_url: https://nocodefamily.com/submit-tool
     type: form
@@ -831,8 +843,10 @@ overseas_general:
   - name: AppsThunder
     submit_url: https://appsthunder.com/submit-your-app/
     type: form
-    auto: yes
+    auto: no
     lang: en
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-28)"
   - name: AddictiveTips
     submit_url: https://www.addictivetips.com/tip-us/
     type: form
@@ -945,18 +959,22 @@ overseas_directories:
   - name: All Business Directory
     submit_url: https://www.allbusinessdirectory.biz/directory.php?page=submission-guidelines
     type: form
-    auto: yes
+    auto: manual
     lang: en
+    auto_blocked_reason: LOGIN_REQUIRED (2026-04-28)
   - name: All States USA Directory
     submit_url: https://www.allstatesusadirectory.com/submit.php
     type: form
-    auto: yes
+    auto: no
     lang: en
+    status: paid
+    auto_blocked_reason: PAID_WALL (2026-04-28)
   - name: BusinessSeek.biz
     submit_url: https://www.businessseek.biz/page.php?page=submission-policy
     type: form
-    auto: yes
+    auto: manual
     lang: en
+    auto_blocked_reason: LOGIN_REQUIRED (2026-04-28)
   - name: Submission Web Directory
     submit_url: https://www.submissionwebdirectory.com/
     type: form
@@ -965,8 +983,10 @@ overseas_directories:
   - name: Highrankdirectory
     submit_url: https://www.highrankdirectory.com/submit.php
     type: form
-    auto: yes
+    auto: no
     lang: en
+    status: paid
+    auto_blocked_reason: PAID_WALL (2026-04-28)
   - name: Sonic Run
     submit_url: https://www.sonicrun.com/freelisting.html
     type: form
@@ -1011,8 +1031,10 @@ overseas_directories:
   - name: Free Directory
     submit_url: https://www.directory-free.com/submit/submit.php
     type: form
-    auto: yes
+    auto: no
     lang: en
+    status: paid
+    auto_blocked_reason: PAID_WALL (2026-04-28)
   - name: Free PR Web Directory
     submit_url: https://www.freeprwebdirectory.com/submit.php
     type: form
@@ -1043,8 +1065,10 @@ overseas_directories:
   - name: Thales Directory
     submit_url: https://thalesdirectory.com/submit/
     type: form
-    auto: yes
+    auto: no
     lang: en
+    status: dead
+    auto_blocked_reason: PAGE_404 (2026-04-28)
   - name: Quality Internet Directory
     submit_url: https://www.qualityinternetdirectory.com/submit.php
     type: form
@@ -1095,9 +1119,11 @@ chinese_ai_directories:
   - name: ai-bot.cn
     submit_url: https://tally.so/r/wkeKz1
     type: form
-    auto: yes
+    auto: no
     lang: zh
     notes: Quality AI tools only, Tally form
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-04-28)"
   - name: AI NAV
     submit_url: https://www.ainavpro.com/contribute
     type: form
