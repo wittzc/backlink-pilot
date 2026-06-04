@@ -15,6 +15,15 @@
   },
   "json_output": "Pass --json to any command that supports it. JSON-mode failures still exit 1 but write a structured payload to stdout: { status, code, error, nextSteps[], verdict }",
   "engine": "bb (bb-browser); playwright was removed in v2.2",
+  "adapters": {
+    "layers": [
+      "generic (src/sites/generic.js) — universal form-filler for simple visible HTML forms; default for any URL without a dedicated adapter",
+      "recipe (src/sites/form-recipe.js + recipe-loader.js, declarative recipes/*.yaml) — stable mid-complexity forms; iframe providers via src/sites/providers/",
+      "site-specific JS (src/sites/) — hand-written for high-value/unusual sites"
+    ],
+    "site_specific": ["saashub", "uneed", "baitools", "startup88", "futuretools", "aivalley"],
+    "removed_v2_2": ["600tools", "toolverto", "submitaitools", "dangai"]
+  },
   "commands": [
     {
       "name": "doctor",
@@ -23,20 +32,53 @@
     },
     {
       "name": "submit",
-      "syntax": "node src/cli.js submit <site|url> [--engine bb] [--json] [--no-auto-verdict] [--dry-run]",
+      "syntax": "node src/cli.js submit <site|url> [--engine bb] [--json] [--no-auto-verdict] [--dry-run] [--screenshot PATH]",
       "purpose": "Submit current product to a single directory site. Accepts a known adapter name (e.g. 'futuretools') or a URL (uses generic adapter). Failures auto-write verdict to targets.yaml unless --no-auto-verdict.",
       "json": true
     },
     {
       "name": "batch-submit",
-      "syntax": "node src/cli.js batch-submit [--limit N] [--dry-run] [--yes] [--category KEY] [--priority high|medium|low] [--force site1,site2]",
-      "purpose": "Run submission across many targets with dedup. Already-submitted (site, productHash) pairs are skipped automatically. Failures populate the verdict layer so the auto:yes pool self-corrects.",
+      "syntax": "node src/cli.js batch-submit [--dry-run] [--yes] [--limit N] [--category KEY] [--priority high|medium|low] [--value-tier 1|2|3] [--force site[:reason]] [--triage-source FILE] [--submissions-path PATH]",
+      "purpose": "Run submission across many targets with dedup. Already-submitted (site, productHash) pairs are skipped automatically. Failures populate the verdict layer so the auto:yes pool self-corrects. --yes required for a real (non-dry-run) run; real runs default to limit 5.",
       "json": false
+    },
+    {
+      "name": "awesome",
+      "syntax": "node src/cli.js awesome <repo> [--open]",
+      "purpose": "Generate a GitHub Issue body for an awesome-list submission. --open opens the issue creation page in the browser."
+    },
+    {
+      "name": "indexnow",
+      "syntax": "node src/cli.js indexnow <url> [--key KEY]",
+      "purpose": "Ping Bing/Yandex (IndexNow protocol) about a new or updated page."
+    },
+    {
+      "name": "scout",
+      "syntax": "node src/cli.js scout <url> [--deep] [--screenshot PATH]",
+      "purpose": "Diagnose a single site's submit page — discover form fields and submit buttons. Use before writing a new adapter or to check if a NO_FIELDS site is fixable."
+    },
+    {
+      "name": "triage",
+      "syntax": "node src/cli.js triage [--browser] [--limit N] [--category KEY] [--include-manual] [--json] [--output FILE]",
+      "purpose": "Classify all auto:yes targets into buckets (generic-ready / adapter-needed / iframe-provider / manual-review) before running batch-submit. HTTP-only by default; pass --browser for full snapshot triage.",
+      "json": true
+    },
+    {
+      "name": "prune-dead",
+      "syntax": "node src/cli.js prune-dead [--apply] [--json]",
+      "purpose": "Probe targets.yaml URLs and mark unreachable ones status:dead. Dry-run by default; pass --apply to write changes.",
+      "json": true
     },
     {
       "name": "status",
       "syntax": "node src/cli.js status [--json]",
-      "purpose": "Show submission history aggregated by status. Cheap; safe to call anytime.",
+      "purpose": "Show submission tracking (directory + blog comments) aggregated by status. Cheap; safe to call anytime.",
+      "json": true
+    },
+    {
+      "name": "stats",
+      "syntax": "node src/cli.js stats [--timing] [--json]",
+      "purpose": "Aggregated submission statistics. --timing adds p50/p95 per-submission timing.",
       "json": true
     },
     {
@@ -51,15 +93,29 @@
       "purpose": "Reverse a verdict lock — auto:yes restored, auto_blocked_reason dropped. Use after fixing the underlying issue (new adapter, updated submit_url) so the next batch run retries the site."
     },
     {
-      "name": "scout",
-      "syntax": "node src/cli.js scout <url> [--deep]",
-      "purpose": "Diagnose a single site's submit page — discover form fields and submit buttons. Use before writing a new adapter or to check if a NO_FIELDS site is fixable."
+      "name": "mark-dead",
+      "syntax": "node src/cli.js mark-dead <site> --yes",
+      "purpose": "Mark a site as dead in targets.yaml (status:dead). Usually unnecessary — the verdict layer does this automatically on PAGE_404."
     },
     {
-      "name": "triage",
-      "syntax": "node src/cli.js triage [--browser] [--limit N] [--category KEY] [--json] [--output FILE]",
-      "purpose": "Classify all auto:yes targets into buckets (generic-ready / adapter-needed / iframe-provider / manual-review) before running batch-submit. HTTP-only by default; pass --browser for full snapshot triage.",
-      "json": true
+      "name": "mark-manual",
+      "syntax": "node src/cli.js mark-manual <site> --yes",
+      "purpose": "Mark a site as manual-only in targets.yaml (auto:manual). Usually unnecessary — the verdict layer does this automatically on LOGIN_REQUIRED."
+    },
+    {
+      "name": "mark-done",
+      "syntax": "node src/cli.js mark-done <site>",
+      "purpose": "Manually record a successful submission in submissions.yaml (for sites submitted outside the tool, e.g. via Computer Use)."
+    },
+    {
+      "name": "bb-update",
+      "syntax": "node src/cli.js bb-update",
+      "purpose": "Update bb-browser community site adapters."
+    },
+    {
+      "name": "cleanup",
+      "syntax": "node src/cli.js cleanup [--keep-days N] [--locks]",
+      "purpose": "Delete screenshots older than N days (default 30), or with --locks remove stale lock files (>60s old)."
     }
   ],
   "verdict_codes": {

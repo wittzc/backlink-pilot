@@ -127,7 +127,6 @@ backlink-pilot/
 │   ├── tutorial.md            ← 上手教程
 │   ├── troubleshooting.md     ← 20+ 排错记录
 │   ├── adapters.md            ← 适配器参考
-│   ├── contributing.md        ← 贡献指南
 │   └── skill.md               ← OpenClaw 技能定义
 │
 ├── src/                       ← 源码
@@ -186,7 +185,7 @@ npm test
 
 ## 贡献
 
-参见 [docs/contributing.md](docs/contributing.md)。欢迎 PR：新适配器、验证码改进、Bug 修复。
+欢迎 PR：新适配器、验证码改进、Bug 修复。添加站点适配器的方法见 [docs/adapters.md](docs/adapters.md)。
 
 ## 许可证
 

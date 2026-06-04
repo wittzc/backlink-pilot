@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Backlink Pilot
-  text: v2.1
+  text: v2.2
   tagline: One config, one command. Automated backlink submission for indie products.
   actions:
     - theme: brand
@@ -15,7 +15,7 @@ hero:
 
 features:
   - title: <!-- stats:total -->258<!-- /stats --> Target Sites
-    details: Pre-curated directory sites in targets.yaml — <!-- stats:auto-yes -->180<!-- /stats --> auto-submittable with bb-browser.
+    details: Pre-curated directory sites in targets.yaml — <!-- stats:auto-yes -->143<!-- /stats --> auto-submittable with bb-browser.
   - title: Claude Code Ready
     details: Clone, open Claude Code, say "帮我提交外链". That's it. CLAUDE.md guides the AI agent.
   - title: Real Chrome
@@ -32,5 +32,4 @@ features:
 | [Tutorial / 上手教程](./tutorial.md) | 3-step quickstart with Claude Code |
 | [Adapters / 适配器](./adapters.md) | Site adapters and awesome-list targets |
 | [Troubleshooting / 排错](./troubleshooting.md) | 20+ site-specific debugging notes |
-| [Contributing / 贡献](./contributing.md) | PR guidelines |
 | [Skill / OpenClaw](./skill.md) | OpenClaw skill definition |

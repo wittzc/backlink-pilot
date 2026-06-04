@@ -127,7 +127,6 @@ backlink-pilot/
 │   ├── tutorial.md            ← Step-by-step tutorial
 │   ├── troubleshooting.md     ← 20+ debugging notes
 │   ├── adapters.md            ← Site adapters reference
-│   ├── contributing.md        ← PR guidelines
 │   └── skill.md               ← OpenClaw skill definition
 │
 ├── src/                       ← Source code
@@ -186,7 +185,7 @@ npm test
 
 ## Contributing
 
-See [docs/contributing.md](docs/contributing.md). PRs welcome: new adapters, CAPTCHA improvements, bug fixes.
+PRs welcome — new adapters, CAPTCHA improvements, bug fixes. See [docs/adapters.md](docs/adapters.md) for how to add a site adapter.
 
 ## License
 

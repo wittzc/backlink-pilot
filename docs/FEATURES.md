@@ -31,7 +31,7 @@
 | `batch-submit` 目录批量执行器（dedup gate by site+productHash、value_tier 排序、`--force`、`--yes` 安全门、真实运行默认 limit 5） | [x] | v2.3（2026-04） | 代码完整 + 28 测试。**备注：历史文档验收全为 `--dry-run`，真实非 dry-run 提交链路尚未经文档化验收** |
 | Recipe Adapter 层（YAML 声明式配方，`form-recipe` + `recipe-loader`） | [x] | v2.3（2026-04） | 引擎完整。**当前仅 2 个配方**（futuretools / aivalley），覆盖面待扩 |
 | Provider Adapter 层（识别第三方表单 iframe → 提取 src → 直接打开表单 URL） | [~] | v2.3（2026-04） | **只实现 Paperform 一站**；Tally / Typeform / Airtable 已排序未接（见「计划中」） |
-| blog 评论批量提交（5 人格轮换 + 20 条自然模板 + 15–45s 抖动 + 双轨去重） | [x] | v2.1（v2.3 拆分独立文件） | `src/batch-blog-comments.js` 完整。**⚠️ 文档过时**：AGENT_GUIDE 指向的命令名仍是 `src/batch-submit.js`（该文件已被重写为目录执行器），实际入口是 `node src/batch-blog-comments.js`；且 `cli.js` 未暴露此子命令 —— 待修文档 |
+| blog 评论批量提交（5 人格轮换 + 20 条自然模板 + 15–45s 抖动 + 双轨去重） | [x] | v2.1（v2.3 拆分独立文件） | `src/batch-blog-comments.js` 完整，入口 `node src/batch-blog-comments.js --limit N`（独立脚本，`cli.js` 未暴露）。AGENT_GUIDE 已更正指向（2026-06-04）|
 | checkbox 分级勾选（仅 `tos`/`privacy` 允许勾选，newsletter/marketing 永禁，loader 层强制） | [x] | v2.3（2026-04） | ADR-009，`recipe-loader.js` schema 拦截 |
 | color CAPTCHA 自动解（「点某颜色按钮」类） | [~] | v2.1 | `src/captcha.js` 只解颜色验证码；Turnstile / reCAPTCHA 一律 fail-fast 跳过 |
 
@@ -84,7 +84,7 @@
 | 能力 | 状态 | 加入 | 备注 |
 |---|---|---|---|
 | AGENT_GUIDE.md 单一权威源 + 4 个 redirect stub（CLAUDE / AGENTS / .cursorrules / copilot-instructions） | [x] | v2.3（2026-04-28） | 验收 9/9 |
-| agent-manifest.json 机器可读命令契约 | [x] | v2.3（2026-04-28） | **⚠️ 内容已滞后**：仅列 8 命令，缺 awesome / indexnow / bb-update / stats / cleanup / prune-dead / mark-* —— 待补全 |
+| agent-manifest.json 机器可读命令契约 | [x] | v2.3（2026-04-28） | 已补全 17 命令 + adapters 层，与 cli.js 对齐（2026-06-04）|
 | exit code 0/1 契约 + `--json` 结构化失败载荷 | [x] | v2.3（2026-04-28） | exit code 2（transient 态）已决定不引入，见「已取消」 |
 
 ---
