@@ -1,22 +1,20 @@
-# Usage Guide / 使用指南
+# 使用指南
 
-Complete guide to using Backlink Pilot v2.1. Pick your path:
+Backlink Pilot v2.1 完整使用指南。按你的情况选一条路径：
 
-完整使用指南。选择你的路径：
-
-| Path | For whom | Time |
-|------|----------|------|
-| [A. Claude Code](#a-claude-code-recommended) | Have Claude Code installed | 2 min |
-| [B. CLI Manual](#b-cli-manual) | Developers, want full control | 10 min |
-| [C. OpenClaw](#c-openclaw-skill) | OpenClaw users | 5 min |
+| 路径 | 适合谁 | 耗时 |
+|------|--------|------|
+| [A. Claude Code](#a-claude-code-recommended) | 已装 Claude Code | 2 分钟 |
+| [B. CLI Manual](#b-cli-manual) | 开发者，想完全掌控 | 10 分钟 |
+| [C. OpenClaw](#c-openclaw-skill) | OpenClaw 用户 | 5 分钟 |
 
 ---
 
 ## A. Claude Code (Recommended)
 
-> **Prerequisites:** [Node.js 18+](https://nodejs.org/) + [Claude Code](https://claude.ai/code)
+> **前置条件：** [Node.js 18+](https://nodejs.org/) + [Claude Code](https://claude.ai/code)
 
-### Step 1: Clone
+### 第 1 步：Clone 项目
 
 ```bash
 git clone https://github.com/s87343472/backlink-pilot.git
@@ -24,19 +22,15 @@ cd backlink-pilot
 npm install
 ```
 
-### Step 2: Open Claude Code
+### 第 2 步：打开 Claude Code
 
 ```bash
 claude
 ```
 
-Claude automatically reads `CLAUDE.md` and understands the entire project.
-
 Claude 会自动读取 `CLAUDE.md`，了解整个项目。
 
-### Step 3: Talk
-
-Just tell Claude what you want in natural language:
+### 第 3 步：对话
 
 用自然语言告诉 Claude 你想做什么：
 
@@ -44,29 +38,29 @@ Just tell Claude what you want in natural language:
 你：帮我把 [产品名] 提交到免费目录站
 ```
 
-Claude will:
-1. Check if `config.yaml` exists → if not, ask you 5 questions → generate it
-2. Check if `bb-browser` is installed → guide you to install if missing
-3. Start Chrome → begin submitting one by one
-4. Report results after each submission
+Claude 会：
+1. 检查 `config.yaml` 是否存在，没有就问你 5 个问题再生成
+2. 检查 `bb-browser` 是否装了，没装就引导你安装
+3. 启动 Chrome，开始逐个提交
+4. 每提交一个就汇报结果
 
-**That's it. No docs to read, no commands to memorize.**
+**就这样。不用读文档，不用记命令。**
 
-### What you can say to Claude
+### 你可以对 Claude 说什么
 
-| Say | Claude does |
-|-----|-------------|
-| "帮我提交外链" / "Submit backlinks" | Guide config → start submitting |
-| "提交到所有免费站" / "Submit to all free sites" | Filter 250+ targets → batch submit |
-| "这个站能提交吗？[URL]" | Scout the site, analyze form |
-| "提交情况" / "Status" | Show submission history |
-| "帮我生成 awesome-list 提交" | Generate GitHub Issue body |
-| "提交到 saashub" / "Submit to saashub" | Submit to specific site |
-| "外链策略建议" / "Backlink strategy" | Give strategic advice |
+| 你说 | Claude 做 |
+|------|-----------|
+| 帮我提交外链 | 引导配置，开始提交 |
+| 提交到所有免费站 | 筛选 250+ 目标站，批量提交 |
+| 这个站能提交吗？[URL] | 侦察该站，分析表单 |
+| 提交情况 | 显示提交记录 |
+| 帮我生成 awesome-list 提交 | 生成 GitHub Issue 内容 |
+| 提交到 saashub | 提交到指定站点 |
+| 外链策略建议 | 给出策略建议 |
 
-### Troubleshooting with Claude
+### 用 Claude 排错
 
-If something goes wrong, just tell Claude:
+出问题时，直接告诉 Claude：
 
 ```
 你：Chrome 连不上怎么办
@@ -74,15 +68,15 @@ If something goes wrong, just tell Claude:
 你：这个站要登录怎么办
 ```
 
-Claude knows all the troubleshooting steps from `CLAUDE.md`.
+Claude 知道 `CLAUDE.md` 里所有排错步骤。
 
 ---
 
 ## B. CLI Manual
 
-> **Prerequisites:** [Node.js 18+](https://nodejs.org/) + [bb-browser](https://github.com/niciral/bb-browser) (recommended)
+> **前置条件：** [Node.js 18+](https://nodejs.org/) + [bb-browser](https://github.com/niciral/bb-browser)（推荐）
 
-### 1. Install
+### 1. 安装
 
 ```bash
 git clone https://github.com/s87343472/backlink-pilot.git
@@ -90,24 +84,22 @@ cd backlink-pilot
 npm install
 ```
 
-### 2. Install bb-browser
+### 2. 安装 bb-browser
 
 ```bash
 npm install -g bb-browser
-bb-browser --version    # should show 0.10.x+
+bb-browser --version    # 应显示 0.10.x 以上
 ```
 
-bb-browser uses your real Chrome — bypasses all anti-bot detection, Cloudflare, and OAuth.
+bb-browser 用你真实的 Chrome，绕过所有反爬检测、Cloudflare 和 OAuth。
 
-bb-browser 用真实 Chrome，绕过所有反爬检测。
-
-### 3. Configure
+### 3. 配置
 
 ```bash
 cp config.example.yaml config.yaml
 ```
 
-Edit `config.yaml`:
+编辑 `config.yaml`：
 
 ```yaml
 product:
@@ -129,219 +121,218 @@ utm:
   base_url: "https://your-product.com"
 ```
 
-### 4. Start Chrome
+### 4. 启动 Chrome
 
 ```bash
 bb-browser open about:blank
 ```
 
-If it errors:
+如果报错：
 ```bash
 pkill -f "bb-browser" || true
 bb-browser open about:blank
 ```
 
-### 5. Submit
+### 5. 提交
 
-#### Submit to a specific site
+#### 提交到指定站点
 
 ```bash
-# Known adapter
+# 已知适配器
 node src/cli.js submit saashub --engine bb
 
-# Any directory URL (generic adapter)
+# 任意目录站 URL（用 generic 适配器）
 node src/cli.js submit https://any-directory.com/submit --engine bb
 ```
 
-#### Submit to multiple sites
+#### 提交到多个站点
 
 ```bash
-# One by one, with 1-3 minute gaps
+# 逐个提交，每个间隔 1-3 分钟
 node src/cli.js submit saashub --engine bb
-# wait 1-2 minutes...
+# 等 1-2 分钟……
 node src/cli.js submit uneed --engine bb
-# wait 1-2 minutes...
+# 等 1-2 分钟……
 node src/cli.js submit startup88 --engine bb
 ```
 
-#### Batch blog comments
+#### 批量博客评论
 
 ```bash
-# Dry run first
+# 先空跑
 node src/batch-submit.js --dry-run --limit 5
 
-# Real run
+# 实际运行
 node src/batch-submit.js --limit 10 --engine bb
 ```
 
-### 6. Other Commands
+### 6. 其他命令
 
 ```bash
-# Scout a new site — discover form fields
+# 侦察新站点，发现表单字段
 node src/cli.js scout https://new-site.com --deep
 
-# Generate awesome-list GitHub Issue body
+# 生成 awesome-list 的 GitHub Issue 内容
 node src/cli.js awesome awesome-cloudflare
 
-# Ping search engines about new pages
+# 向搜索引擎推送新页面
 node src/cli.js indexnow https://your-site.com --key YOUR_KEY
 
-# Check submission history
+# 查看提交记录
 node src/cli.js status
 
-# Update bb-browser community adapters
+# 更新 bb-browser 社区适配器
 node src/cli.js bb-update
 ```
 
-### 7. Site Adapters
+### 7. 站点适配器
 
-Built-in adapters (in `src/sites/`):
+内置适配器（在 `src/sites/`）：
 
-| Adapter | Site | Notes |
-|---------|------|-------|
-| `generic` | Any URL | Universal, works with bb-browser |
-| `saashub` | saashub.com | SaaS directory |
-| `uneed` | uneed.best | Tools (DR 72) |
-| `baitools` | baitools.com | AI tools |
-| `startup88` | startup88.com | Startup directory |
+| 适配器 | 站点 | 说明 |
+|--------|------|------|
+| `generic` | 任意 URL | 通用，配合 bb-browser |
+| `saashub` | saashub.com | SaaS 目录站 |
+| `uneed` | uneed.best | 工具站（DR 72） |
+| `baitools` | baitools.com | AI 工具站 |
+| `startup88` | startup88.com | 创业项目目录 |
 
-For any site without a dedicated adapter, just use the URL directly:
+没有专用适配器的站点，直接用 URL：
 
 ```bash
 node src/cli.js submit https://any-site.com/submit --engine bb
 ```
 
-### 8. Target Sites Database
+### 8. 目标站点库
 
-`targets.yaml` contains 250+ directory sites. Filter by:
+`targets.yaml` 收录 250+ 个目录站。可按以下字段筛选：
 
-| Field | Values | Meaning |
-|-------|--------|---------|
-| `auto` | yes / no | Can be auto-submitted |
-| `status` | (empty) / dead / paid | Site status |
-| `type` | form / github / email | Submission method |
-| `lang` | en / zh | Language |
+| 字段 | 取值 | 含义 |
+|------|------|------|
+| `auto` | yes / no | 是否可自动提交 |
+| `status` | （空） / dead / paid | 站点状态 |
+| `type` | form / github / email | 提交方式 |
+| `lang` | en / zh | 语言 |
 
-Quick counts:
-- **<!-- stats:auto-yes -->180<!-- /stats -->** auto-submittable (`auto: yes`)
-- **<!-- stats:dead -->45<!-- /stats -->** confirmed dead (`status: dead`)
-- **<!-- stats:paid -->1<!-- /stats -->** paid only (`status: paid`)
+快速统计：
+- **<!-- stats:auto-yes -->143<!-- /stats -->** 个可自动提交（`auto: yes`）
+- **<!-- stats:dead -->47<!-- /stats -->** 个已确认失效（`status: dead`）
+- **<!-- stats:paid -->7<!-- /stats -->** 个仅付费（`status: paid`）
 
 ---
 
 ## C. OpenClaw Skill
 
-> **Prerequisites:** [OpenClaw](https://openclaw.ai) installed
+> **前置条件：** 已安装 [OpenClaw](https://openclaw.ai)
 
-### 1. Link the skill
+### 1. 链接 skill
 
 ```bash
 ln -s ~/path/to/backlink-pilot ~/.openclaw/skills/backlink-pilot
 ```
 
-### 2. Talk to your Agent
+### 2. 跟你的 Agent 对话
 
-| Say | Agent does |
-|-----|-----------|
-| "Submit to free directories" | Config → submit to all free sites |
-| "Submit to saashub" | Submit to specific site |
-| "Scout https://site.com" | Analyze site's form |
-| "Show backlink status" | Show submission history |
-| "Generate awesome-cloudflare submission" | Create GitHub Issue body |
-
----
-
-## Key Rules / 重要规则
-
-1. **Never submit the same product to the same site twice**
-   - Check `node src/cli.js status` first
-   - The tracker auto-deduplicates
-
-2. **Pace your submissions**
-   - 1-3 minutes between different sites
-   - 5-10 submissions per day max
-   - 30-60 minute wait before retrying same site
-
-3. **Always use bb-browser**
-   - `--engine bb` or set `browser.engine: bb` in config
-   - Playwright gets blocked by most modern anti-bot systems
-
-4. **Check before submitting**
-   - v2.1 has pre-flight HTTP checks (auto-skips 404/500)
-   - Some sites require manual Google login first: `bb-browser open https://accounts.google.com`
-
-5. **Screenshots are your proof**
-   - Saved to `./screenshots/` automatically
-   - Verify submissions worked as expected
+| 你说 | Agent 做 |
+|------|----------|
+| Submit to free directories | 配置后提交到所有免费站 |
+| Submit to saashub | 提交到指定站点 |
+| Scout https://site.com | 分析站点表单 |
+| Show backlink status | 显示提交记录 |
+| Generate awesome-cloudflare submission | 生成 GitHub Issue 内容 |
 
 ---
 
-## Error Reference / 常见错误
+## 重要规则
 
-| Error | Cause | Fix |
-|-------|-------|-----|
-| "bb-browser cannot connect to Chrome" | Chrome not running | `bb-browser open about:blank` |
-| "Chrome may be unresponsive" | Stuck Chrome process | Kill Chrome → restart |
-| "404 — submit page gone" | Site changed URL | Visit root domain manually |
-| "Page redirected to login" | Site requires account | Login first or skip |
-| "No recognizable form fields" | Generic adapter can't parse | `scout <url> --deep` first |
-| "CAPTCHA detected" | Site has CAPTCHA | Color CAPTCHAs auto-solved; others skip |
-| "UTM params rejected" | Site rejects query params | Set `utm.enabled: false` in config |
+1. **同一产品绝不向同一站点重复提交**
+   - 先跑 `node src/cli.js status` 查
+   - tracker 会自动去重
 
-> Full troubleshooting notes: [troubleshooting.md](./troubleshooting.md)
+2. **控制提交节奏**
+   - 不同站点之间间隔 1-3 分钟
+   - 每天最多 5-10 次提交
+   - 重试同一站点前先等 30-60 分钟
+
+3. **始终用 bb-browser**
+   - 加 `--engine bb`，或在 config 里设 `browser.engine: bb`
+   - Playwright 会被多数现代反爬系统拦截
+
+4. **提交前先检查**
+   - v2.1 有预检 HTTP 请求（自动跳过 404/500）
+   - 有些站点需要先手动登录 Google：`bb-browser open https://accounts.google.com`
+
+5. **截图就是你的凭证**
+   - 自动保存到 `./screenshots/`
+   - 用来核对提交是否如预期生效
 
 ---
 
-## File Reference / 文件说明
+## 常见错误
+
+| 错误 | 原因 | 解决 |
+|------|------|------|
+| "bb-browser cannot connect to Chrome" | Chrome 没运行 | `bb-browser open about:blank` |
+| "Chrome may be unresponsive" | Chrome 进程卡死 | 杀掉 Chrome 再重启 |
+| "404 — submit page gone" | 站点改了 URL | 手动访问根域名找新入口 |
+| "Page redirected to login" | 站点要求账号 | 先登录或跳过 |
+| "No recognizable form fields" | generic 适配器解析不了 | 先跑 `scout <url> --deep` |
+| "CAPTCHA detected" | 站点有验证码 | 颜色验证码自动解，其余跳过 |
+| "UTM params rejected" | 站点拒绝 query 参数 | config 里设 `utm.enabled: false` |
+
+> 完整排错笔记：[troubleshooting.md](./troubleshooting.md)
+
+---
+
+## 文件说明
 
 ```
-config.yaml              ← Your product config (gitignored, private)
-config.example.yaml      ← Template to copy from
-targets.yaml             ← 250+ target sites with status metadata
-submissions.yaml         ← Auto-generated submission history
+config.yaml              ← 你的产品配置（gitignored，私有）
+config.example.yaml      ← 复制用的模板
+targets.yaml             ← 250+ 目标站点及状态元数据
+submissions.yaml         ← 自动生成的提交记录
 
-src/cli.js               ← CLI entry point (all commands)
-src/submit.js            ← Submission dispatcher + pre-flight checks
-src/bb.js                ← bb-browser wrapper (BbPage API)
-src/browser.js           ← Dual-engine manager (bb + playwright)
-src/sites/generic.js     ← Universal adapter for any directory
-src/sites/*.js           ← Site-specific adapters
-src/scout/discover.js    ← Form field discovery
-src/captcha.js           ← CAPTCHA solvers
-src/tracker.js           ← Submission dedup tracking
-src/indexnow.js          ← Search engine ping
-src/batch-submit.js      ← Batch blog comment submitter
+src/cli.js               ← CLI 入口（所有命令）
+src/submit.js            ← 提交调度器 + 预检
+src/bb.js                ← bb-browser 封装（BbPage API）
+src/browser.js           ← 双引擎管理器（bb + playwright）
+src/sites/generic.js     ← 任意目录站的通用适配器
+src/sites/*.js           ← 站点专用适配器
+src/scout/discover.js    ← 表单字段发现
+src/captcha.js           ← 验证码求解器
+src/tracker.js           ← 提交去重追踪
+src/indexnow.js          ← 搜索引擎推送
+src/batch-submit.js      ← 批量博客评论提交器
 
-CLAUDE.md                ← Instructions for Claude Code AI agent
-docs/                    ← Documentation site (VitePress)
+CLAUDE.md                ← 给 Claude Code AI agent 的指令
+docs/                    ← 文档站（VitePress）
 ```
 
 ---
 
-## Daily Workflow Example / 日常工作流
+## 日常工作流示例
 
 ```bash
-# Morning — check what's been submitted
+# 早上：查看已经提交了哪些
 node src/cli.js status
 
-# Find 5 new sites from targets.yaml to submit today
 # 从 targets.yaml 找 5 个今天要提交的站
 
-# Start Chrome
+# 启动 Chrome
 bb-browser open about:blank
 
-# Submit one by one with gaps
+# 逐个提交，留间隔
 node src/cli.js submit saashub --engine bb
-# wait 2 min...
+# 等 2 分钟……
 node src/cli.js submit https://findmyaitool.com/submit --engine bb
-# wait 2 min...
+# 等 2 分钟……
 node src/cli.js submit https://toolpilot.ai/submit --engine bb
 
-# End of session — check results
+# 收尾：查看结果
 node src/cli.js status
 ```
 
-Or with Claude Code:
+或者用 Claude Code：
 
 ```
 你：今天帮我提交 5 个免费站，从上次没提交过的开始
