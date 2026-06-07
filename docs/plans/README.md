@@ -14,3 +14,4 @@ to [`../adr/`](../adr/).
 | [2026-04-27-Task0-5验收交接.md](2026-04-27-Task0-5验收交接.md) | Acceptance handoff for Tasks 0–5 |
 | [2026-04-28-提交失败自我修正闭环.md](2026-04-28-提交失败自我修正闭环.md) | Verdict layer: failure code → write-back to targets.yaml, streak gate, field-level anti-regression |
 | [2026-04-28-跨agent通用化协议.md](2026-04-28-跨agent通用化协议.md) | Agent-agnostic instructions: AGENT_GUIDE.md as SoT + tool-specific redirect stubs + agent-manifest.json |
+| [2026-06-04-站点画像驱动的外链内容差异化方案.md](2026-06-04-站点画像驱动的外链内容差异化方案.md) | Per-site content personalization: `niche` field + agent-runtime copy generation (zero extra API) + `submit_text` fallback |
