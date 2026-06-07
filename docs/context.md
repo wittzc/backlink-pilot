@@ -8,7 +8,7 @@
 
 - niche 内容差异化能力已落地（v2.2 之上）：`targets.yaml` 加 `niche` 字段（81 个 auto:yes general 站已分类）、`submit --description-file` 接 agent 生成文案、AGENT_GUIDE 有 Niche-driven playbook。`npm test` 234 pass。方案见 [plans/2026-06-04-站点画像驱动的外链内容差异化方案.md](plans/2026-06-04-站点画像驱动的外链内容差异化方案.md)。
 - 当前产品 = `Happy Horse AI`（https://www.ai-happyhorse.org）。站池 258，143 `auto:yes`。
-- 本地领先 origin/main 多个 commit（文档对齐 + niche 功能），未 push。
+- niche 功能 + 文档对齐已 push 到 `origin/main`（github.com/wittzc/backlink-pilot）。
 
 ## Next
 
