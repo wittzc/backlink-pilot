@@ -636,13 +636,13 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: saas
   - name: App Rater
     submit_url: https://apprater.net/add/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: saas
   - name: Appoid
     submit_url: http://appiod.com/submit-app-for-review/
     type: form
@@ -656,7 +656,7 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Betalist
     submit_url: https://betalist.com/users/sign_in
     type: form
@@ -669,52 +669,52 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Changelog
     submit_url: https://changelog.com/news/submit
     type: form
     auto: yes
     lang: en
     notes: Developer-focused, high quality
-    niche: _unclassified
+    niche: devtools
   - name: Digital Stuff We Love
     submit_url: https://digitalstuffwelove.org.nz/submit-tool
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: DataTau
     submit_url: https://datatau.net/
     type: form
     auto: yes
     lang: en
     notes: HN clone for data science
-    niche: _unclassified
+    niche: devtools
   - name: 10words
     submit_url: https://10words.io/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: MicroLaunch
     submit_url: https://microlaunch.net/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Fiddy
     submit_url: https://fiddy.co/
     type: form
     auto: yes
     lang: en
     notes: Weekly indie hacker ranking
-    niche: _unclassified
+    niche: startup
   - name: Fund a Maker
     submit_url: https://fundamaker.com/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: OpenAlternative
     submit_url: https://airtable.com/appcN6nvv5iyo3x/pagzZyGl6fEI2RWDq/form
     type: form
@@ -728,56 +728,56 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: KillerStartups
     submit_url: https://www.killerstartups.com/submit-startup/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: PitchWall
     submit_url: https://pitchwall.co/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Prime Indies
     submit_url: https://primeindies.com/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Toools.design
     submit_url: https://toools.design/
     type: form
     auto: yes
     lang: en
     notes: Design tools, 1500+ resources
-    niche: _unclassified
+    niche: design
   - name: TechPluto
     submit_url: https://www.techpluto.com/submit-a-startup/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: The Startup Pitch
     submit_url: https://thestartuppitch.com/post-a-pitch/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Top Best Alternatives
     submit_url: https://www.topbestalternatives.com/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: saas
   - name: Launched!
     submit_url: https://launched.io/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Launching Next
     submit_url: https://www.launchingnext.com/submit/
     type: form
@@ -799,13 +799,13 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: StartupRanking
     submit_url: https://www.startupranking.com/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: Startup Stash
     submit_url: https://startupstash.com/add-listing/
     type: form
@@ -819,14 +819,14 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: SourceForge
     submit_url: https://sourceforge.net/software/vendors/new
     type: form
     auto: yes
     lang: en
     notes: 20M monthly users
-    niche: _unclassified
+    niche: devtools
   - name: PayOnceApps
     submit_url: https://payonceapps.com/add-your-app/
     type: form
@@ -840,7 +840,7 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Toolbase.io
     submit_url: https://form.typeform.com/to/LQcTJr
     type: form
@@ -863,20 +863,20 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Unloc
     submit_url: https://www.unloc.tools/submit-tool
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: saas
   - name: Wewaat
     submit_url: https://www.wewaat.com/submitnewtool
     type: form
     auto: yes
     lang: en
     notes: No-code tools
-    niche: _unclassified
+    niche: saas
   - name: Indie Tools
     submit_url: https://indietools.co/
     type: form
@@ -913,25 +913,25 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Launching Today
     submit_url: https://www.launching.today/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: WebsiteHunt
     submit_url: https://www.websitehunt.co/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Twelve.tools
     submit_url: https://twelve.tools/submit-your-tool
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: saas
   - name: Top10
     submit_url: https://top10.now/submit
     type: form
@@ -945,27 +945,27 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: bigstartups.co
     submit_url: https://bigstartups.co/overview/list-product
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: startup
   - name: business-software.com
     submit_url: https://www.business-software.com/add-your-product/
     type: form
     auto: yes
     lang: en
     notes: 4M+ annual tech buyers
-    niche: _unclassified
+    niche: saas
   - name: osalt.com
     submit_url: https://osalt.com/suggest
     type: form
     auto: yes
     lang: en
     notes: Open source alternatives
-    niche: _unclassified
+    niche: devtools
   - name: Broadwise.org
     submit_url: https://broadwise.org/t/how-to-promote-your-startup-on-broadwise-org/125
     type: form
@@ -978,7 +978,7 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: AppsThunder
     submit_url: https://appsthunder.com/submit-your-app/
     type: form
@@ -1000,7 +1000,7 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: saas
   - name: findatool
     submit_url: https://www.findatool.io/add-a-tool
     type: form
@@ -1014,14 +1014,14 @@ overseas_general:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: saas
   - name: once.tools
     submit_url: https://once.tools/
     type: form
     auto: yes
     lang: en
     notes: One-time payment software
-    niche: _unclassified
+    niche: saas
 # ============================================================
 # Overseas Web Directories / 海外网址目录站
 # SEO backlink value — most have simple submit forms
@@ -1040,7 +1040,7 @@ overseas_directories:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: DesignRush
     submit_url: https://www.designrush.com/submit/agency
     type: form
@@ -1070,50 +1070,50 @@ overseas_directories:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: OnToplist.com
     submit_url: https://www.ontoplist.com/join/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Offpagesavvy
     submit_url: https://www.offpagesavvy.com/submit-your-site/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Unmatched Style
     submit_url: https://unmatchedstyle.com/submit
     type: form
     auto: yes
     lang: en
     notes: Web design showcase
-    niche: _unclassified
+    niche: design
   - name: 01webdirectory
     submit_url: https://www.01webdirectory.com/frmPreSubmit.aspx
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: 247WebDirectory
     submit_url: https://www.247webdirectory.com/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: 9Sites.net
     submit_url: https://www.9sites.net/addurl.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: ABC Directory
     submit_url: https://www.abc-directory.com/submiturl
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: All Business Directory
     submit_url: https://www.allbusinessdirectory.biz/directory.php?page=submission-guidelines
     type: form
@@ -1141,7 +1141,7 @@ overseas_directories:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Highrankdirectory
     submit_url: https://www.highrankdirectory.com/submit.php
     type: form
@@ -1155,50 +1155,50 @@ overseas_directories:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Site Promotion Directory
     submit_url: https://www.sitepromotiondirectory.com/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: SitesWebdirectory
     submit_url: https://www.siteswebdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Marketing Internet Directory
     submit_url: https://www.marketinginternetdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Promote Business Directory
     submit_url: https://www.promotebusinessdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: ProLinkDirectory
     submit_url: https://www.prolinkdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: GainWeb.org
     submit_url: https://gainweb.org/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Jayde
     submit_url: https://www.jayde.com/submit.html
     type: form
     auto: yes
     lang: en
     notes: B2B search engine
-    niche: _unclassified
+    niche: general
   - name: Free Directory
     submit_url: https://www.directory-free.com/submit/submit.php
     type: form
@@ -1212,13 +1212,13 @@ overseas_directories:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Free Internet Web Directory
     submit_url: https://www.freeinternetwebdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Info-Listings
     submit_url: https://info-listings.com/submit.php
     type: form
@@ -1232,13 +1232,13 @@ overseas_directories:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Tsection
     submit_url: https://www.tsection.com/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Thales Directory
     submit_url: https://thalesdirectory.com/submit/
     type: form
@@ -1252,38 +1252,38 @@ overseas_directories:
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: UK Internet Directory
     submit_url: https://www.ukinternetdirectory.net/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: USA Websites Directory
     submit_url: https://www.usawebsitesdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: World Web Directory
     submit_url: https://www.worldweb-directory.com/add.php
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: Submit.biz
     submit_url: https://www.submit.biz/
     type: form
     auto: yes
     lang: en
-    niche: _unclassified
+    niche: general
   - name: 5118.link
     submit_url: http://www.5118.link/article/22.html
     type: form
     auto: yes
     lang: zh
     notes: Chinese directory, 1-2 day review
-    niche: _unclassified
+    niche: general
 # ============================================================
 # Chinese AI Directories / 国内AI导航站
 # ============================================================
@@ -1519,70 +1519,70 @@ chinese_general:
     auto: yes
     lang: zh
     notes: Free developer product listing
-    niche: _unclassified
+    niche: devtools
   - name: 新趣集
     submit_url: https://xinquji.com/
     type: form
     auto: yes
     lang: zh
     notes: ProductHunt-like for China
-    niche: _unclassified
+    niche: startup
   - name: Mergeek
     submit_url: https://mergeek.com/publish_project
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: 挖互联网
     submit_url: https://tigg.cc/share
     type: form
     auto: yes
     lang: zh
     notes: Free innovative tools only
-    niche: _unclassified
+    niche: startup
   - name: 线圈
     submit_url: https://xquan.net/help?tab=submit-guide
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: 一网一匠
     submit_url: https://ywyj.cn/
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: Solo 社区
     submit_url: https://solo.xin/product
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: 电商导航网
     submit_url: https://www.dianshangdaohang.cn/shoulu/
     type: form
     auto: yes
     lang: zh
     notes: E-commerce only
-    niche: _unclassified
+    niche: general
   - name: 名站在线
     submit_url: http://www.fwol.cn/infos_add.php
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: 63243网址导航
     submit_url: https://www.63243.com/about/add.html
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: 小木屋
     submit_url: https://wechalet.cn/appstore/add
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: IT桔子
     submit_url: https://www.itjuzi.com/addcompany
     type: form
@@ -1596,14 +1596,14 @@ chinese_general:
     type: form
     auto: yes
     lang: zh
-    niche: _unclassified
+    niche: general
   - name: FUUN.FUN
     submit_url: https://fuun.fun/talk.html
     type: form
     auto: yes
     lang: zh
     notes: Fun/quirky web apps only
-    niche: _unclassified
+    niche: design
 # ============================================================
 # Communities & Forums (manual only) / 社区论坛（需手动）
 # These need accounts, human interaction, or specific formats
