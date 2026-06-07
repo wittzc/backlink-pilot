@@ -23,6 +23,7 @@ overseas_ai_directories:
     auto: yes
     lang: en
     notes: Popular AI tool directory
+    niche: ai-tools
   - name: Futurepedia
     submit_url: https://www.futurepedia.io/basic
     type: form
@@ -30,12 +31,14 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: There's An AI For That
     submit_url: https://theresanaiforthat.com/launch/
     type: form
     auto: manual
     lang: en
     notes: Major AI directory, may require payment
+    niche: ai-tools
   - name: dang.ai
     submit_url: https://dang.ai/
     type: form
@@ -43,11 +46,13 @@ overseas_ai_directories:
     lang: en
     status: paid
     notes: Paid $29, no longer free
+    niche: ai-tools
   - name: AI Valley
     submit_url: https://aivalley.ai/submit-tool/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: AIToolsDirectory
     submit_url: https://aitoolsdirectory.com/submit-tool
     type: form
@@ -55,46 +60,54 @@ overseas_ai_directories:
     lang: en
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-27)"
+    niche: ai-tools
   - name: AI Directory
     submit_url: https://www.aidirectory.org/user-submit/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: AIToolMall
     submit_url: https://aitoolmall.com/submit/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: AI Finder
     submit_url: https://ai-finder.net/
     type: form
     auto: no
     lang: en
     auto_blocked_reason: "NO_FIELDS: no recognizable form fields after long-wait scan (2026-04-28)"
+    niche: ai-tools
   - name: AIFINDY
     submit_url: https://aifindy.com/contacto/publica-tu-ia-en-aifindy
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: AITopTools
     submit_url: https://aitoptools.com/login?redirect_to=submit
     type: form
     auto: manual
     lang: en
     notes: Requires login
+    niche: ai-tools
   - name: AllThingsAI
     submit_url: https://allthingsai.com
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: AiDude
     submit_url: https://aidude.pro/submit-your-tool
     type: form
     auto: no
     lang: en
     auto_blocked_reason: "NO_FIELDS: no recognizable form fields after long-wait scan (2026-04-28)"
+    niche: ai-tools
   - name: AI Homes
     submit_url: https://aihomes.io/submit/submit-tool
     type: form
@@ -102,11 +115,13 @@ overseas_ai_directories:
     lang: en
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-27)"
+    niche: ai-tools
   - name: AI Library
     submit_url: https://library.phygital.plus/tool-submission
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: AiSuperSmart
     submit_url: https://www.aisupersmart.com/submit-tool/
     type: form
@@ -114,17 +129,20 @@ overseas_ai_directories:
     lang: en
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-27)"
+    niche: ai-tools
   - name: Ai Business Tool
     submit_url: https://aibusinesstool.com/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: AI Tool For Business
     submit_url: https://aitoolforbusiness.com/submit-ai-tool/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Aitoolnet
     submit_url: https://www.aitoolnet.com/submit
     type: form
@@ -132,18 +150,21 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: ai-tools
   - name: AI-Hunter.io
     submit_url: https://ai-hunter.io/submit-ai-tool/
     type: form
     auto: yes
     lang: en
     notes: 2000+ AI tools
+    niche: ai-tools
   - name: AIToolGuru
     submit_url: https://aitoolguru.com/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: AI News Guru
     submit_url: https://ainews.guru/ai-app-submission/
     type: form
@@ -151,6 +172,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: AILib
     submit_url: https://ailib.ru/en/add-ai/
     type: form
@@ -158,6 +180,7 @@ overseas_ai_directories:
     lang: en
     notes: Russian AI directory with English interface; iframe/SPA form — needs
       scout or manual 2026-04-27
+    niche: ai-tools
   - name: AiToolkit
     submit_url: https://www.aitoolkit.org/submit
     type: form
@@ -165,6 +188,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: AffordHunt
     submit_url: https://www.affordhunt.com/onesubmitai
     type: form
@@ -172,12 +196,14 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: AIWikiTools
     submit_url: https://aiwikitools.com/submit-a-tool/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: AI Worthy
     submit_url: https://aiworthy.org/submit-tool/
     type: form
@@ -185,6 +211,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 500 as of 2026-03
+    niche: ai-tools
   - name: Ai pedia Hub
     submit_url: https://aipediahub.com/submit/
     type: form
@@ -192,12 +219,14 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: AI Tools Up
     submit_url: https://aitoolsup.com/submit-tool/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: AI Mojo
     submit_url: https://aimojo.pro/submit/
     type: form
@@ -205,11 +234,13 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: Apps and Websites
     submit_url: https://landing.mycloudmedia.co.uk/apps-and-websites-submit-ai-or-saas-tool/new-submission.html
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: chatgptdemo
     submit_url: https://chatgptdemo.com/submit-new-ai-tool/
     type: form
@@ -217,23 +248,27 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: ChatGPTDemo.pro
     submit_url: https://chatgptdemo.pro/submit-tool/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: DigiProToolz
     submit_url: https://digiprotoolz.com/contact-us/
     type: form
     auto: manual
     lang: en
     auto_blocked_reason: LOGIN_REQUIRED (2026-04-27)
+    niche: ai-tools
   - name: DropYourAI
     submit_url: https://www.dropyourai.com/submit-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Design Tools AI
     submit_url: https://designtools.ai/submit/
     type: form
@@ -241,6 +276,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: Draeno.io
     submit_url: https://draeno.io/submit-a-tool/
     type: form
@@ -248,6 +284,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     auto_blocked_reason: PAGE_404 (2026-04-27)
+    niche: ai-tools
   - name: Every AI
     submit_url: https://every-ai.com/submit-tool/
     type: form
@@ -255,17 +292,20 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: Future AGI Tools
     submit_url: https://www.futureagitools.com/submit-a-site
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: Free AI Tools Directory
     submit_url: https://free-ai-tools-directory.com/submit-request/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: fastpedia.io
     submit_url: https://fastpedia.io/submit-tool/
     type: form
@@ -273,6 +313,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: findcool.tools
     submit_url: https://www.findcool.tools/submit-tool
     type: form
@@ -280,62 +321,73 @@ overseas_ai_directories:
     lang: en
     status: paid
     notes: payment page detected 2026-04-27
+    niche: ai-tools
   - name: Full Stack AI
     submit_url: https://fullstackai.co/submit-a-tool/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: PoweredbyAI
     submit_url: https://poweredbyai.app/submit-tool
     type: form
     auto: manual
     lang: en
+    niche: ai-tools
   - name: Paxi
     submit_url: https://paxi.ai/submit
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: Human Alternative
     submit_url: https://www.humanalternative.com/submit-resource/submit-a-tool
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: Human or Not
     submit_url: https://www.humanornot.co/submit-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Insidr.ai
     submit_url: https://www.insidr.ai/submit-tools/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Gate2AI
     submit_url: https://www.gate2ai.com/zh-cn/submit-tool
     type: form
     auto: yes
     lang: multi
+    niche: ai-tools
   - name: Supertools
     submit_url: https://supertools.therundown.ai/submit
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: Startup AI tools
     submit_url: https://www.startupaitools.com/submit-ai-tools/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: SaaSBaba
     submit_url: https://saasbaba.com/add-ai-tool/
     type: form
     auto: no
     lang: en
     notes: iframe/SPA form — needs scout or manual 2026-04-27
+    niche: ai-tools
   - name: SEOFAI
     submit_url: https://seofai.com/submit-tool/
     type: form
@@ -343,6 +395,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: SpotTheAI
     submit_url: https://www.spottheai.com/submit
     type: form
@@ -351,36 +404,43 @@ overseas_ai_directories:
     notes: 5000+ AI products; payment page detected 2026-04-27
     status: paid
     auto_blocked_reason: PAID_WALL (2026-04-27)
+    niche: ai-tools
   - name: Nextool AI
     submit_url: https://www.nextool.ai/submit-a-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: OpenFuture AI
     submit_url: https://openfuture.ai/zh/submit-tool
     type: form
     auto: yes
     lang: multi
+    niche: ai-tools
   - name: TopApps.Ai
     submit_url: https://topapps.ai/submit
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: ToolHunter.ai
     submit_url: https://www.toolhunter.ai/submit-a-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: ToolPilot
     submit_url: https://www.toolpilot.ai/pages/submit-your-ai-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: ToolScout
     submit_url: https://toolscout.ai/submit
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Toolbase AI
     submit_url: https://www.toolbase.ai/toolbase/submit-tool
     type: form
@@ -388,21 +448,25 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: ToolsAI.net
     submit_url: https://toolsai.net/add-listing/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: TrackBes
     submit_url: https://trackbes.com/submit-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: ToolStory.net
     submit_url: https://toolsstory.net/add-listing/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: TheToolBus.ai
     submit_url: https://www.thetoolbus.ai/submit-tools
     type: form
@@ -410,16 +474,19 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: tools-ai.online
     submit_url: https://www.tools-ai.online/tool-submit
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: The AI Warehouse
     submit_url: https://www.thewarehouse.ai/product-submission
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: VTeam
     submit_url: https://vteam.ai/submit-tool
     type: form
@@ -427,11 +494,13 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: Interested In AI
     submit_url: https://www.interestedinai.com/submit-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Neil Patel AI Tools
     submit_url: https://aitools.neilpatel.com/submit/
     type: form
@@ -439,6 +508,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: ai-tools
   - name: NextGenTools
     submit_url: https://nextgentools.me/submit-your-tool
     type: form
@@ -446,6 +516,7 @@ overseas_ai_directories:
     lang: en
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-28)"
+    niche: ai-tools
   - name: YourAITool
     submit_url: https://youraitool.com/submit-tool
     type: form
@@ -453,33 +524,39 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: Super AI Tools
     submit_url: https://www.superaitools.io/submit-a-tool
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Free AI Tool
     submit_url: https://freeaitool.ai/submit
     type: form
     auto: yes
     lang: en
     notes: 24h fast review
+    niche: ai-tools
   - name: aitoolslist.io
     submit_url: https://aitoolslist.io/submit-ai-tool/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: AI Tools Masters
     submit_url: https://aitoolsmasters.com/add-ai-tools/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: AILibri
     submit_url: https://ailibri.com/addAi
     type: form
     auto: yes
     lang: en
     notes: Russian AI directory
+    niche: ai-tools
   - name: AI Scout
     submit_url: https://aiscout.net/
     type: form
@@ -487,6 +564,7 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 520 as of 2026-03
+    niche: ai-tools
   - name: Stork
     submit_url: https://www.stork.ai/
     type: form
@@ -494,32 +572,38 @@ overseas_ai_directories:
     lang: en
     status: dead
     notes: 429 as of 2026-03
+    niche: ai-tools
   - name: aitoolhunt
     submit_url: https://www.aitoolhunt.com/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Cipinet
     submit_url: https://www.cipinet.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: A List Directory
     submit_url: http://www.alistdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Foundr.ai
     submit_url: https://foundr.ai/
     type: form
     auto: yes
     lang: en
+    niche: ai-tools
   - name: Tap4 AI
     submit_url: https://tap4.ai/cn/submit
     type: form
     auto: yes
     lang: multi
     notes: Supports Chinese
+    niche: ai-tools
   - name: aiwith.me
     submit_url: https://aiwith.me/zh/submit
     type: form
@@ -527,12 +611,14 @@ overseas_ai_directories:
     lang: multi
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-28)"
+    niche: ai-tools
   - name: ToolsFine
     submit_url: https://tally.so/r/wvB7Xg
     type: form
     auto: yes
     lang: en
     notes: Tally form
+    niche: ai-tools
 # ============================================================
 # Overseas General Sites / 海外综合网站
 # Product directories, startup listings, tool collections
@@ -544,16 +630,19 @@ overseas_general:
     auto: manual
     lang: en
     notes: Major alternative software directory
+    niche: _unclassified
   - name: Alternative.me
     submit_url: https://alternative.me/how-to/submit-software/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: App Rater
     submit_url: https://apprater.net/add/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Appoid
     submit_url: http://appiod.com/submit-app-for-review/
     type: form
@@ -561,60 +650,71 @@ overseas_general:
     lang: en
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-28)"
+    niche: _unclassified
   - name: All Startups
     submit_url: http://www.allstartups.info/Startups/Submit
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Betalist
     submit_url: https://betalist.com/users/sign_in
     type: form
     auto: manual
     lang: en
     notes: Requires login
+    niche: _unclassified
   - name: BufferApps
     submit_url: https://bufferapps.com/beta-listing/new
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Changelog
     submit_url: https://changelog.com/news/submit
     type: form
     auto: yes
     lang: en
     notes: Developer-focused, high quality
+    niche: _unclassified
   - name: Digital Stuff We Love
     submit_url: https://digitalstuffwelove.org.nz/submit-tool
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: DataTau
     submit_url: https://datatau.net/
     type: form
     auto: yes
     lang: en
     notes: HN clone for data science
+    niche: _unclassified
   - name: 10words
     submit_url: https://10words.io/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: MicroLaunch
     submit_url: https://microlaunch.net/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Fiddy
     submit_url: https://fiddy.co/
     type: form
     auto: yes
     lang: en
     notes: Weekly indie hacker ranking
+    niche: _unclassified
   - name: Fund a Maker
     submit_url: https://fundamaker.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: OpenAlternative
     submit_url: https://airtable.com/appcN6nvv5iyo3x/pagzZyGl6fEI2RWDq/form
     type: form
@@ -622,52 +722,62 @@ overseas_general:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: _unclassified
   - name: Joinly
     submit_url: https://www.joinly.xyz/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: KillerStartups
     submit_url: https://www.killerstartups.com/submit-startup/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: PitchWall
     submit_url: https://pitchwall.co/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Prime Indies
     submit_url: https://primeindies.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Toools.design
     submit_url: https://toools.design/
     type: form
     auto: yes
     lang: en
     notes: Design tools, 1500+ resources
+    niche: _unclassified
   - name: TechPluto
     submit_url: https://www.techpluto.com/submit-a-startup/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: The Startup Pitch
     submit_url: https://thestartuppitch.com/post-a-pitch/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Top Best Alternatives
     submit_url: https://www.topbestalternatives.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Launched!
     submit_url: https://launched.io/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Launching Next
     submit_url: https://www.launchingnext.com/submit/
     type: form
@@ -675,6 +785,7 @@ overseas_general:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: LibHunt
     submit_url: https://www.libhunt.com/repo/submit
     type: form
@@ -682,16 +793,19 @@ overseas_general:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: Startup Collections
     submit_url: https://startupcollections.com/submit-product/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: StartupRanking
     submit_url: https://www.startupranking.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Startup Stash
     submit_url: https://startupstash.com/add-listing/
     type: form
@@ -699,17 +813,20 @@ overseas_general:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: StartupBase
     submit_url: https://startupbase.io/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: SourceForge
     submit_url: https://sourceforge.net/software/vendors/new
     type: form
     auto: yes
     lang: en
     notes: 20M monthly users
+    niche: _unclassified
   - name: PayOnceApps
     submit_url: https://payonceapps.com/add-your-app/
     type: form
@@ -717,11 +834,13 @@ overseas_general:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: _unclassified
   - name: techdirectory.io
     submit_url: https://www.techdirectory.io/get-listed
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Toolbase.io
     submit_url: https://form.typeform.com/to/LQcTJr
     type: form
@@ -730,6 +849,7 @@ overseas_general:
     notes: Typeform
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-28)"
+    niche: _unclassified
   - name: Tool Finder
     submit_url: https://toolfinder.co/submit-your-tool
     type: form
@@ -737,22 +857,26 @@ overseas_general:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: _unclassified
   - name: TechFaster
     submit_url: http://techfaster.com/submit-your-company/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Unloc
     submit_url: https://www.unloc.tools/submit-tool
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Wewaat
     submit_url: https://www.wewaat.com/submitnewtool
     type: form
     auto: yes
     lang: en
     notes: No-code tools
+    niche: _unclassified
   - name: Indie Tools
     submit_url: https://indietools.co/
     type: form
@@ -760,6 +884,7 @@ overseas_general:
     lang: en
     status: paid
     auto_blocked_reason: PAID_WALL (2026-04-30)
+    niche: _unclassified
   - name: No Code Family
     submit_url: https://nocodefamily.com/submit-tool
     type: form
@@ -767,6 +892,7 @@ overseas_general:
     lang: en
     status: dead
     notes: 503 as of 2026-03
+    niche: _unclassified
   - name: SpotSaaS
     submit_url: https://www.spotsaas.com/get-listed
     type: form
@@ -774,32 +900,38 @@ overseas_general:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: MakerPeak
     submit_url: https://makerpeak.com/sign-up?redirect=/profile/products/submit
     type: form
     auto: manual
     lang: en
     notes: Requires signup
+    niche: _unclassified
   - name: Simple Lister
     submit_url: https://simplelister.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Launching Today
     submit_url: https://www.launching.today/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: WebsiteHunt
     submit_url: https://www.websitehunt.co/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Twelve.tools
     submit_url: https://twelve.tools/submit-your-tool
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Top10
     submit_url: https://top10.now/submit
     type: form
@@ -807,39 +939,46 @@ overseas_general:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: _unclassified
   - name: WhatLaunched.Today
     submit_url: https://www.whatlaunched.today
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: bigstartups.co
     submit_url: https://bigstartups.co/overview/list-product
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: business-software.com
     submit_url: https://www.business-software.com/add-your-product/
     type: form
     auto: yes
     lang: en
     notes: 4M+ annual tech buyers
+    niche: _unclassified
   - name: osalt.com
     submit_url: https://osalt.com/suggest
     type: form
     auto: yes
     lang: en
     notes: Open source alternatives
+    niche: _unclassified
   - name: Broadwise.org
     submit_url: https://broadwise.org/t/how-to-promote-your-startup-on-broadwise-org/125
     type: form
     auto: manual
     lang: en
     notes: Community, needs account
+    niche: _unclassified
   - name: ASR
     submit_url: https://www.activesearchresults.com/addwebsite.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: AppsThunder
     submit_url: https://appsthunder.com/submit-your-app/
     type: form
@@ -847,6 +986,7 @@ overseas_general:
     lang: en
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-28)"
+    niche: _unclassified
   - name: AddictiveTips
     submit_url: https://www.addictivetips.com/tip-us/
     type: form
@@ -854,11 +994,13 @@ overseas_general:
     lang: en
     status: dead
     notes: 405 as of 2026-03
+    niche: _unclassified
   - name: insanelycooltools
     submit_url: https://www.insanelycooltools.com/submit
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: findatool
     submit_url: https://www.findatool.io/add-a-tool
     type: form
@@ -866,17 +1008,20 @@ overseas_general:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: 700.tools
     submit_url: https://700.tools/add
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: once.tools
     submit_url: https://once.tools/
     type: form
     auto: yes
     lang: en
     notes: One-time payment software
+    niche: _unclassified
 # ============================================================
 # Overseas Web Directories / 海外网址目录站
 # SEO backlink value — most have simple submit forms
@@ -889,11 +1034,13 @@ overseas_directories:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: Dizila
     submit_url: https://www.dizila.com/submit
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: DesignRush
     submit_url: https://www.designrush.com/submit/agency
     type: form
@@ -901,6 +1048,7 @@ overseas_directories:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: Good Design Tools
     submit_url: https://www.gooddesign.tools/submit
     type: form
@@ -908,6 +1056,7 @@ overseas_directories:
     lang: en
     status: dead
     notes: 404 as of 2026-03
+    niche: _unclassified
   - name: Webwiki
     submit_url: https://www.webwiki.com/info/add-website.html
     type: form
@@ -915,53 +1064,63 @@ overseas_directories:
     lang: en
     status: dead
     notes: 403 as of 2026-03
+    niche: _unclassified
   - name: Viesearch
     submit_url: https://viesearch.com/submit
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: OnToplist.com
     submit_url: https://www.ontoplist.com/join/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Offpagesavvy
     submit_url: https://www.offpagesavvy.com/submit-your-site/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Unmatched Style
     submit_url: https://unmatchedstyle.com/submit
     type: form
     auto: yes
     lang: en
     notes: Web design showcase
+    niche: _unclassified
   - name: 01webdirectory
     submit_url: https://www.01webdirectory.com/frmPreSubmit.aspx
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: 247WebDirectory
     submit_url: https://www.247webdirectory.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: 9Sites.net
     submit_url: https://www.9sites.net/addurl.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: ABC Directory
     submit_url: https://www.abc-directory.com/submiturl
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: All Business Directory
     submit_url: https://www.allbusinessdirectory.biz/directory.php?page=submission-guidelines
     type: form
     auto: manual
     lang: en
     auto_blocked_reason: LOGIN_REQUIRED (2026-04-28)
+    niche: _unclassified
   - name: All States USA Directory
     submit_url: https://www.allstatesusadirectory.com/submit.php
     type: form
@@ -969,17 +1128,20 @@ overseas_directories:
     lang: en
     status: paid
     auto_blocked_reason: PAID_WALL (2026-04-28)
+    niche: _unclassified
   - name: BusinessSeek.biz
     submit_url: https://www.businessseek.biz/page.php?page=submission-policy
     type: form
     auto: manual
     lang: en
     auto_blocked_reason: LOGIN_REQUIRED (2026-04-28)
+    niche: _unclassified
   - name: Submission Web Directory
     submit_url: https://www.submissionwebdirectory.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Highrankdirectory
     submit_url: https://www.highrankdirectory.com/submit.php
     type: form
@@ -987,47 +1149,56 @@ overseas_directories:
     lang: en
     status: paid
     auto_blocked_reason: PAID_WALL (2026-04-28)
+    niche: _unclassified
   - name: Sonic Run
     submit_url: https://www.sonicrun.com/freelisting.html
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Site Promotion Directory
     submit_url: https://www.sitepromotiondirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: SitesWebdirectory
     submit_url: https://www.siteswebdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Marketing Internet Directory
     submit_url: https://www.marketinginternetdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Promote Business Directory
     submit_url: https://www.promotebusinessdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: ProLinkDirectory
     submit_url: https://www.prolinkdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: GainWeb.org
     submit_url: https://gainweb.org/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Jayde
     submit_url: https://www.jayde.com/submit.html
     type: form
     auto: yes
     lang: en
     notes: B2B search engine
+    niche: _unclassified
   - name: Free Directory
     submit_url: https://www.directory-free.com/submit/submit.php
     type: form
@@ -1035,16 +1206,19 @@ overseas_directories:
     lang: en
     status: paid
     auto_blocked_reason: PAID_WALL (2026-04-28)
+    niche: _unclassified
   - name: Free PR Web Directory
     submit_url: https://www.freeprwebdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Free Internet Web Directory
     submit_url: https://www.freeinternetwebdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Info-Listings
     submit_url: https://info-listings.com/submit.php
     type: form
@@ -1052,16 +1226,19 @@ overseas_directories:
     lang: en
     status: dead
     notes: 500 as of 2026-03
+    niche: _unclassified
   - name: TXTLinks
     submit_url: https://www.txtlinks.com/sug_url.php?cat_id=0
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Tsection
     submit_url: https://www.tsection.com/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Thales Directory
     submit_url: https://thalesdirectory.com/submit/
     type: form
@@ -1069,37 +1246,44 @@ overseas_directories:
     lang: en
     status: dead
     auto_blocked_reason: PAGE_404 (2026-04-28)
+    niche: _unclassified
   - name: Quality Internet Directory
     submit_url: https://www.qualityinternetdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: UK Internet Directory
     submit_url: https://www.ukinternetdirectory.net/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: USA Websites Directory
     submit_url: https://www.usawebsitesdirectory.com/submit.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: World Web Directory
     submit_url: https://www.worldweb-directory.com/add.php
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: Submit.biz
     submit_url: https://www.submit.biz/
     type: form
     auto: yes
     lang: en
+    niche: _unclassified
   - name: 5118.link
     submit_url: http://www.5118.link/article/22.html
     type: form
     auto: yes
     lang: zh
     notes: Chinese directory, 1-2 day review
+    niche: _unclassified
 # ============================================================
 # Chinese AI Directories / 国内AI导航站
 # ============================================================
@@ -1109,6 +1293,7 @@ chinese_ai_directories:
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AIHub
     submit_url: https://www.aihub.cn/write
     type: form
@@ -1116,6 +1301,7 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 403 as of 2026-03
+    niche: ai-tools
   - name: ai-bot.cn
     submit_url: https://tally.so/r/wkeKz1
     type: form
@@ -1124,41 +1310,49 @@ chinese_ai_directories:
     notes: Quality AI tools only, Tally form
     auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
       cross-frame (2026-04-28)"
+    niche: ai-tools
   - name: AI NAV
     submit_url: https://www.ainavpro.com/contribute
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AI大师
     submit_url: https://www.aidashi.cn/sl
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AI智式
     submit_url: https://aiwaytools.com/%e7%bd%91%e5%9d%80%e6%8f%90%e4%ba%a4/
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AI工具箱 (aitool123)
     submit_url: https://www.aitool123.cc/%E6%8F%90%E4%BA%A4%E6%94%B6%E5%BD%95/
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 工具达人AI导航
     submit_url: http://toolsdar.mikecrm.com/nix44in
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 映技派
     submit_url: https://www.yjpoo.com/submit-ai-tool/
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 深度AI导航
     submit_url: https://www.deepdhai.com/submit
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 一起用AI
     submit_url: https://17yongai.com/submit-website
     type: form
@@ -1166,41 +1360,49 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 403 as of 2026-03
+    niche: ai-tools
   - name: 懂AI
     submit_url: https://www.dongaiapp.com/sub
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 南城FE AI导航
     submit_url: https://nancheng.fun/contribute
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: zhexieai
     submit_url: https://zhexieai.com/%e6%8f%90%e4%ba%a4%e7%bd%91%e5%9d%80
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: Cooltools
     submit_url: https://backdata.net/submit-site.html
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: iforai
     submit_url: https://iforai.com/submit_website/
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 未来百科
     submit_url: https://nav.6aiq.com/contribute
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 123AI导航
     submit_url: https://www.fsl123.com/contribute
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AI导航猫
     submit_url: https://www.h1z1tmc.com/submit
     type: form
@@ -1208,11 +1410,13 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 500 as of 2026-03
+    niche: ai-tools
   - name: AIGC工具导航
     submit_url: https://www.aigc.cn/submit
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AiTime.Space
     submit_url: https://aitime.space/submit
     type: form
@@ -1220,17 +1424,20 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: AI导航网 (94kan)
     submit_url: https://ai.94kan.cn/submit
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AIGC便利店
     submit_url: https://aigclist.com/submit-ai-tools-free/
     type: form
     auto: yes
     lang: zh
     notes: 4000+ AI tools
+    niche: ai-tools
   - name: Jay的资源库
     submit_url: https://www.lovejay.top/%e7%bd%91%e7%ab%99%e6%8a%95%e7%a8%bf
     type: form
@@ -1238,11 +1445,13 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: 知否Box AI导航
     submit_url: https://www.zhifoubox.com/submission
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 牛牛导航
     submit_url: https://aoh.cc/contribute
     type: form
@@ -1250,6 +1459,7 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 404 as of 2026-03
+    niche: ai-tools
   - name: 乐易AI导航
     submit_url: https://leiydz.com/contribute
     type: form
@@ -1257,27 +1467,32 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 502 as of 2026-03
+    niche: ai-tools
   - name: 海外导航网
     submit_url: https://www.hhlink.com/%E6%8F%90%E4%BA%A4%E6%96%B0%E7%BD%91%E7%AB%99
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: 智鹭AI
     submit_url: https://www.aiheron.com/promote
     type: form
     auto: yes
     lang: zh
     notes: 8187+ products, 24h review
+    niche: ai-tools
   - name: 老北鼻AI导航
     submit_url: https://lbbai.com/contribute
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AI工具箱 (ailookme)
     submit_url: https://www.ailookme.com/%e7%bd%91%e5%9d%80%e6%8f%90%e4%ba%a4
     type: form
     auto: yes
     lang: zh
+    niche: ai-tools
   - name: AI驿站
     submit_url: https://www.51aiyz.com/about
     type: form
@@ -1285,12 +1500,14 @@ chinese_ai_directories:
     lang: zh
     status: dead
     notes: 403 as of 2026-03
+    niche: ai-tools
   - name: AI导航网 (aiopenminds)
     submit_url: https://jinshuju.net/f/BhEFyJ
     type: form
     auto: yes
     lang: zh
     notes: 金数据 form
+    niche: ai-tools
 # ============================================================
 # Chinese General Sites / 国内综合网站
 # Product directories, developer communities
@@ -1302,59 +1519,70 @@ chinese_general:
     auto: yes
     lang: zh
     notes: Free developer product listing
+    niche: _unclassified
   - name: 新趣集
     submit_url: https://xinquji.com/
     type: form
     auto: yes
     lang: zh
     notes: ProductHunt-like for China
+    niche: _unclassified
   - name: Mergeek
     submit_url: https://mergeek.com/publish_project
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: 挖互联网
     submit_url: https://tigg.cc/share
     type: form
     auto: yes
     lang: zh
     notes: Free innovative tools only
+    niche: _unclassified
   - name: 线圈
     submit_url: https://xquan.net/help?tab=submit-guide
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: 一网一匠
     submit_url: https://ywyj.cn/
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: Solo 社区
     submit_url: https://solo.xin/product
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: 电商导航网
     submit_url: https://www.dianshangdaohang.cn/shoulu/
     type: form
     auto: yes
     lang: zh
     notes: E-commerce only
+    niche: _unclassified
   - name: 名站在线
     submit_url: http://www.fwol.cn/infos_add.php
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: 63243网址导航
     submit_url: https://www.63243.com/about/add.html
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: 小木屋
     submit_url: https://wechalet.cn/appstore/add
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: IT桔子
     submit_url: https://www.itjuzi.com/addcompany
     type: form
@@ -1362,17 +1590,20 @@ chinese_general:
     lang: zh
     status: dead
     notes: 412 as of 2026-03
+    niche: _unclassified
   - name: 笛卡
     submit_url: https://dizkaz.com/
     type: form
     auto: yes
     lang: zh
+    niche: _unclassified
   - name: FUUN.FUN
     submit_url: https://fuun.fun/talk.html
     type: form
     auto: yes
     lang: zh
     notes: Fun/quirky web apps only
+    niche: _unclassified
 # ============================================================
 # Communities & Forums (manual only) / 社区论坛（需手动）
 # These need accounts, human interaction, or specific formats
@@ -1384,69 +1615,82 @@ communities_manual:
     auto: manual
     lang: en
     notes: High value, needs genuine engagement
+    niche: community
   - name: Product Hunt
     submit_url: https://www.producthunt.com/
     type: listing
     auto: manual
     lang: en
     notes: Anti-bot, manual only
+    niche: community
   - name: Dev Hunt
     submit_url: https://devhunt.org/
     type: listing
     auto: manual
     lang: en
+    niche: community
   - name: Uneed
     submit_url: https://www.uneed.best/promote-your-tool
     type: form
     auto: yes
     lang: en
     notes: Free but queued
+    niche: community
   - name: Indie Hackers
     submit_url: https://www.indiehackers.com/products
     type: listing
     auto: manual
     lang: en
+    niche: community
   - name: dev.to
     submit_url: https://dev.to/
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: Hashnode
     submit_url: https://hashnode.com/discussions
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: HackerNoon
     submit_url: https://hackernoon.com/
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: 即刻
     submit_url: https://web.okjike.com/
     type: article
     auto: manual
     lang: zh
     notes: Best Chinese indie community
+    niche: community
   - name: V2EX
     submit_url: https://www.v2ex.com/go/create
     type: article
     auto: manual
     lang: zh
+    niche: community
   - name: W2solo
     submit_url: https://w2solo.com/topics/newproduct
     type: article
     auto: manual
     lang: zh
+    niche: community
   - name: 掘金
     submit_url: https://juejin.cn/
     type: article
     auto: manual
     lang: zh
+    niche: community
   - name: HelloGitHub
     submit_url: https://hellogithub.com/
     type: listing
     auto: manual
     lang: zh
+    niche: community
 # ============================================================
 # GitHub Awesome Lists / GitHub 精选列表
 # Submit via Issue — use: node src/cli.js awesome <key>
@@ -1457,22 +1701,26 @@ awesome_lists:
     type: github
     auto: manual
     lang: zh
+    niche: devtools
   - name: Best App
     submit_url: https://github.com/hzlzh/Best-App/issues
     type: github
     auto: manual
     lang: zh
+    niche: devtools
   - name: 科技爱好者周刊
     submit_url: https://github.com/ruanyf/weekly/issues
     type: github
     auto: manual
     lang: zh
     notes: Ruanyifeng's weekly, high influence
+    niche: devtools
   - name: 独立开发变现周刊
     submit_url: https://github.com/ljinkai/weekly/issues
     type: github
     auto: manual
     lang: zh
+    niche: devtools
 # ============================================================
 # Reddit Subreddits / Reddit 子版块
 # Post manually, follow subreddit rules
@@ -1483,49 +1731,59 @@ reddit:
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/AlphaandBetausers
     submit_url: https://www.reddit.com/r/alphaandbetausers/
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/IMadeThis
     submit_url: https://www.reddit.com/r/IMadeThis/
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/Startups
     submit_url: https://reddit.com/r/startups
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/Entrepreneur
     submit_url: https://reddit.com/r/entrepreneur
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/InternetIsBeautiful
     submit_url: https://www.reddit.com/r/InternetIsBeautiful/
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/webdev (Showoff Saturday)
     submit_url: https://www.reddit.com/r/webdev/
     type: article
     auto: manual
     lang: en
     notes: Only on Saturdays
+    niche: community
   - name: r/opensource
     submit_url: https://www.reddit.com/r/opensource/
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/selfhosted
     submit_url: https://www.reddit.com/r/selfhosted/
     type: article
     auto: manual
     lang: en
+    niche: community
   - name: r/buildinpublic
     submit_url: https://www.reddit.com/r/buildinpublic/
     type: article
     auto: manual
     lang: en
+    niche: community
