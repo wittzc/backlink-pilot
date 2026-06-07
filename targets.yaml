@@ -1787,3 +1787,264 @@ reddit:
     auto: manual
     lang: en
     niche: community
+
+# ============================================================
+# Launch batch (evaluated overseas_launch_2026_06)
+# ============================================================
+overseas_launch_2026_06:
+  - name: "Agenthunter"
+    submit_url: "https://agenthunter.io/submit"
+    type: form
+    auto: yes
+    lang: en
+    niche: ai-tools
+    notes: "AI agent 目录，open-form 两步提交，无登录墙"
+  - name: "PeerPush"
+    submit_url: "https://peerpush.net/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: startup
+    notes: "需注册；PH 替代品，付费加速档 $35+"
+  - name: "SaaSHub"
+    submit_url: "https://saashub.com/services/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: saas
+    notes: "需注册；22.5万产品大目录 DR高；有 saashub.js adapter，配 credentials 可半自动"
+  - name: "Foundrlist"
+    submit_url: "https://foundrlist.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: startup
+    notes: "需登录；Founder/indie 周榜，有付费广告位"
+  - name: "Fazier"
+    submit_url: "https://fazier.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: startup
+    notes: "需登录；每日产品发现，免费+付费档"
+  - name: "Firsto"
+    submit_url: "https://firsto.co/projects/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: startup
+    notes: "需注册；公平发布平台 2000+项目"
+  - name: "Slocco"
+    submit_url: "https://slocco.com/register"
+    type: form
+    auto: manual
+    lang: en
+    niche: general
+    notes: "需注册；免费 Free Launch + 付费 Express 档"
+  - name: "TinyLaunch"
+    submit_url: "https://tinylaunch.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: startup
+    notes: "需注册；PH替代 25000用户 DR72+ 外链激励"
+  - name: "ToolFame"
+    submit_url: "https://toolfame.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: ai-tools
+    notes: "需登录；声称 DR70+ 月PV12k，有付费档"
+  - name: "Tiny Startups"
+    submit_url: "https://tinystartups.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: startup
+    notes: "需注册；DR60+ dofollow，免费可用，付费置顶 £199+"
+  - name: "Neeed Directory"
+    submit_url: "https://neeed.directory/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: devtools
+    notes: "需注册；永久 dofollow，免费基础提交，人工审核"
+  - name: "Turbo0"
+    submit_url: "https://turbo0.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: general
+    notes: "需登录(OAuth)；内容创作工具目录"
+  - name: "Indie Deals"
+    submit_url: "https://indie.deals/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: saas
+    notes: "需登录；indie 产品折扣聚合，$37 Pro 会员"
+  - name: "IndieTools"
+    submit_url: "https://indietools.app/signin?callbackUrl=/dashboard/products/new"
+    type: form
+    auto: manual
+    lang: en
+    niche: saas
+    notes: "需登录；indie 工具目录 346产品，有付费置顶"
+  - name: "SaaSFame"
+    submit_url: "https://saasfame.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: saas
+    notes: "需登录(Google/GitHub)；300+ SaaS，待测是否 nofollow"
+  - name: "StartupRanked"
+    submit_url: "https://startupranked.com/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: saas
+    notes: "需登录；免费排队，Premium $29 跳队+dofollow"
+  - name: "IndexOf.ai"
+    submit_url: "https://indexof.ai/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: ai-tools
+    notes: "需注册；539 AI工具，免费 dofollow listing，Pro $2.99"
+  - name: "NextLaunch"
+    submit_url: "https://nextlaunch.io/projects/submit"
+    type: form
+    auto: manual
+    lang: en
+    niche: startup
+    notes: "需注册；免费进前3才dofollow，Premium $9 保证dofollow"
+  - name: "PeerList"
+    submit_url: "https://peerlist.io"
+    type: form
+    auto: manual
+    lang: en
+    niche: community
+    notes: "社区/profile 平台，发 Project，需账号手动发"
+  - name: "Stacker News"
+    submit_url: "https://stacker.news"
+    type: form
+    auto: manual
+    lang: en
+    niche: community
+    notes: "类 HN 社区，发帖玩法，需账号手动发"
+  - name: "AI Directories (best-of-ai)"
+    submit_url: "https://github.com/best-of-ai/ai-directories"
+    type: github
+    auto: manual
+    lang: en
+    niche: devtools
+    notes: "GitHub awesome-list，走 awesome 命令提 PR/Issue"
+  - name: "LaunchDirectories"
+    submit_url: "https://launchdirectories.com"
+    type: listing
+    auto: no
+    lang: en
+    niche: startup
+    notes: "退回 not-submit: 目录的目录，本身不接受产品提交，提供付费代投"
+  - name: "DirectoryHunt"
+    submit_url: "https://directoryhunt.com"
+    type: listing
+    auto: no
+    lang: en
+    niche: general
+    notes: "退回 not-submit: 目录的目录，收录目录站而非产品"
+  - name: "Awesome Directories"
+    submit_url: "https://awesome-directories.com"
+    type: listing
+    auto: no
+    lang: en
+    niche: general
+    notes: "退回 not-submit: 目录聚合，只收目录站，对外链无直接价值"
+  - name: "StartupSubmit"
+    submit_url: "https://startupsubmit.app"
+    type: listing
+    auto: no
+    lang: en
+    niche: startup
+    notes: "退回 not-submit: 代投服务商($99起)，非可获 backlink 的目录"
+  - name: "The Grommet"
+    submit_url: "https://thegrommet.com"
+    type: listing
+    auto: no
+    lang: en
+    niche: general
+    notes: "退回 not-submit: 实体消费品平台，非软件/AI，无公开提交入口"
+  - name: "Launchdubai"
+    submit_url: "https://launchdub.ai"
+    type: listing
+    auto: no
+    lang: en
+    niche: general
+    notes: "退回 not-submit: 实为卖 UAE 创业电子书的页面，与外链无关"
+  - name: "ShowMeBestAI"
+    submit_url: "https://showmebest.ai/submit"
+    type: form
+    auto: no
+    status: paid
+    lang: en
+    niche: ai-tools
+    notes: "退回 paid: 免费档曝光极低，$9.99 才给 1 dofollow"
+  - name: "AILaunch"
+    submit_url: "https://ailaunch.ai"
+    type: form
+    auto: no
+    status: dead
+    lang: en
+    niche: ai-tools
+    notes: "退回 dead: 域名过期，跳 GoDaddy 待售页"
+  - name: "TwelveTools"
+    submit_url: "https://twelvetools.com"
+    type: form
+    auto: no
+    status: dead
+    lang: en
+    niche: general
+    notes: "退回 dead: 域名待售 $1888，站点未上线"
+  - name: "300 AI Directories"
+    submit_url: "https://300aidirectories.com"
+    type: form
+    auto: no
+    status: dead
+    lang: en
+    niche: ai-tools
+    notes: "退回 dead: 站点已关停 'no longer available'"
+  - name: "TryLaunch"
+    submit_url: "https://trylaunchai.com"
+    type: form
+    auto: no
+    lang: en
+    niche: ai-tools
+    notes: "退回 unreachable: SSL 证书错误，待人工核实"
+  - name: "ShipYard HQ"
+    submit_url: "https://shipyardhq.dev"
+    type: form
+    auto: no
+    lang: en
+    niche: startup
+    notes: "退回 unreachable: 403 挡爬虫(可能 Cloudflare)，待人工核实"
+  - name: "Shipsquad"
+    submit_url: "https://shipsquad.space"
+    type: form
+    auto: no
+    lang: en
+    niche: saas
+    notes: "退回 unreachable: 提交页 404，待人工核实"
+  - name: "LaunchIgniter"
+    submit_url: "https://launchigniter.com"
+    type: form
+    auto: no
+    lang: en
+    niche: startup
+    notes: "退回 unreachable: 403 挡爬虫，待人工核实"
+  - name: "AItoolonline"
+    submit_url: "https://aitoolonline.com"
+    type: form
+    auto: no
+    lang: en
+    niche: ai-tools
+    notes: "退回 unreachable: 403 挡爬虫，待人工核实"
