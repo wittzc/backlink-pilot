@@ -2,7 +2,7 @@
 // Every failure path returns a machine-readable { code, nextSteps } structure
 // so both CLI rendering and Claude agent automation can act on it.
 
-import { readdirSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs';
 import { utmUrl } from './config.js';
 import { recordSubmission } from './tracker.js';
 import { applyFailureVerdict } from './targets.js';
@@ -123,6 +123,10 @@ export async function submit(site, opts) {
   if (adapter._targetUrl) config._targetUrl = adapter._targetUrl;
 
   const product = { ...config.product, utm_url: utmUrl(config, site) };
+  if (opts.descriptionFile) {
+    const text = readFileSync(opts.descriptionFile, 'utf-8').trim();
+    if (text) product.submit_text = text;
+  }
 
   console.log(`\n🚀 Submitting "${product.name}" to ${site}`);
   if (opts.dryRun) {

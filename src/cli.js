@@ -44,6 +44,7 @@ program
   .option('--engine <engine>', 'Browser engine (bb required; playwright removed in v2.2)')
   .option('--json', 'Output machine-readable JSON result (for Claude agent use)')
   .option('--no-auto-verdict', 'Skip writing failure verdicts back to targets.yaml')
+  .option('--description-file <path>', 'Use submission copy from a file (agent-generated, per-site)')
   .action(async (site, opts) => {
     const config = await loadConfig();
     if (opts.engine) config._engine = opts.engine;

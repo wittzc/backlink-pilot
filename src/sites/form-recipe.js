@@ -43,9 +43,9 @@ export function resolveRecipeValue(product, valueKey) {
     case 'url': return product.url ?? null;
     case 'utmUrl': return product.utm_url ?? product.url ?? null;
     case 'email': return product.email ?? null;
-    case 'description': return product.description ?? null;
+    case 'description': return product.submit_text ?? product.description ?? null;
     case 'longDescription':
-      return product.long_description ?? product.description ?? null;
+      return product.submit_text ?? product.long_description ?? product.description ?? null;
     case 'categories':
       return Array.isArray(product.categories) ? product.categories : null;
     case 'pricing': return product.pricing ?? null;

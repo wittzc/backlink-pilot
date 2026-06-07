@@ -247,7 +247,7 @@ export default {
       }
 
       if (fields.description) {
-        const desc = product.long_description || product.description;
+        const desc = product.submit_text || product.long_description || product.description;
         console.log(`  ✏️  Filling description`);
         await page.fill(fields.description, desc);
         await delay(300);
