@@ -6,12 +6,12 @@
 
 ## Now
 
-- v2.2 已上线：verdict 自我修正层（`locked`/`unlock`，失败自动回写 `targets.yaml`）+ agent 无关化指令重构（`AGENT_GUIDE.md` 作为 SoT）。
-- 当前产品 = `Happy Horse AI`（https://www.ai-happyhorse.org）。站池约 258 个目标，143 个 `auto:yes`（verdict 层已把一批锁成 no/manual/dead）；目前已提交 47 / 失败 119 / 手动 16。
-- 未提交：`targets.yaml` 带着验证轮次产生的 verdict locks（尚未 commit）。
+- niche 内容差异化能力已落地（v2.2 之上）：`targets.yaml` 加 `niche` 字段（81 个 auto:yes general 站已分类）、`submit --description-file` 接 agent 生成文案、AGENT_GUIDE 有 Niche-driven playbook。`npm test` 234 pass。方案见 [plans/2026-06-04-站点画像驱动的外链内容差异化方案.md](plans/2026-06-04-站点画像驱动的外链内容差异化方案.md)。
+- 当前产品 = `Happy Horse AI`（https://www.ai-happyhorse.org）。站池 258，143 `auto:yes`。
+- 本地领先 origin/main 多个 commit（文档对齐 + niche 功能），未 push。
 
 ## Next
 
-<!-- 待仲长确认 — 以下为草稿推断 -->
-- 提交待处理的 `targets.yaml` verdict locks。
-- 继续批量提交剩余的 `auto:yes` 目标，或处理 `locked` 池（跑 `node src/cli.js locked` 分流）。
+- 真实试投验证：挑 3-5 个不同 niche 的站实跑一轮，对照基线看通过率（plan 的 rollback_trigger 看这个）。
+- 验证有效后再做反馈闭环（Task 5：`submissions.yaml` 记 `niche` → 通过率）。
+- 需要时 `git push` 同步 origin/main。
