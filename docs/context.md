@@ -6,12 +6,11 @@
 
 ## Now
 
-- niche 内容差异化能力已落地（v2.2 之上）：`targets.yaml` 加 `niche` 字段（81 个 auto:yes general 站已分类）、`submit --description-file` 接 agent 生成文案、AGENT_GUIDE 有 Niche-driven playbook。`npm test` 234 pass。方案见 [plans/2026-06-04-站点画像驱动的外链内容差异化方案.md](plans/2026-06-04-站点画像驱动的外链内容差异化方案.md)。
-- 当前产品 = `Happy Horse AI`（https://www.ai-happyhorse.org）。站池 258，143 `auto:yes`。
-- niche 功能 + 文档对齐已 push 到 `origin/main`（github.com/wittzc/backlink-pilot）。
+- niche 内容差异化能力已上线 + launch 平台半自动探索：bb-browser 登录态复用已验证（TinyLaunch）。站池 294（含 36 个评估过的 launch/目录站，多为 `auto:manual`），143 `auto:yes`。
+- 当前产品 = `Happy Horse AI`（https://www.ai-happyhorse.org）。
+- 本地领先 `origin/main` 几个 commit（加站 + 收尾），需要时 push。
 
 ## Next
 
-- 真实试投验证：挑 3-5 个不同 niche 的站实跑一轮，对照基线看通过率（plan 的 rollback_trigger 看这个）。
-- 验证有效后再做反馈闭环（Task 5：`submissions.yaml` 记 `niche` → 通过率）。
-- 需要时 `git push` 同步 origin/main。
+- **下个会话接手**：用专门 Google 账号注册 18 个 launch 平台 + 保留登录态，验证 TinyLaunch 的 Startups 产品提交表单 → 标准则写 recipe。详见 [research/2026-06-04-launch平台半自动接手笔记.md](research/2026-06-04-launch平台半自动接手笔记.md)。
+- niche 真实试投验证（挑不同 niche 站对照基线看通过率）待安排。
