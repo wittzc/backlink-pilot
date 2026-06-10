@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f .ctx-relay/bin/load-context.sh ] && bash .ctx-relay/bin/load-context.sh || echo '{\"additionalContext\":\"\"}'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
