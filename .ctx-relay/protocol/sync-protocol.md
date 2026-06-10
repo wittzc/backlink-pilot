@@ -2,6 +2,8 @@
 
 ### 启动（读端）
 会话开始先读 docs/context.md（或 docs/agent-context.md）的 Now/Next/Refs。
+branch / 与远端同步状态 / 工作区 / 最近 commit 等派生状态由启动注入自动提供（或自己跑
+`git status -sb` + `git log -5 --oneline`），**不要从 context 里找，也不要手抄进 context**。
 系统提示 stale → 先 reconcile 再做用户任务；提示 dirty → 先 git status/diff 留意。
 
 ### 接手时（读端·按需重建 why）
@@ -17,7 +19,9 @@ diff 只记赢家，why 和被否的输家只活在 commit body 里。
 ### Commit 时（写端·状态层，自动主路）
 执行 git commit 且含实质代码改动时，同一轮内：
 1. 读 active SoT（agent-context.md 优先，否则含 Now/Next 的 context.md）
-2. ≤6 行更新 ## Now / ## Next
+2. ≤6 行更新 ## Now / ## Next——**只写 git 推不出的**（做到哪 / 为什么 / 阻塞 / 下一步意图）；
+   branch、领先 / 落后远端、未提交变更、最近改动文件这类派生状态**禁止写入**
+   （读端自动注入实时值，手写一份必腐烂）
 3. 有关键取舍则更新 Refs（≤1 行）
 4. context 纳入本次 commit（或紧接一个 commit）
 
