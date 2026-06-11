@@ -6,11 +6,11 @@
 
 ## Now
 
-- 19 个 launch 平台已用专用 Google 账号完成注册（overseas_launch_2026_06 分组）。
-- 新产品 `addfamilyphoto.com` 已提交 Future Tools（免费，待 Matt Wolfe 审核）；竞品外链调研完成，最高 ROI 渠道：族谱博客 + AI 工具目录。
+- nofollow 绕过实测完成（addfamilyphoto，11 站）：机制成立、评论能入库，但全部卡审核/spam 未公开 → 实际外链 0，**实测否决纳入产品**（见 [research/2026-06-12-nofollow绕过实测.md](research/2026-06-12-nofollow绕过实测.md)）。
+- launch 平台 19 站已注册（TinyLaunch Startups 未解锁）；addfamilyphoto 已提交 Future Tools。
 - 当前双产品：Happy Horse AI（https://www.ai-happyhorse.org）+ addfamilyphoto.com。
 
 ## Next
 
-- TinyLaunch：填 Maker Profile 解锁 Startups，验证产品提交表单结构 → 标准则写 recipe（19 站逐站推开）。
+- TinyLaunch：补全/修正 Maker Profile（疑似 X/Twitter handle 必填或 handle 冲突）并保存，解锁 Startups 后验证提交表单结构 → 标准则写 recipe。
 - addfamilyphoto.com：联系 Family Tree Magazine / ScanMyPhotos 博客编辑 pitch 收录；考虑付费提交 Toolify.ai（$99，6 条 dofollow）。
