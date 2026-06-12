@@ -131,6 +131,7 @@
 | 文档全面国际化（README 已 EN/ZH，其余文档未跟上） | 2026-06-03 | 优化方案「后续观察项」，未立项 |
 | 加新 agent 工具（Cursor / Copilot / Aider 等）只写一个 stub | 2026-06-03 | 接入层已留扩展位，零成本接入；待有需求时执行 |
 | 「AI 接入层」单一权威源模式复用到其他项目 | 2026-06-03 | 跨项目方向外溢设想 |
+| 博客评论外链自动化（浏览器插件） | 2026-06-12 | **已分流为独立项目** `comment-snowball`（`../comment-snowball`）。nofollow 实测证明 headless 走不通（登录 + 行为指纹两墙），插件复用登录态 + 真人操作。本工具不做——撞 METHODOLOGY 的 Web UI/服务化 Non-Goal；两者通过 Google Sheet 共享数据 |
 
 ---
 
