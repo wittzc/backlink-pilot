@@ -12,6 +12,6 @@
 
 ## Next
 
-- 浏览器插件立项决策（待用户拍板）：独立新项目，解 backlink-pilot 实测两墙（无法登录 + headless 行为指纹），3-5 周级；ROI 取决于赛道——先定「卷赛道 AI SaaS 辅助 vs 不卷赛道/站群主力」再决定。
+- comment-snowball **Phase 0 三假设全过**（真实数据：软审核博客评论可公开+不限 niche / 滚雪球有燃料 / Ahrefs 数据走 XHR 可拦但 Turnstile→半自动），项目 ROI 成立（见 [plans/2026-06-12-comment-snowball立项与发现slice.md](plans/2026-06-12-comment-snowball立项与发现slice.md)）。下一步 **Slice 1**：建独立仓库 + 发现链路。目标站筛选=「被多游戏站反复刷过的软审核博客」。
 - TinyLaunch：补全/修正 Maker Profile（疑似 X/Twitter handle 必填或 handle 冲突）并保存，解锁 Startups 后验证提交表单结构 → 标准则写 recipe。
 - addfamilyphoto.com：联系 Family Tree Magazine / ScanMyPhotos 博客编辑 pitch 收录；考虑付费提交 Toolify.ai（$99，6 条 dofollow）。
