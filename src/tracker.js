@@ -244,9 +244,13 @@ export async function showStatus(opts = {}) {
   if (submissions.length > 0) {
     console.log('Recent directory submissions:');
     for (const s of submissions.slice(-10)) {
-      const date = new Date(s.timestamp).toLocaleDateString();
+      // Records come from two write paths with different field names:
+      // interactive (site + timestamp) and batch (targetKey + submittedAt).
+      const ts = s.timestamp || s.submittedAt;
+      const date = ts ? new Date(ts).toLocaleDateString() : 'unknown date';
+      const site = s.site || s.targetKey || 'unknown';
       const icon = s.status === 'submitted' ? '✅' : s.status === 'failed' ? '❌' : '⏳';
-      console.log(`  ${icon} ${s.site} — ${s.status} (${date})`);
+      console.log(`  ${icon} ${site} — ${s.status} (${date})`);
     }
   }
 }
