@@ -1,0 +1,56 @@
+# Backlink Pilot config — Happy Horse AI
+# 多站切换：cp config.happyhorse.yaml config.yaml 激活本站
+# ⚠️ 本文件入库（按产品命名，非 gitignore 的 config.yaml）。credentials/indexnow.key 永远留空——
+#    真实密钥只填进 config.yaml（gitignore）或 .env，绝不写进本文件再 commit。
+product:
+  name: "Happy Horse AI"
+  url: "https://www.ai-happyhorse.org"
+  description: "Create cinematic AI videos with Happy Horse AI Video Generator."
+  long_description: |
+    Happy Horse AI turns any photo into a cinematic video in seconds — no editing skills needed. Built for creators who want Hollywood-quality motion from a single image. Early access is rolling out now.
+  email: "support@ai-happyhorse.org"
+  categories:
+    - ai-tools
+    - video
+    - creative-tools
+  pricing: free
+
+  logo_url: ""
+  github_url: ""
+  twitter: ""
+  features:
+    - "Photo to cinematic video in seconds"
+    - "No editing skills required"
+    - "Hollywood-quality AI motion"
+
+credentials:
+  saashub:
+    email: ""
+    password: ""
+  uneed:
+    email: ""
+    password: ""
+
+utm:
+  enabled: true
+  base_url: "https://www.ai-happyhorse.org"
+  medium: "directory"
+  campaign: "backlink"
+
+indexnow:
+  key: ""
+
+browser:
+  engine: bb
+  headless: true
+  slow_mo: 100
+  timeout: 30000
+  screenshot_dir: "./screenshots"
+
+bb_browser:
+  auto_update: true
+  update_interval_hours: 24
+
+pacing:
+  min_interval_ms: 60000
+  same_site_interval_ms: 3600000

@@ -1,0 +1,62 @@
+# Backlink Pilot config — AddFamilyPhoto
+# 映射自 addtophoto/docs/research/backlink-outreach/addfamilyphoto.product.yaml（业务侧交付契约）
+# 多站切换：cp config.addfamilyphoto.yaml config.yaml 激活本站；happyhorse 同理用 config.happyhorse.yaml
+# ⚠️ 本文件入库（按产品命名，非 gitignore 的 config.yaml）。credentials/indexnow.key 永远留空——
+#    真实密钥只填进 config.yaml（gitignore）或 .env，绝不写进本文件再 commit。
+product:
+  name: "AddFamilyPhoto"
+  url: "https://www.addfamilyphoto.com"
+  description: "AddFamilyPhoto uses AI to add an absent or deceased loved one into a family photo — realistic and face-accurate. Free preview, no signup."
+  long_description: |
+    Some family photos are missing someone — a parent who passed, a grandparent who never met the grandkids, a relative who couldn't travel. AddFamilyPhoto uses AI to bring them back into the picture.
+
+    Upload your family photo plus a reference image of the person, and the tool composites them in so it looks like they were really there — same face, natural lighting, believable placement. You can preview the result for free without signing up, then pay once ($19 single, $49 family) only if you want the full-resolution downloads. No subscription, no monthly fee.
+
+    Built for families and for people processing loss who want one complete photo with everyone in it.
+  email: "hello@addfamilyphoto.com"
+  categories:
+    - ai-photo
+    - image-editing
+    - photo-editing
+  pricing: paid
+
+  logo_url: ""
+  github_url: ""
+  twitter: ""
+  features:
+    - "Add an absent or deceased loved one into a family photo"
+    - "Face-accurate compositing (keeps the person's real face)"
+    - "Free preview before paying, no account required"
+    - "One-time pay, no subscription ($19 single / $49 family)"
+
+credentials:
+  saashub:
+    email: ""
+    password: ""
+  uneed:
+    email: ""
+    password: ""
+
+utm:
+  enabled: true
+  base_url: "https://www.addfamilyphoto.com"
+  medium: "directory"
+  campaign: "backlink"
+
+indexnow:
+  key: ""
+
+browser:
+  engine: bb
+  headless: true
+  slow_mo: 100
+  timeout: 30000
+  screenshot_dir: "./screenshots"
+
+bb_browser:
+  auto_update: true
+  update_interval_hours: 24
+
+pacing:
+  min_interval_ms: 60000
+  same_site_interval_ms: 3600000
