@@ -432,9 +432,11 @@ overseas_ai_directories:
   - name: ToolPilot
     submit_url: https://www.toolpilot.ai/pages/submit-your-ai-tool
     type: form
-    auto: yes
+    auto: no
     lang: en
     niche: ai-tools
+    auto_blocked_reason: "IFRAME_FORM: iframe form — generic adapter cannot fill
+      cross-frame (2026-06-14)"
   - name: ToolScout
     submit_url: https://toolscout.ai/submit
     type: form
@@ -976,9 +978,10 @@ overseas_general:
   - name: ASR
     submit_url: https://www.activesearchresults.com/addwebsite.php
     type: form
-    auto: yes
+    auto: manual
     lang: en
     niche: general
+    auto_blocked_reason: LOGIN_REQUIRED (2026-06-14)
   - name: AppsThunder
     submit_url: https://appsthunder.com/submit-your-app/
     type: form
@@ -1093,9 +1096,10 @@ overseas_directories:
   - name: 01webdirectory
     submit_url: https://www.01webdirectory.com/frmPreSubmit.aspx
     type: form
-    auto: yes
+    auto: no
     lang: en
     niche: general
+    auto_blocked_reason: "NO_FIELDS: no recognizable form fields after long-wait scan (2026-06-14)"
   - name: 247WebDirectory
     submit_url: https://www.247webdirectory.com/
     type: form
@@ -1230,15 +1234,17 @@ overseas_directories:
   - name: TXTLinks
     submit_url: https://www.txtlinks.com/sug_url.php?cat_id=0
     type: form
-    auto: yes
+    auto: no
     lang: en
     niche: general
+    auto_blocked_reason: "NO_FIELDS: no recognizable form fields after long-wait scan (2026-06-14)"
   - name: Tsection
     submit_url: https://www.tsection.com/
     type: form
-    auto: yes
+    auto: no
     lang: en
     niche: general
+    auto_blocked_reason: "NO_FIELDS: no recognizable form fields after long-wait scan (2026-06-14)"
   - name: Thales Directory
     submit_url: https://thalesdirectory.com/submit/
     type: form
