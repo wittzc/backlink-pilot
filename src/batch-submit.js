@@ -198,6 +198,7 @@ function makeResult({
   status,
   code,
   evidence = null,
+  product = null,
   productHash: hash,
   forced = false,
   forceReason = null,
@@ -210,6 +211,7 @@ function makeResult({
     code,
     submittedAt: new Date().toISOString(),
     evidence,
+    product,
     productHash: hash,
     forced,
     forceReason,
@@ -374,6 +376,7 @@ export async function runBatch(targets, opts = {}, _deps = {}) {
   } = _deps;
 
   const hash = productHash(product);
+  const productName = product.name;
   const results = [];
   const summary = { submitted: 0, skipped: 0, manual: 0, dead: 0, failed: 0 };
 
@@ -389,6 +392,7 @@ export async function runBatch(targets, opts = {}, _deps = {}) {
         adapterType: 'skipped',
         status,
         code: target.code || (status === 'dead' ? 'PAGE_UNREACHABLE' : 'MANUAL_REVIEW'),
+        product: productName,
         productHash: hash,
         reason: target.reason || target.bucket,
       });
@@ -410,6 +414,7 @@ export async function runBatch(targets, opts = {}, _deps = {}) {
         adapterType: target.adapterType,
         status: 'skipped',
         code: 'ALREADY_SUBMITTED',
+        product: productName,
         productHash: hash,
         reason: 'already-submitted',
       });
@@ -439,6 +444,7 @@ export async function runBatch(targets, opts = {}, _deps = {}) {
           status: interp.status,
           code: interp.code,
           evidence: interp.evidence,
+          product: productName,
           productHash: hash,
           forced,
           forceReason,
@@ -461,6 +467,7 @@ export async function runBatch(targets, opts = {}, _deps = {}) {
             adapterType: target.adapterType,
             status: 'failed',
             code: 'CAPTCHA_REQUIRED',
+            product: productName,
             productHash: hash,
             forced,
             forceReason,
@@ -477,6 +484,7 @@ export async function runBatch(targets, opts = {}, _deps = {}) {
           adapterType: target.adapterType,
           status: 'failed',
           code: interp.code,
+          product: productName,
           productHash: hash,
           forced,
           forceReason,

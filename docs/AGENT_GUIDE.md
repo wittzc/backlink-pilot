@@ -291,7 +291,9 @@ utm:
 config.yaml              ← User's product config (gitignored)
 config.example.yaml      ← Template
 targets.yaml             ← ~258 target sites with auto/status/auto_blocked_reason
-submissions.yaml         ← Submission history, keyed by (site, productHash) (gitignored)
+submissions.yaml         ← Submission history; each record carries `product` (name) +
+                            `productHash`, so the file stays filterable by product even
+                            though it is shared across configs (gitignored)
 recipes/*.yaml           ← Declarative form recipes (no JS adapter needed)
 reports/                 ← triage JSON + run logs
 docs/context.md          ← Cross-tool context SoT (Now / Next)

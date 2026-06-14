@@ -4,7 +4,7 @@
 
 import { readdirSync, readFileSync } from 'fs';
 import { utmUrl } from './config.js';
-import { recordSubmission } from './tracker.js';
+import { recordSubmission, productIdentity } from './tracker.js';
 import { applyFailureVerdict } from './targets.js';
 
 // Run verdict layer + render the auto-applied line. Centralized so the
@@ -127,6 +127,9 @@ export async function submit(site, opts) {
     const text = readFileSync(opts.descriptionFile, 'utf-8').trim();
     if (text) product.submit_text = text;
   }
+  // Stamp product identity onto every record this run writes, so submissions.yaml
+  // rows are filterable by product even though the file is shared across configs.
+  const identity = productIdentity(config.product);
 
   console.log(`\n🚀 Submitting "${product.name}" to ${site}`);
   if (opts.dryRun) {
@@ -146,7 +149,7 @@ export async function submit(site, opts) {
     if (res?.status === 404) {
       const { code, nextSteps } = classifyError(site, '404');
       const result = { status: 'failed', code, error: '404 — submit page gone', nextSteps };
-      await recordSubmission(site, 'failed', { code, error: result.error });
+      await recordSubmission(site, 'failed', { ...identity, code, error: result.error });
       const verdict = runVerdict(site, code, { json: jsonMode, noAutoVerdict: opts.noAutoVerdict });
       if (jsonMode) {
         console.log(JSON.stringify({ ...result, verdict }, null, 2));
@@ -159,7 +162,7 @@ export async function submit(site, opts) {
     }
     if (res && res.status >= 500) {
       const result = { status: 'failed', code: 'SERVER_ERROR', error: `HTTP ${res.status}`, nextSteps: [] };
-      await recordSubmission(site, 'failed', { code: 'SERVER_ERROR', error: result.error });
+      await recordSubmission(site, 'failed', { ...identity, code: 'SERVER_ERROR', error: result.error });
       const verdict = runVerdict(site, 'SERVER_ERROR', { json: jsonMode, noAutoVerdict: opts.noAutoVerdict });
       if (jsonMode) {
         console.log(JSON.stringify({ ...result, verdict }, null, 2));
@@ -176,6 +179,7 @@ export async function submit(site, opts) {
     const duration_ms = Date.now() - startMs;
 
     await recordSubmission(site, 'submitted', {
+      ...identity,
       url: adapterResult?.url,
       confirmation: adapterResult?.confirmation,
       duration_ms,
@@ -192,7 +196,7 @@ export async function submit(site, opts) {
   } catch (e) {
     const duration_ms = Date.now() - startMs;
     const { code, nextSteps } = classifyError(site, e);
-    await recordSubmission(site, 'failed', { code, error: e.message, duration_ms });
+    await recordSubmission(site, 'failed', { ...identity, code, error: e.message, duration_ms });
     const verdict = runVerdict(site, code, { json: jsonMode, noAutoVerdict: opts.noAutoVerdict });
 
     const result = { status: 'failed', code, error: e.message, nextSteps, verdict };

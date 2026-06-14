@@ -24,6 +24,24 @@ export function productHash(product = {}) {
 }
 
 /**
+ * Stamp a submission record with its product identity. submissions.yaml is
+ * shared across configs — one install can submit several products over time —
+ * so every record MUST name its product. Without it, downstream tooling that
+ * aggregates by product (e.g. the reflow/backfill script) can only see an
+ * opaque productHash and can't filter rows to a given product by name.
+ *
+ *   product      — human-readable name; what downstream tooling filters on
+ *   productHash  — stable dedup key (see productHash above)
+ *
+ * Every write path (batch executor, interactive submit, manual mark-done)
+ * spreads this onto its record so the field is never silently missing.
+ */
+export function productIdentity(product = {}) {
+  const name = String(product.name || '').trim();
+  return { product: name || null, productHash: productHash(product) };
+}
+
+/**
  * Build a Map<"<targetKey>::<productHash>", lastStatus> from submissions.yaml.
  *
  * Used by the directory batch executor as the dedup gate. Only the most

@@ -2,7 +2,7 @@
 
 import { existsSync } from 'fs';
 import { flatten, loadTargetsDoc, saveTargetsDoc, backupTargets, TARGETS_FILE } from './yaml-utils.js';
-import { recordSubmission, getFailureStreak } from './tracker.js';
+import { recordSubmission, getFailureStreak, productIdentity } from './tracker.js';
 
 // Verdict table — what happens to targets.yaml after a failure with a given
 // error code. `op` is what we write; `streak` (if set) is the number of
@@ -52,8 +52,9 @@ export function markManual(siteName) {
   return target.entry;
 }
 
-export async function markDone(siteName) {
+export async function markDone(siteName, product = {}) {
   await recordSubmission(siteName, 'submitted', {
+    ...productIdentity(product),
     note: 'Manually marked done',
   });
 }

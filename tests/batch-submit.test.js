@@ -547,11 +547,12 @@ describe('result record schema', () => {
       const r = results[0];
       const required = [
         'targetKey', 'adapterType', 'status', 'code', 'submittedAt',
-        'evidence', 'productHash', 'forced', 'forceReason', 'reason',
+        'evidence', 'product', 'productHash', 'forced', 'forceReason', 'reason',
       ];
       for (const k of required) {
         assert.ok(k in r, `result missing field: ${k}`);
       }
+      assert.equal(r.product, PRODUCT.name, 'product name must be stamped on the record');
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

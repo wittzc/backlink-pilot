@@ -229,7 +229,8 @@ program
   .command('mark-done <site>')
   .description('Manually record a successful submission in submissions.yaml')
   .action(async (site) => {
-    await markDone(site);
+    const config = await loadConfig();
+    await markDone(site, config.product);
     console.log(`✓ Recorded "${site}" as submitted in submissions.yaml`);
   });
 
