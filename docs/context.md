@@ -6,9 +6,9 @@
 
 ## Now
 
-- nofollow 绕过实测完成（addfamilyphoto，11 站）：机制成立、评论能入库，但全部卡审核/spam 未公开 → 实际外链 0。**我的建议是暂不纳入（未拍板，决策权在用户）**；赛道维度修正后博客评论在不卷赛道/作辅助仍有效（见 [research/2026-06-12-nofollow绕过实测.md](research/2026-06-12-nofollow绕过实测.md)）。
+- nofollow 绕过实测完成并收口（11 站：机制成立、评论入库、全卡审核/spam 未公开 → 外链 0）；一次性探针脚本+报告已删，结论固化进 [research/2026-06-12-nofollow绕过实测.md](research/2026-06-12-nofollow绕过实测.md)。建议暂不纳入（未拍板）。
 - launch 平台 19 站已注册（TinyLaunch Startups 未解锁）；addfamilyphoto 已提交 Future Tools。
-- 当前双产品：Happy Horse AI（https://www.ai-happyhorse.org）+ addfamilyphoto.com。
+- 双产品 config 已落地可一键切换：`config.happyhorse.yaml`（ai-happyhorse.org）/ `config.addfamilyphoto.yaml`（addfamilyphoto.com），密钥只走 gitignore 的 config.yaml/.env；历史 submission 记录已由 scripts/backfill-product.js 盖产品身份。
 
 ## Next
 
