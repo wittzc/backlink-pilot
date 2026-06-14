@@ -23,9 +23,22 @@ export function computeStats(submissions) {
   // Per-site success rate
   const bySite = {};
   for (const s of submissions) {
-    if (!bySite[s.site]) bySite[s.site] = { submitted: 0, failed: 0 };
-    if (s.status === 'submitted') bySite[s.site].submitted++;
-    else if (s.status === 'failed') bySite[s.site].failed++;
+    const siteKey = s.site || s.targetKey || 'unknown';
+    if (!bySite[siteKey]) bySite[siteKey] = { submitted: 0, failed: 0 };
+    if (s.status === 'submitted') bySite[siteKey].submitted++;
+    else if (s.status === 'failed') bySite[siteKey].failed++;
+  }
+
+  // Per-product breakdown. submissions.yaml is shared across configs, so a
+  // record may belong to any product; records written before product identity
+  // was stamped have no `product` and fall into '(unlabeled)'.
+  const byProduct = {};
+  for (const s of submissions) {
+    const key = s.product || '(unlabeled)';
+    if (!byProduct[key]) byProduct[key] = { total: 0, submitted: 0, failed: 0 };
+    byProduct[key].total++;
+    if (s.status === 'submitted') byProduct[key].submitted++;
+    else if (s.status === 'failed') byProduct[key].failed++;
   }
 
   // Timing (only for records that have duration_ms)
@@ -44,7 +57,7 @@ export function computeStats(submissions) {
       }
     : null;
 
-  return { total, byStatus, submitted, failed, successRate, bySite, timing };
+  return { total, byStatus, submitted, failed, successRate, bySite, byProduct, timing };
 }
 
 export async function showStats(opts = {}) {
@@ -68,6 +81,20 @@ export async function showStats(opts = {}) {
   console.log(`  Submitted:    ${stats.submitted}`);
   console.log(`  Failed:       ${stats.failed}`);
   console.log(`  Success rate: ${stats.successRate}%`);
+
+  // Per-product breakdown — only meaningful when the shared submissions.yaml
+  // holds more than one product.
+  const productKeys = Object.keys(stats.byProduct);
+  if (productKeys.length > 1) {
+    console.log('\n🏷  By product (submitted / total)\n');
+    const sortedProducts = Object.entries(stats.byProduct).sort(
+      ([, a], [, b]) => b.submitted - a.submitted
+    );
+    for (const [product, c] of sortedProducts) {
+      const rate = c.total > 0 ? ((c.submitted / c.total) * 100).toFixed(0) : '0';
+      console.log(`  ${product.padEnd(30)} ${c.submitted}✓ / ${c.total}  (${rate}%)`);
+    }
+  }
 
   if (opts.timing) {
     console.log('\n⏱  Timing (per-submission duration)\n');

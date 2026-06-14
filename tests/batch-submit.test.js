@@ -21,6 +21,7 @@ import {
 } from '../src/batch-submit.js';
 import {
   productHash,
+  productIdentity,
   loadSubmissionMap,
   recordResult,
 } from '../src/tracker.js';
@@ -360,6 +361,38 @@ describe('runBatch — 8 scenarios from Task 5 step 4', () => {
       assert.equal(results[0].code, 'ALREADY_SUBMITTED');
       assert.equal(results[0].reason, 'already-submitted');
       assert.equal(results[0].forced, false);
+    } finally {
+      cleanup();
+    }
+  });
+
+  // Cross-path dedup: a record written by the INTERACTIVE submit path
+  // (shape: { site, productHash } — no targetKey) must be recognised by the
+  // batch dedup gate. Before product identity was stamped on interactive
+  // records, their productHash was absent → keyed as `site::*` → batch keyed
+  // as `targetKey::<realhash>` and never matched → silent re-submission.
+  it('5b. dedup hit from an interactive-path record (site + productHash) → skipped', async () => {
+    const { dir, submissionsPath, cleanup } = setup();
+    try {
+      const identity = productIdentity(PRODUCT);
+      // Mirror exactly what recordSubmission() writes from submit.js:
+      // a `site` (not `targetKey`) plus the stamped product identity.
+      await recordResult(submissionsPath, {
+        site: 'futuretools',
+        status: 'submitted',
+        ...identity,
+        timestamp: new Date().toISOString(),
+      });
+      let dispatched = false;
+      const dispatcher = async () => { dispatched = true; return {}; };
+      const { results, summary } = await runBatch(
+        [mkTarget({ siteKey: 'futuretools', bucket: 'recipe-ready' })],
+        { product: PRODUCT, submissionsPath },
+        { dispatcher, sleepFn: async () => {}, logger: quietLogger() }
+      );
+      assert.equal(dispatched, false, 'interactive submission must block batch re-submit');
+      assert.equal(summary.skipped, 1);
+      assert.equal(results[0].code, 'ALREADY_SUBMITTED');
     } finally {
       cleanup();
     }

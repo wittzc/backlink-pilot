@@ -115,8 +115,8 @@ for live syntax; the authoritative machine-readable list is
 
 | Command | What it does |
 |---------|-------------|
-| `status` | Show submission tracking (directory + blog comments). `--json`. |
-| `stats` | Aggregated submission statistics. `--timing` for p50/p95, `--json`. |
+| `status` | Show submission tracking (directory + blog comments). Adds a per-product breakdown when submissions.yaml holds >1 product. `--json`. |
+| `stats` | Aggregated submission statistics (`byProduct` breakdown included). `--timing` for p50/p95, `--json`. |
 | `doctor` | Check environment health (Node, bb-browser, Chrome, config). Run first if anything misbehaves. |
 | `bb-update` | Update bb-browser community site adapters. |
 | `cleanup` | Delete old screenshots (`--keep-days N`, default 30) or stale lock files (`--locks`). |

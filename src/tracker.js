@@ -218,6 +218,23 @@ export async function showStatus(opts = {}) {
     console.log(`  ${icon} ${status}: ${count}`);
   }
 
+  // Per-product breakdown — submissions.yaml is shared across configs, so when
+  // more than one product is present, show submitted/total per product.
+  const byProduct = {};
+  for (const s of submissions) {
+    const key = s.product || '(unlabeled)';
+    if (!byProduct[key]) byProduct[key] = { total: 0, submitted: 0 };
+    byProduct[key].total++;
+    if (s.status === 'submitted') byProduct[key].submitted++;
+  }
+  const productKeys = Object.keys(byProduct);
+  if (productKeys.length > 1) {
+    console.log('\n  By product:');
+    for (const [product, c] of Object.entries(byProduct).sort(([, a], [, b]) => b.submitted - a.submitted)) {
+      console.log(`    🏷  ${product}: ${c.submitted}✅ / ${c.total}`);
+    }
+  }
+
   if (commentedUrls.size > 0) {
     console.log(`  💬 blog comments: ${commentedUrls.size}`);
   }
