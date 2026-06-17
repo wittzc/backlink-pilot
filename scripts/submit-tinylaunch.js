@@ -45,7 +45,9 @@ if (!logoPath || !fs.existsSync(logoPath)) {
 const cfg = parseYaml(fs.readFileSync(configPath, 'utf8'));
 const p = cfg.product || {};
 const name = (p.name || '').slice(0, 30);
-const tagline = (p.description || '').slice(0, 60);
+// Tagline cap is 60. config.description is usually longer and truncates
+// mid-word, so prefer an explicit --tagline; fall back to a hard slice.
+const tagline = (opt('--tagline') || p.description || '').slice(0, 60);
 const url = p.url || p.base_url || '';
 const description = (p.long_description || p.description || '').trim();
 if (!name || !url || !description) {
@@ -86,6 +88,14 @@ if (!page.url.includes('/dashboard/startups/new')) {
 }
 await send('Runtime.enable'); await send('DOM.enable'); await send('Page.enable');
 
+// SPA renders the form async — wait for it before filling.
+let ready = false;
+for (let i = 0; i < 20; i++) {
+  if (await evalJS(`!!document.querySelector('input[name=name]') && !!document.querySelector('select[name=category_id]')`)) { ready = true; break; }
+  await new Promise(r => setTimeout(r, 1000));
+}
+if (!ready) { console.error('ERR: form did not render (input[name=name] missing). Is the page on /dashboard/startups/new and unlocked?'); process.exit(1); }
+
 const setText = (sel, val) => `(()=>{const el=document.querySelector(${JSON.stringify(sel)});const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(el,${JSON.stringify(val)});el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));return el.value})()`;
 console.log('name   =', await evalJS(setText('input[name=name]', name)));
 console.log('tagline=', await evalJS(setText('input[name=tagline]', tagline)));
@@ -95,7 +105,9 @@ const catSet = await evalJS(`(()=>{const sel=document.querySelector('select[name
 console.log('category=', catSet);
 if (catSet === 'NO-MATCH') console.error('WARN: category not found among options; left unselected. Pass exact --category text.');
 
-await evalJS(`(()=>{const d=document.querySelector('[contenteditable=true]');d.focus();return true})()`);
+// focus + selectAll so insertText REPLACES any existing content (idempotent
+// across re-runs; otherwise a dry-run + a --submit run double the description).
+await evalJS(`(()=>{const d=document.querySelector('[contenteditable=true]');d.focus();document.execCommand('selectAll');return true})()`);
 await send('Input.insertText', { text: description });
 console.log('descLen=', await evalJS(`document.querySelector('input[name=description]')?.value?.length || document.querySelector('[contenteditable=true]').innerText.length`));
 
