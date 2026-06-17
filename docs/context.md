@@ -12,5 +12,5 @@
 
 ## Next
 
-- TinyLaunch：补全/修正 Maker Profile（疑似 X/Twitter handle 必填或 handle 冲突）并保存，解锁 Startups 后验证提交表单结构 → 标准则写 recipe。
+- ~~TinyLaunch~~ ✅ 已完成：根因是 handle 撞名（非 X handle 必填），换 `happyhorseapp` 解锁 Startups，happyhorse 已发布（DR72+）。半自动脚本 `scripts/submit-tinylaunch.js`（CDP 填表+logo 上传）；不写 recipe。其余 launch 站如要推开，复用同套方法（详见 [research 笔记 2026-06-18 条](research/2026-06-04-launch平台半自动接手笔记.md)）。
 - addfamilyphoto.com：联系 Family Tree Magazine / ScanMyPhotos 博客编辑 pitch 收录；考虑付费提交 Toolify.ai（$99，6 条 dofollow）。

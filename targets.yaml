@@ -1848,12 +1848,12 @@ overseas_launch_2026_06:
     niche: general
     notes: "需注册；免费 Free Launch + 付费 Express 档"
   - name: "TinyLaunch"
-    submit_url: "https://tinylaunch.com/submit"
+    submit_url: "https://www.tinylaunch.com/dashboard/startups/new"
     type: form
     auto: manual
     lang: en
     niche: startup
-    notes: "需注册；PH替代 25000用户 DR72+ 外链激励"
+    notes: "需登录+一次性 Maker Profile(handle 须唯一,撞名会静默回空)。半自动脚本 scripts/submit-tinylaunch.js(CDP 填表+logo 上传,--submit 真发);不写 recipe(logo 上传/富文本超出 selector 表达力)。happyhorse 已于 2026-06-18 发布。详见 docs/research/2026-06-04-launch平台半自动接手笔记.md。DR72+ dofollow"
   - name: "ToolFame"
     submit_url: "https://toolfame.com/submit"
     type: form
