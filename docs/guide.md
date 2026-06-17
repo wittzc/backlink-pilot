@@ -215,9 +215,9 @@ node src/cli.js submit https://any-site.com/submit --engine bb
 | `lang` | en / zh | 语言 |
 
 快速统计：
-- **<!-- stats:auto-yes -->143<!-- /stats -->** 个可自动提交（`auto: yes`）
-- **<!-- stats:dead -->47<!-- /stats -->** 个已确认失效（`status: dead`）
-- **<!-- stats:paid -->7<!-- /stats -->** 个仅付费（`status: paid`）
+- **<!-- stats:auto-yes -->139<!-- /stats -->** 个可自动提交（`auto: yes`）
+- **<!-- stats:dead -->50<!-- /stats -->** 个已确认失效（`status: dead`）
+- **<!-- stats:paid -->8<!-- /stats -->** 个仅付费（`status: paid`）
 
 ---
 

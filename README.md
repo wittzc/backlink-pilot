@@ -6,7 +6,7 @@
 
 > Built by an AI Agent ([OpenClaw](https://openclaw.ai)) during real-world link building — battle-tested on 30+ sites.
 
-**<!-- stats:total -->258<!-- /stats --> target sites** in [`targets.yaml`](targets.yaml) — <!-- stats:auto-yes -->143<!-- /stats --> auto-submittable with bb-browser.
+**<!-- stats:total -->294<!-- /stats --> target sites** in [`targets.yaml`](targets.yaml) — <!-- stats:auto-yes -->139<!-- /stats --> auto-submittable with bb-browser.
 
 ---
 

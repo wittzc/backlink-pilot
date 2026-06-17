@@ -10,7 +10,7 @@
 
 > 由 AI Agent ([OpenClaw](https://openclaw.ai)) 在真实外链建设中构建，30+ 站点实战验证。
 
-[`targets.yaml`](targets.yaml) 收录 **<!-- stats:total -->258<!-- /stats --> 个目标站点**，其中 <!-- stats:auto-yes -->143<!-- /stats --> 个可用 bb-browser 自动提交。
+[`targets.yaml`](targets.yaml) 收录 **<!-- stats:total -->294<!-- /stats --> 个目标站点**，其中 <!-- stats:auto-yes -->139<!-- /stats --> 个可用 bb-browser 自动提交。
 
 ---
 
