@@ -16,3 +16,4 @@ to [`../adr/`](../adr/).
 | [2026-04-28-跨agent通用化协议.md](2026-04-28-跨agent通用化协议.md) | Agent-agnostic instructions: AGENT_GUIDE.md as SoT + tool-specific redirect stubs + agent-manifest.json |
 | [2026-06-04-站点画像驱动的外链内容差异化方案.md](2026-06-04-站点画像驱动的外链内容差异化方案.md) | Per-site content personalization: `niche` field + agent-runtime copy generation (zero extra API) + `submit_text` fallback |
 | [2026-06-12-comment-snowball立项与发现slice.md](2026-06-12-comment-snowball立项与发现slice.md) | 衍生新项目 comment-snowball(独立仓库)立项 + 发现 slice:Chrome 插件 + Google Sheet 流水线,滚雪球发现可发布博客文章库 → 导出喂 batch-blog-comments.js 闭环。含 Phase 0 假设验证(抓窗口期前的命脉侦察) |
+| [2026-06-18-其余launch站推开交接.md](2026-06-18-其余launch站推开交接.md) | 交接给接手 AI:用 TinyLaunch 已验证的方法(登录态+原生 CDP+native setter+坑清单)逐站推开 overseas_launch_2026_06 里的免费 dofollow launch 站。含优先站清单、per-site protocol、判定基线、产品资产 |
